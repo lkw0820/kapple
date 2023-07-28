@@ -4,7 +4,7 @@ import java.util.Date;
 
 import lombok.Data;
 @Data
-public class OrderVO {
+public class OrdersVO {
 	private String order_no;
 	private SupplierVO supplier;
 	private ComponentVO component;
