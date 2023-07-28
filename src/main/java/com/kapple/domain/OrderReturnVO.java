@@ -3,7 +3,7 @@ package com.kapple.domain;
 import lombok.Data;
 
 @Data
-public class Order_returnVO {
+public class OrderReturnVO {
 	private String order_return;
 	private String supple_no;
 	private String compo_no;

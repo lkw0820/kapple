@@ -4,7 +4,7 @@ import java.util.Date;
 
 import lombok.Data;
 @Data
-public class Retail_fileVO {
+public class RetailFileVO {
 	private String retail_file_no;
 	private String retail_no;
 	private String retail_file_name;
