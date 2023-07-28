@@ -11,5 +11,5 @@ public class ContractVO {
 	private ComponentVO component;
 	private Date start_date;
 	private Date end_date;
-	private char yn;
+	private Date contract_date;
 }
