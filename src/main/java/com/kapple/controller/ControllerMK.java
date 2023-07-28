@@ -13,6 +13,6 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("")
 public class ControllerMK {
 	
-	@Autowired
-	private ServiceMK service;
+//	@Autowired
+//	private ServiceMK service;
 }
