@@ -74,7 +74,11 @@
 		<result property="detail" column="detail"/>
 	</resultMap>
 
-	<select id="proposalList" resultMap="proposalMap">
-	
+	<select id="getProposal" resultMap="proposalMap">
+		select p.proposal_no, suppl_name, compo_name, price, quantity, defective_rate, quality_grade, prod_period
+		from proposal p full outer join supplier s
+		on p.suppl_no=s.suppl_no full outer join component c
+		on p.compo_no=c.compo_no
+		where compo_name=#{compo_name} and p.suppl_no=#{suppl_no}
 	</select>
 </mapper>
