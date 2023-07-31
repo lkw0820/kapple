@@ -4,4 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kapple.mapper.MapperMK">
 
+
+	<insert id="insert">
+		INSERT INTO TEST_TBL (TEST_NO, CONTENTS, ANYNUM, reg_date)
+		SELECT
+			'TEST' || TEST_TBL_SEQ.NEXTVAL,
+			'테스트 내용' || (TEST_TBL_SEQ.currval-9000),
+			TEST_TBL_SEQ.currval-9000,
+			SYSDATE
+		FROM DUAL CONNECT BY LEVEL <= 100;
+	</insert>
+
 </mapper>

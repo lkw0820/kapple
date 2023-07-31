@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
   <head>
     <meta charset="utf-8">
@@ -32,6 +34,8 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="resources/assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="resources/vendors/leaflet/leaflet.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	
   </head>
 
 
