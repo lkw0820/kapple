@@ -22,7 +22,7 @@ public class ServiceKWImpl implements ServiceKW {
 	@Override
 	public SupplierDetailVO supplierDetail(String suppl_no) {
 		// 공급사 상세 정보 출력
-		return mapper.detail(suppl_no);
+		return mapper.supplierDetail(suppl_no);
 	}
 
 }

@@ -25,7 +25,7 @@ public class mapperTests {
 	
 	@Test
 	public void test() {
-		log.info(mapper.supplierList("카메라"));
+		log.info(mapper.supplierList("부품이름1"));
 	}
 
 }

@@ -10,5 +10,5 @@ public interface MapperKW {
 
 	public Date test();
 	public List<SupplierVO> supplierList(String compo_name);
-	public SupplierDetailVO detail(String suppl_no);
+	public SupplierDetailVO supplierDetail(String suppl_no);
 }

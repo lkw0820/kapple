@@ -20,7 +20,7 @@ public class ServiceTests {
 	private ServiceKW service;
 	@Test
 	public void test() {
-		service.supplierListService("카메라").forEach(supplier -> log.info(supplier));
+		service.supplierListService("부품이름1").forEach(supplier -> log.info(supplier));
 	}
 
 }

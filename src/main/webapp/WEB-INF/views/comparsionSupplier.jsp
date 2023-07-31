@@ -23,7 +23,7 @@
 				
 					<!-- 부품/상품 검색창 -->
 					<div class="search-box" id="componentSearchBox">
-						<form class="position-relative" data-bs-toggle="search" data-bs-display="static" action="comparsionSuppplier" method="post">
+						<form class="position-relative" data-bs-toggle="search" data-bs-display="static" action="/comparsionSupplier" method="post">
 							<input class="form-control search-input search" type="search" placeholder="부품 검색창" aria-label="Search" name="compo_name"/>
 							<span class="fas fa-search search-box-icon"></span>
 						</form>
@@ -84,7 +84,7 @@
 									<div class="table-responsive mx-n1 px-1">
 									
 										<!-- 고객사 테이블 : retailerTable  -->
-										<table class=" table tabl-sm border-top border-200 fs--1 mb-0" id="retailerTable">
+										<table class=" table tabl-sm border-top border-200 fs--1 mb-0" id="supplierTable">
 											<thead>
 												<tr>
 													<th class="white-space-nowrap fs--1 align-middle ps-0"
@@ -104,36 +104,7 @@
 											</thead>
 											
 											<tbody class="list" id="bulk-select-body">
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Anna&quot;,&quot;email&quot;:&quot;anna@example.com&quot;,&quot;age&quot;:18}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 no">예시</td>
-													<td class="align-middle name">예시</td>
-													<td class="align-middle ceo">예시</td>
-													<td class="align-middle cate">예시</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!" id="supplierDetail">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
+												
 												
 												<!-- 이후 삭제해도 됨, 동적으로 생성 -->
 												<c:forEach items="${sList }" var="supplier">
@@ -159,7 +130,7 @@
 																<span class="fas fa-ellipsis-h fs--2"></span>
 															</button>
 															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
+																<a class="dropdown-item supplierDetail" href="#!" >View</a><a
 																	class="dropdown-item" href="#!">Export</a>
 																<div class="dropdown-divider"></div>
 																<a class="dropdown-item text-danger" href="#!">Remove</a>
@@ -453,19 +424,32 @@
 <!-- /.modal -->
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/resources/test.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#searchItem').on('click',function(){
-			console.log("as");
+			$('form.position-relative').submit();
 		});
 		//모달 창
-		$("#supplierDetail").on("click", function(e){
+
+		$(".supplierDetail").on("click", function(e){
+			var suppl_no=$(this).closest('tr').children('.ps-3').html();
+			console.log(suppl_no);
+			//detailService.get();
+			var supplierDetail;
+			detailService.get(suppl_no,function(result){
+				 supplierDetail=result;
+				 console.log(result.ceo_name);
+			}); 
+			$('#myModal'
 			$(".modal").modal("show");
+			
 		});
 		//모달창 닫기
 		$("#modalCloseBtn").on("click",function(e){
 			$(".modal").modal("hide");
 		})
+		
 	})
 </script>
 <%@include file="includes/footer.jsp"%>
