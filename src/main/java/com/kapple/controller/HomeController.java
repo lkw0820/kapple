@@ -60,9 +60,9 @@ public class HomeController {
 		log.info("move to ComparsionRetailer Page.....................................");
 	}
 	
-//	@GetMapping("/statistics")
-//	public void moveToStatistics() {
-//		log.info("move to Statistics Page.....................................");
-//	}
+	@GetMapping("/statistics")
+	public void moveToStatistics() {
+		log.info("move to Statistics Page.....................................");
+	}
 	
 }
