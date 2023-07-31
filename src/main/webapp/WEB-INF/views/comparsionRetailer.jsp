@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@include file="includes/header.jsp"%>
 
 <!-- ------------------------------------- -->
@@ -772,4 +773,16 @@
 
 </div>
 
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#searchItem').on('click',function(){
+			console.log("as");
+		});
+		
+	})
+		
+		
+</script>
 <%@include file="includes/footer.jsp"%>

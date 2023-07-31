@@ -1,5 +1,11 @@
 package com.kapple.service;
 
-public interface ServiceKW {
+import java.util.List;
 
+import com.kapple.domain.SupplierDetailVO;
+import com.kapple.domain.SupplierVO;
+
+public interface ServiceKW {
+	public List<SupplierVO> supplierListService(String compo_name);
+	public SupplierDetailVO supplierDetail(String suppl_no);
 }
