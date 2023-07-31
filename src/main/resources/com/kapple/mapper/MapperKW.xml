@@ -9,8 +9,8 @@
 	</select>
 	
 	<resultMap type="com.kapple.domain.SupplierVO" id="supplierMap">
-		<id property="supple_no" column="supple_no"/>
-		<result property="supple_no" column="supple_no"/>
+		<id property="suppl_no" column="suppl_no"/>
+		<result property="suppl_no" column="suppl_no"/>
 		<result property="suppl_name" column="suppl_name"/>
 		<result property="ceo_name" column="ceo_name"/>
 		<result property="category" column="category"/>
@@ -24,13 +24,28 @@
 		<result property="transport_charge" column="transport_charge"/>
 		<result property="additional_condition" column="additional_condition"/>
 	</resultMap>
-	<select id="supplierList" resultMap="supplierMap">
+	
+	<!-- 회사 리스트 -->
+	<select id="supplierList" resultMap="supplierMap" parameterType="String">
 		<![CDATA[
-			select supple_no, transport_category, suppl_name, ceo_name, category, phone 
-				from supplier s join transportation t 
-				on s.transport_no=t.transport_no
+			select s.suppl_no, suppl_name, ceo_name, category
+				from supplier s join proposal p
+				on s.suppl_no=p.suppl_no join component c
+				on p.compo_no=c.compo_no
+				where c.compo_name = #{compo_name}
 		]]>
 	</select>
+	<!-- 회사 상세 정보 -->
+	
+	<select id="supplierDetail" resultMap="com.kapple.domain.supplierDetailVO" parameterType="String">
+		<![CDATA[
+			select suppl_name, ceo_name, category, phone, biz_no, transport_category
+				from supplier s join transport t
+				on s.transport_no=t.transport_no join biz_certificate b
+				on s.suppl_no=b.suppl_no
+				where suppl_no=#{suppl_no}
+		]]>
+	</select> 
 	
 	<resultMap type="com.kapple.domain.ProposalVO" id="proposalMap">
 		<id property="proposal_no" column="proposal_no"/>
