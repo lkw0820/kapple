@@ -11,13 +11,15 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/mk")
+//@RequestMapping("")
 public class ControllerMK {
 	
 //	@Autowired
 	private ServiceMK service;
 	
-	@GetMapping("/register")
-	public void register() {
+	@GetMapping("/statistics")
+	public void list() {
+		
+		
 	}
 }

@@ -6,13 +6,8 @@
 
 
 	<insert id="insert">
-		INSERT INTO TEST_TBL (TEST_NO, CONTENTS, ANYNUM, reg_date)
-		SELECT
-			'TEST' || TEST_TBL_SEQ.NEXTVAL,
-			'테스트 내용' || (TEST_TBL_SEQ.currval-9000),
-			TEST_TBL_SEQ.currval-9000,
-			SYSDATE
-		FROM DUAL CONNECT BY LEVEL <= 100;
+		insert into test_tbl (TEST_NO, CONTENTS, ANYNUM, REG_DATE)
+		values ('TEST'||TEST_TBL_SEQ.nextval, #{contents}, #{anynum}, SYSDATE)
 	</insert>
 
 </mapper>

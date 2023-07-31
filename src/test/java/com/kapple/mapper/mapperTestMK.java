@@ -18,7 +18,7 @@ public class mapperTestMK {
 	@Autowired
 	private MapperMK mapper;
 	
-	// 이게 Autowired로 안되고 꼭 생성해야 하는 이유는...?
+	// VO를 @Data해놔서 bean등록은 안해도 되는데, 이게 Autowired로 안되고 꼭 직접 생성해야 하는 이유는...?
 	private TestTblVO test = new TestTblVO();
 	
 	@Test

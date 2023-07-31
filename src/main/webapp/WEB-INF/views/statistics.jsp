@@ -16,27 +16,34 @@
 			<!-- 왼쪽 통계 그래프들 -->
 			<div class="col-12 col-xxl-6">
 
-				<!-- 통계 값 패널, 이모티콘 :  Unicons Line, 다른거 사용 가능, 동적 변환 원하면 클래스명 또는 아이디값 부여 -->
+				<!-- 통계 값 패널, 이모티콘 : Unicons Line, 다른거 사용 가능, 동적 변환 원하면 클래스명 또는 아이디값 부여 -->
 				<div class="row justify-content-between">
-					<div class="col-6 col-md-4 col-xxl-3 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end border-bottom pb-4 pb-xxl-0 ">
+					<div class="col-6 col-md-4 col-xxl-3 text-center 
+						border-start-xxl border-end-xxl-0 border-bottom-xxl-0 
+						border-end border-bottom pb-4 pb-xxl-0 ">
 						<span class="uil fs-3 lh-1 uil-download-alt text-primary"></span>
 						<h1 class="fs-3 pt-3">28,00</h1>
 						<p class="fs--1 mb-0">총 입고량</p>
 					</div>
 					<div
-						class="col-6 col-md-4 col-xxl-3 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end-md border-bottom pb-4 pb-xxl-0">
+						class="col-6 col-md-4 col-xxl-3 text-center 
+						border-start-xxl border-end-xxl-0 border-bottom-xxl-0 
+						border-end-md border-bottom pb-4 pb-xxl-0">
 						<span class="uil fs-3 lh-1 uil-upload text-info"></span>
 						<h1 class="fs-3 pt-3">1,866</h1>
 						<p class="fs--1 mb-0">총 생산수</p>
 					</div>
 					<div
-						class="col-6 col-md-4 col-xxl-3 text-center border-start-xxl border-bottom-xxl-0 border-bottom border-end border-end-md-0 pb-4 pb-xxl-0 pt-4 pt-md-0">
+						class="col-6 col-md-4 col-xxl-3 text-center 
+						border-start-xxl border-bottom-xxl-0 border-bottom 
+						border-end border-end-md-0 pb-4 pb-xxl-0 pt-4 pt-md-0">
 						<span class="uil fs-3 lh-1 uil-money-bill-stack text-primary"></span>
 						<h1 class="fs-3 pt-3">1,366</h1>
 						<p class="fs--1 mb-0">총 판매량</p>
 					</div>
 					<div
-						class="col-6 col-md-4 col-xxl-3 text-center border-start-xxl border-end-xxl pb-md-4 pb-xxl-0 pt-4 pt-xxl-0">
+						class="col-6 col-md-4 col-xxl-3 text-center 
+						border-start-xxl border-end-xxl pb-md-4 pb-xxl-0 pt-4 pt-xxl-0">
 						<span class="uil fs-3 lh-1 uil-usd-circle text-danger"></span>
 						<h1 class="fs-3 pt-3">1,200</h1>
 						<p class="fs--1 mb-0">총 반품량</p>
@@ -72,9 +79,11 @@
 								<div class="d-flex justify-content-between">
 									<div>
 										<h5 class="mb-1">
-											Total orders<span
-												class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2"><span
-												class="badge-label">-6.8%</span></span>
+											Total orders
+											<span class="badge badge-phoenix badge-phoenix-warning 
+												rounded-pill fs--1 ms-2">
+												<span class="badge-label">-6.8%</span>
+											</span>
 										</h5>
 										<h6 class="text-700">Last 7 days</h6>
 									</div>
@@ -92,8 +101,8 @@
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-primary-100 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Pending
-											payment</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">
+											Pending payment</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">48%</h6>
 									</div>
 								</div>
@@ -106,8 +115,9 @@
 								<div class="d-flex justify-content-between">
 									<div>
 										<h5 class="mb-1">
-											New customers<span
-												class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
+											New customers
+											<span class="badge badge-phoenix badge-phoenix-warning 
+												rounded-pill fs--1 ms-2">
 												<span class="badge-label">+26.5%</span>
 											</span>
 										</h5>
@@ -180,8 +190,8 @@
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-primary-100 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Non-paying
-											customer</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">
+											Non-paying customer</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">70%</h6>
 									</div>
 								</div>
