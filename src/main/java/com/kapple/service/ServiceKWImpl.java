@@ -24,5 +24,10 @@ public class ServiceKWImpl implements ServiceKW {
 		// 공급사 상세 정보 출력
 		return mapper.supplierDetail(suppl_no);
 	}
+	@Override
+	public int supplierCount(String compo_name) {
+		// 공급사 개수
+		return mapper.supplierCnt(compo_name);
+	}
 
 }

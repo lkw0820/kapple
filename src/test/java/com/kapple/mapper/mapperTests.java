@@ -23,9 +23,14 @@ public class mapperTests {
 //		mapper.test();
 //	}
 	
+//	@Test
+//	public void test() {
+//		log.info(mapper.supplierList("부품이름1"));
+//	}
+	
 	@Test
 	public void test() {
-		log.info(mapper.supplierList("부품이름1"));
+		log.info(mapper.getProposal("부품이름3", "SPPL10775"));
 	}
 
 }
