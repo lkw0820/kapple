@@ -40,10 +40,10 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/addSupplier")
-	public void moveToAddSupplier() {
-		log.info("move to AddSupplier Page..................................");
-	}
+	/*
+	 * @GetMapping("/addSupplier") public void moveToAddSupplier() {
+	 * log.info("move to AddSupplier Page.................................."); }
+	 */
 	
 	@GetMapping("/addRetailer")
 	public void moveToAddRetailer() {

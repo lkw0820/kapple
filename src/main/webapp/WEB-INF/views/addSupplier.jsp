@@ -39,17 +39,32 @@
                   <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" aria-labelledby="bootstrap-wizard-validation-tab1" id="bootstrap-wizard-validation-tab1">
                       <form class="needs-validation" id="wizardValidationForm1" novalidate="novalidate" data-wizard-form="1">
-                        <h5 class="mb-2 mx-2" for="bootstrap-wizard-validation-wizard-name">부품명</h5>
+                        <h5 class="mb-2 mx-2" for="componentName-addSupplier">부품명</h5>
                         <div class="mb-2">
-                          <input class="form-control" type="text" name="componentName" placeholder="Component Name" required="required" id="bootstrap-wizard-validation-wizard-name">
+                          <input class="form-control" type="text" name="componentName" placeholder="Component Name" required="required" id="componentName-addSupplier" value="">
                           <div class="invalid-feedback">부품명을 정확히 입력하세요.</div>
                         </div>
                       </form>
+                      <div id="componentBtnDiv" class="row my-1">
+                      	<!-- 부품 버튼 동적 생성 -->
+                      	<c:forEach items="${componentList}" var="component">
+                      		<div class="col-md-3 mb-3">
+	                        	<button class="btn btn-phoenix-primary p-2 w-100 border-100" onclick="componentBtnClick('${component.compo_name}')">
+	                            	<p class="fs-sm--1 mb-1">${component.compo_no}</p>
+	                            	<h4 class="mb-2">${component.compo_name}</h4>
+	                            	(<span>${component.unit}</span>)
+	                            	<p class="mb-0">${component.detail}</p>
+	                          	</button>
+	                        </div>
+                      	</c:forEach>
+              
+               
+                      </div>
                     </div>
       
                     <div class="tab-pane" role="tabpanel" aria-labelledby="bootstrap-wizard-validation-tab2" id="bootstrap-wizard-validation-tab2">
                       <form class="needs-validation" id="wizardValidationForm2" novalidate="novalidate" data-wizard-form="2">
-                        <div class="row g-4 mb-4 dz-clickable" data-dropzone="data-dropzone" data-options='{"maxFiles": 1, "data": [{"name": "avatar.webp", "size": "54kb", "url": "assets/img/team/avatar.webp"}]}'>
+                        <div class="row g-4 mb-4 dz-clickable" data-dropzone="data-dropzone" data-options='{"maxFiles": 1, "data": [{"name": "avatar.webp", "size": "54kb", "url": "resources/assets/img/team/avatar.webp"}]}'>
 
                           <div class="col-md-auto">
                             <div class="dz-preview dz-preview-single">
@@ -148,10 +163,10 @@
                         <div class="fallback">
                           <input name="file" type="file" multiple="multiple" />
                         </div>
-                        <div class="dz-message text-center" data-dz-message="data-dz-message"><img class="me-2" src="assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
+                        <div class="dz-message text-center" data-dz-message="data-dz-message"><img class="me-2" src="resources/assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
                         <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
                           <div class="d-flex mb-3 pb-3 border-bottom media">
-                            <div class="border border-300 p-2 rounded-2 me-2"><img class="rounded-2 dz-image" src="assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
+                            <div class="border border-300 p-2 rounded-2 me-2"><img class="rounded-2 dz-image" src="resources/assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
                             <div class="flex-1 d-flex flex-between-center">
                               <div>
                                 <h6 data-dz-name="data-dz-name"></h6>
@@ -174,7 +189,7 @@
                     <div class="tab-pane" role="tabpanel" aria-labelledby="bootstrap-wizard-validation-tab4" id="bootstrap-wizard-validation-tab4">
                       <div class="row flex-center pb-8 pt-4 gx-3 gy-4 mt-10 min-vh-50">
                         <div class="col-12 col-sm-auto">
-                          <div class="text-center text-sm-start"><img class="d-dark-none" src="assets/img/spot-illustrations/38.webp" alt="" width="220"><img class="d-light-none" src="../../assets/img/spot-illustrations/dark_38.webp" alt="" width="220"></div>
+                          <div class="text-center text-sm-start"><img class="d-dark-none" src="resources/assets/img/spot-illustrations/38.webp" alt="" width="220"><img class="d-light-none" src="../../assets/img/spot-illustrations/dark_38.webp" alt="" width="220"></div>
                         </div>
                         <div class="col-12 col-sm-auto">
                           <div class="text-center text-sm-start">
@@ -314,7 +329,7 @@
           var nextPageHref = $('.nav-link.active').attr('href');
           
           // 미리 보기 자동 입력 
-          $("#preComponentName").val($("#bootstrap-wizard-validation-wizard-name").val());
+          $("#preComponentName").val($("#componentName-addSupplier").val());
           $("#componentName-addSuppliers").val($("#preComponentName").val());
 
           
@@ -337,8 +352,35 @@
             submitSupplierBtn.disabled = false;
           }
         });
+        
 
       });
+      
+        /* componentBtn 클릭 이벤트 */
+        function componentBtnClick(compoName) {
+        	console.log(compoName);
+        	$("#componentName-addSupplier").val(compoName);
+        };
+        
+        const componentNameInput = document.getElementById('componentName-addSupplier');
+
+        // input 값이 변경될 때마다 필터링된 버튼들을 보여주는 함수
+        function showFilteredButtons() {
+          const filterValue = componentNameInput.value.toLowerCase();
+          const buttons = document.querySelectorAll('#componentBtnDiv div');
+
+          buttons.forEach((button) => {
+            const buttonCompoName = button.querySelector('h4').innerText.toLowerCase();
+            if (buttonCompoName.includes(filterValue)) {
+              button.style.display = 'block';
+            } else {
+              button.style.display = 'none';
+            }
+          });
+        }
+
+        // input 값이 변경될 때마다 showFilteredButtons 함수를 호출합니다.
+        componentNameInput.addEventListener('input', showFilteredButtons);
 
     </script>
 
