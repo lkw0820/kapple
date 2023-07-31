@@ -28,6 +28,10 @@
     <script src="resources/vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
     <script src="resources/assets/js/ecommerce-dashboard.js"></script>
     <script src="resources/assets/js/crm-analytics.js"></script>
+    <script src="resources/vendors/dayjs/dayjs.min.js"></script>
+    <script src="resources/vendors/tinymce/tinymce.min.js"></script>
+    <script src="resources/vendors/dropzone/dropzone.min.js"></script>
+    <script src="resources/vendors/choices/choices.min.js"></script>
     
 
 
