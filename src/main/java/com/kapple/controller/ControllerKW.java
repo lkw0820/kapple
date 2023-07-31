@@ -28,6 +28,8 @@ public class ControllerKW {
 	public void comparsionSupplier(@RequestParam("compo_name") String compo_name, Model model) {
 		log.info("supplierList...........");
 		model.addAttribute("sList",service.supplierListService(compo_name));
+		model.addAttribute("compo_name",compo_name);
+		model.addAttribute("count", service.supplierCount(compo_name));
 	}
 	
 	@GetMapping("/modal/{suppl_no}")
