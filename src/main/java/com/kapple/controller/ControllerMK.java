@@ -17,7 +17,7 @@ public class ControllerMK {
 //	@Autowired
 	private ServiceMK service;
 	
-	@GetMapping("/statistics")
+	//@GetMapping("/mk")
 	public void list() {
 		
 		
