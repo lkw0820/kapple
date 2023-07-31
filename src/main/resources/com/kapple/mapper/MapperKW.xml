@@ -35,8 +35,15 @@
 				where c.compo_name = #{compo_name}
 		]]>
 	</select>
+	<select id="supplierCnt" resultType="int" parameterType="String">
+		<![CDATA[
+			select count(*) from supplier s join proposal p
+				on s.suppl_no=p.suppl_no join component c
+				on p.compo_no=c.compo_no
+				where c.compo_name = #{compo_name}
+		]]>
+	</select>
 	<!-- 회사 상세 정보 -->
-	
 	<select id="supplierDetail" resultType="com.kapple.domain.SupplierDetailVO" parameterType="String">
 		<![CDATA[
 			select suppl_name, ceo_name, category, phone, biz_no, transport_category

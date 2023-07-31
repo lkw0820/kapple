@@ -57,8 +57,15 @@
 								
 									<!-- 카드 타이틀 및 설명, 카드 헤더 내용 -->
 									<div class="col-auto">
-										<h3 class="text-1100" id="supplierCardTitle">카메라렌즈</h3>
-										<p class="mb-0 text-700">카메라 렌즈 설명</p>
+									<c:if test="${not empty compo_name }">
+										<h3 class="text-1100" id="supplierCardTitle"><c:out value="${compo_name }"/></h3>
+										<p class="mb-0 text-700"><c:out value="${compo_name } 공급사"/></p>
+									</c:if>
+									<c:if test="${empty compo_name }">
+										<h3 class="text-1100" id="supplierCardTitle">부품을 검색해주세요</h3>
+										<p class="mb-0 text-700"></p>
+									</c:if>
+										
 									</div>
 									
 									<!-- 검색 결과 개수 표시 -->
@@ -68,7 +75,7 @@
 											<div class="col-auto d-flex">
 												<p class="mb-0 ms-sm-3 fs--1 text-700 fw-bold">
 													<span class="fas fa-filter me-1 fw-extra-bold fs--2"></span>
-													<span id="supplierTasks">23 tasks</span>
+													<span id="supplierTasks">${count} tasks</span>
 												</p>
 											</div>
 										</div>
@@ -194,18 +201,30 @@
 										<table class="table table-sm fs--1 mb-0">
 											<thead>
 												<tr>
-													<th class="sort border-top ps-3 asc" data-sort="name">Name</th>
-													<th class="sort border-top" data-sort="email">Email</th>
-													<th class="sort border-top" data-sort="age">Age</th>
+													<th class="sort border-top ps-3 asc" data-sort="proposal_no">제안 번호</th>
+													<th class="sort border-top" data-sort="suppl_name">공급사 이름</th>
+													<th class="sort border-top" data-sort="compo_name">부품 이름</th>
+													<th class="sort border-top" data-sort="price">단가</th>
+													<th class="sort border-top" data-sort="quantity">수량</th>
+													<th class="sort border-top" data-sort="defective_rate">불량률</th>
+													<th class="sort border-top" data-sort="quality_grade">품질등급</th>
+													<th class="sort border-top" data-sort="prod_period">생산기간</th>
+													
+													
 													<th class="sort text-end align-middle pe-0 border-top"
 														scope="col">ACTION</th>
 												</tr>
 											</thead>
 											<tbody class="list">
 												<tr>
-													<td class="align-middle ps-3 name">Alice</td>
-													<td class="align-middle email">alice@example.com</td>
-													<td class="align-middle age">42</td>
+													<td class="align-middle ps-3 name">제안번호 예시</td>
+													<td class="align-middle email">공급사이름 예시</td>
+													<td class="align-middle age">부품이름 예시</td>
+													<td class="align-middle age">단가 예시</td>
+													<td class="align-middle age">수량 예시</td>
+													<td class="align-middle age">불량률 예시</td>
+													<td class="align-middle age">품질등급 예시</td>
+													<td class="align-middle age">생산기간 예시</td>
 													<td class="align-middle white-space-nowrap text-end pe-0">
 														<div
 															class="font-sans-serif btn-reveal-trigger position-static">
@@ -232,126 +251,7 @@
 														</div>
 													</td>
 												</tr>
-												<tr>
-													<td class="align-middle ps-3 name">Alvaro</td>
-													<td class="align-middle email">alvaro@example.com</td>
-													<td class="align-middle age">37</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<svg class="svg-inline--fa fa-ellipsis fs--2"
-																	aria-hidden="true" focusable="false" data-prefix="fas"
-																	data-icon="ellipsis" role="img"
-																	xmlns="http://www.w3.org/2000/svg"
-																	viewBox="0 0 448 512" data-fa-i2svg="">
-																	<path fill="currentColor"
-																		d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"></path></svg>
-																<!-- <span class="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com -->
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="align-middle ps-3 name">Anna</td>
-													<td class="align-middle email">anna@example.com</td>
-													<td class="align-middle age">18</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<svg class="svg-inline--fa fa-ellipsis fs--2"
-																	aria-hidden="true" focusable="false" data-prefix="fas"
-																	data-icon="ellipsis" role="img"
-																	xmlns="http://www.w3.org/2000/svg"
-																	viewBox="0 0 448 512" data-fa-i2svg="">
-																	<path fill="currentColor"
-																		d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"></path></svg>
-																<!-- <span class="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com -->
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="align-middle ps-3 name">Antony</td>
-													<td class="align-middle email">antony@example.com</td>
-													<td class="align-middle age">39</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<svg class="svg-inline--fa fa-ellipsis fs--2"
-																	aria-hidden="true" focusable="false" data-prefix="fas"
-																	data-icon="ellipsis" role="img"
-																	xmlns="http://www.w3.org/2000/svg"
-																	viewBox="0 0 448 512" data-fa-i2svg="">
-																	<path fill="currentColor"
-																		d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"></path></svg>
-																<!-- <span class="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com -->
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="align-middle ps-3 name">Brittany Griffin</td>
-													<td class="align-middle email">brittany@example.com</td>
-													<td class="align-middle age">41</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<svg class="svg-inline--fa fa-ellipsis fs--2"
-																	aria-hidden="true" focusable="false" data-prefix="fas"
-																	data-icon="ellipsis" role="img"
-																	xmlns="http://www.w3.org/2000/svg"
-																	viewBox="0 0 448 512" data-fa-i2svg="">
-																	<path fill="currentColor"
-																		d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"></path></svg>
-																<!-- <span class="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com -->
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
+												
 											</tbody>
 										</table>
 									</div>
@@ -429,6 +329,8 @@
 	$(document).ready(function(){
 		$('#searchItem').on('click',function(){
 			$('form.position-relative').submit();
+			
+			$('#supplierCardTitle').html($('#componentSearchBox').find('input').val());
 		});
 		//모달 창
 
@@ -439,9 +341,15 @@
 			var supplierDetail;
 			detailService.get(suppl_no,function(result){
 				 supplierDetail=result;
-				 console.log(result.ceo_name);
+				 //console.log(result.ceo_name);
+				 $('#myModal').find("input[name='suppl_name']").val(supplierDetail.suppl_name);
+				 $('#myModal').find("input[name='ceo_name']").val(supplierDetail.ceo_name);
+				 $('#myModal').find("input[name='category']").val(supplierDetail.category);
+				 $('#myModal').find("input[name='biz_no']").val(supplierDetail.biz_no);
+				 $('#myModal').find("input[name='transport_category']").val(supplierDetail.transport_category);
+				 $('#myModal').find("input[name='phone']").val(supplierDetail.phone);
 			}); 
-			$('#myModal'
+			
 			$(".modal").modal("show");
 			
 		});
