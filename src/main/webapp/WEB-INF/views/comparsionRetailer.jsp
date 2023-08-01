@@ -56,8 +56,22 @@
 								
 									<!-- 카드 타이틀 및 설명, 카드 헤더 내용 -->
 									<div class="col-auto">
-										<h3 class="text-1100" id="retailerCardTitle">Kapple 23</h3>
-										<p class="mb-0 text-700">상품 설명</p>
+									<c:if test="${not empty compo_name }">
+										<h3 class="text-1100" id="supplierCardTitle"><c:out value="${compo_name }"/></h3>
+										<button class="btn btn-primary" id="componentDetail">
+											제품상세보기
+										</button>
+										<p class="mb-0 text-700"><c:out value="${compo_name } 공급사"/></p>
+									</c:if>
+									<c:if test="${empty compo_name }">
+										<h3 class="text-1100" id="supplierCardTitle">부품을 검색해주세요</h3>
+										<p class="mb-0 text-700"></p>
+									</c:if>
+										<input type="hidden" name="compo_name" id="compo_name" value="${compoDetail.compo_name }">
+										<input type="hidden" name="compo_no" id="compo_no" value="${compoDetail.compo_no }">
+										<input type="hidden" name="detail" id="detail" value="${compoDetail.detail }">
+										<input type="hidden" name="unit" id="unit" value="${compoDetail.unit }">
+
 									</div>
 									
 									<!-- 검색 결과 개수 표시 -->
@@ -67,7 +81,7 @@
 											<div class="col-auto d-flex">
 												<p class="mb-0 ms-sm-3 fs--1 text-700 fw-bold">
 													<span class="fas fa-filter me-1 fw-extra-bold fs--2"></span>
-													<span id="retailerTasks">23 tasks</span>
+													<span id="retailerTasks">${count} tasks</span>
 												</p>
 											</div>
 										</div>
@@ -94,24 +108,27 @@
 																data-bulk-select='{"body":"bulk-select-body","actions":"bulk-select-actions","replacedElement":"bulk-select-replace-element"}' />
 														</div>
 													</th>
-													<th class="sort align-middle ps-3" data-sort="name">Name</th>
-													<th class="sort align-middle" data-sort="email">Email</th>
-													<th class="sort align-middle" data-sort="age">Age</th>
+													<th class="sort align-middle ps-3" data-sort="no">판매사 번호</th>
+													<th class="sort align-middle" data-sort="name">판매사 이름</th>
+													<th class="sort align-middle" data-sort="ceo">대표자</th>
+													<th class="sort align-middle" data-sort="cate">구분</th>
 													<th class="sort text-end align-middle pe-0" scope="col">ACTION</th>
 												</tr>
 											</thead>
 											
 											<tbody class="list" id="bulk-select-body">
-												<tr>
+												<c:forEach items="${sList }" var="supplier">
+													<tr>
 													<td class="fs--1 align-middle">
 														<div class="form-check mb-0 fs-0">
 															<input class="form-check-input" type="checkbox"
 																data-bulk-select-row="{&quot;name&quot;:&quot;Anna&quot;,&quot;email&quot;:&quot;anna@example.com&quot;,&quot;age&quot;:18}" />
 														</div>
 													</td>
-													<td class="align-middle ps-3 name">Anna</td>
-													<td class="align-middle email">anna@example.com</td>
-													<td class="align-middle age">18</td>
+													<td class="align-middle ps-3 no"><c:out value="${supplier.suppl_no }"/></td>
+													<td class="align-middle name"><c:out value="${supplier.suppl_name }"/></td>
+													<td class="align-middle ceo"><c:out value="${supplier.ceo_name }"/></td>
+													<td class="align-middle cate"><c:out value="${supplier.category }"/></td>
 													<td class="align-middle white-space-nowrap text-end pe-0">
 														<div
 															class="font-sans-serif btn-reveal-trigger position-static">
@@ -123,7 +140,7 @@
 																<span class="fas fa-ellipsis-h fs--2"></span>
 															</button>
 															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
+																<a class="dropdown-item supplierDetail" href="#!" >View</a><a
 																	class="dropdown-item" href="#!">Export</a>
 																<div class="dropdown-divider"></div>
 																<a class="dropdown-item text-danger" href="#!">Remove</a>
@@ -131,414 +148,7 @@
 														</div>
 													</td>
 												</tr>
-												
-												<!-- 이후 삭제해도 됨, 동적으로 생성 -->
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Homer&quot;,&quot;email&quot;:&quot;homer@example.com&quot;,&quot;age&quot;:35}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Homer</td>
-													<td class="align-middle email">homer@example.com</td>
-													<td class="align-middle age">35</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Oscar&quot;,&quot;email&quot;:&quot;oscar@example.com&quot;,&quot;age&quot;:52}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Oscar</td>
-													<td class="align-middle email">oscar@example.com</td>
-													<td class="align-middle age">52</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Emily&quot;,&quot;email&quot;:&quot;emily@example.com&quot;,&quot;age&quot;:30}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Emily</td>
-													<td class="align-middle email">emily@example.com</td>
-													<td class="align-middle age">30</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Jara&quot;,&quot;email&quot;:&quot;jara@example.com&quot;,&quot;age&quot;:25}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Jara</td>
-													<td class="align-middle email">jara@example.com</td>
-													<td class="align-middle age">25</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Clark&quot;,&quot;email&quot;:&quot;clark@example.com&quot;,&quot;age&quot;:39}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Clark</td>
-													<td class="align-middle email">clark@example.com</td>
-													<td class="align-middle age">39</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Jennifer&quot;,&quot;email&quot;:&quot;jennifer@example.com&quot;,&quot;age&quot;:52}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Jennifer</td>
-													<td class="align-middle email">jennifer@example.com</td>
-													<td class="align-middle age">52</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Tony&quot;,&quot;email&quot;:&quot;tony@example.com&quot;,&quot;age&quot;:30}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Tony</td>
-													<td class="align-middle email">tony@example.com</td>
-													<td class="align-middle age">30</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Tom&quot;,&quot;email&quot;:&quot;tom@example.com&quot;,&quot;age&quot;:25}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Tom</td>
-													<td class="align-middle email">tom@example.com</td>
-													<td class="align-middle age">25</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Michael&quot;,&quot;email&quot;:&quot;michael@example.com&quot;,&quot;age&quot;:39}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Michael</td>
-													<td class="align-middle email">michael@example.com</td>
-													<td class="align-middle age">39</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Antony&quot;,&quot;email&quot;:&quot;antony@example.com&quot;,&quot;age&quot;:39}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Antony</td>
-													<td class="align-middle email">antony@example.com</td>
-													<td class="align-middle age">39</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Raymond&quot;,&quot;email&quot;:&quot;raymond@example.com&quot;,&quot;age&quot;:52}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Raymond</td>
-													<td class="align-middle email">raymond@example.com</td>
-													<td class="align-middle age">52</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Marie&quot;,&quot;email&quot;:&quot;marie@example.com&quot;,&quot;age&quot;:30}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Marie</td>
-													<td class="align-middle email">marie@example.com</td>
-													<td class="align-middle age">30</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Cohen&quot;,&quot;email&quot;:&quot;cohen@example.com&quot;,&quot;age&quot;:25}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Cohen</td>
-													<td class="align-middle email">cohen@example.com</td>
-													<td class="align-middle age">25</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Rowen&quot;,&quot;email&quot;:&quot;rowen@example.com&quot;,&quot;age&quot;:39}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 name">Rowen</td>
-													<td class="align-middle email">rowen@example.com</td>
-													<td class="align-middle age">39</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 									</div>
