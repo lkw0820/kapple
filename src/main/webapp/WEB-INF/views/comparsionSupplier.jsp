@@ -17,7 +17,7 @@
 		</div>
 
 		<!-- 상단 ; 부품/상품 검색 및 부품/공급사추가 버튼  -->
-		<div id="products" data-list='{"valueNames":["product","price","category","tags","vendor","time"],"page":10,"pagination":true}'>
+		<div id="products" data-list='{"valueNames":["suppl_no","suppl_name","ceo_name","category"],"page":10,"pagination":true}'>
 			<div class="mb-4">
 				<div class="d-flex flex-wrap gap-3">
 				
@@ -59,14 +59,22 @@
 									<div class="col-auto">
 									<c:if test="${not empty compo_name }">
 										<h3 class="text-1100" id="supplierCardTitle"><c:out value="${compo_name }"/></h3>
+										<button class="btn btn-primary" id="componentDetail">
+											부품상세보기
+										</button>
 										<p class="mb-0 text-700"><c:out value="${compo_name } 공급사"/></p>
 									</c:if>
 									<c:if test="${empty compo_name }">
 										<h3 class="text-1100" id="supplierCardTitle">부품을 검색해주세요</h3>
 										<p class="mb-0 text-700"></p>
 									</c:if>
-										
+										<input type="hidden" name="compo_name" id="compo_name" value="${compoDetail.compo_name }">
+										<input type="hidden" name="compo_no" id="compo_no" value="${compoDetail.compo_no }">
+										<input type="hidden" name="detail" id="detail" value="${compoDetail.detail }">
+										<input type="hidden" name="unit" id="unit" value="${compoDetail.unit }">
+
 									</div>
+
 									
 									<!-- 검색 결과 개수 표시 -->
 									<div class="col-auto w-100 w-md-auto">
@@ -87,7 +95,7 @@
 							<!-- 카드 바디 :  공급사 리스트 테이블 -->
 							<div class="card-body py-0 scrollbar to-do-list-body min-vh-xxl-50 h-xl-auto">
 
-								<div id="retailerTableContainer" dat-list='{"valueNames":["name","email","age"],"page":10,"pagination":true}'>
+								<div id="supplierTableContainer" dat-list='{"valueNames":["suppl_no","suppl_name","ceo_name","category"],"page":10,"pagination":true}'>
 									<div class="table-responsive mx-n1 px-1">
 									
 										<!-- 고객사 테이블 : retailerTable  -->
@@ -196,7 +204,7 @@
 								<p class="text-700 mb-4">공급 제안 비교 설명</p>
 
 								<!-- 오른쪽 비교 리스트 테이블 -->
-								<div id="tableComparsionS" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":true}'>
+								<div id="tableComparsionS" data-list='{"valueNames":["proposal_no","suppl_name","compo_name","price","quantity","defective_rate","quality_grade","prod_period"],"page":5,"pagination":true}'>
 									<div class="table-responsive">
 										<table class="table table-sm fs--1 mb-0">
 											<thead>
@@ -209,48 +217,9 @@
 													<th class="sort border-top" data-sort="defective_rate">불량률</th>
 													<th class="sort border-top" data-sort="quality_grade">품질등급</th>
 													<th class="sort border-top" data-sort="prod_period">생산기간</th>
-													
-													
-													<th class="sort text-end align-middle pe-0 border-top"
-														scope="col">ACTION</th>
 												</tr>
 											</thead>
 											<tbody class="list" id="proposalList">
-												<tr>
-													<td class="align-middle ps-3 name">제안번호 예시</td>
-													<td class="align-middle email">공급사이름 예시</td>
-													<td class="align-middle age">부품이름 예시</td>
-													<td class="align-middle age">단가 예시</td>
-													<td class="align-middle age">수량 예시</td>
-													<td class="align-middle age">불량률 예시</td>
-													<td class="align-middle age">품질등급 예시</td>
-													<td class="align-middle age">생산기간 예시</td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<svg class="svg-inline--fa fa-ellipsis fs--2"
-																	aria-hidden="true" focusable="false" data-prefix="fas"
-																	data-icon="ellipsis" role="img"
-																	xmlns="http://www.w3.org/2000/svg"
-																	viewBox="0 0 448 512" data-fa-i2svg="">
-																	<path fill="currentColor"
-																		d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"></path></svg>
-																<!-- <span class="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com -->
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item" href="#!">View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
 												
 											</tbody>
 										</table>
@@ -284,37 +253,64 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<label>공급사 이름</label> <input class="form-control" name='suppl_name'
-						value=''>
+					<label>공급사 이름</label> <input class="form-control" name='suppl_name' value='' readonly>
 				</div>
 				<div class="form-group">
-					<label>대표자</label> <input class="form-control" name='ceo_name'
-						value=''>
+					<label>대표자</label> <input class="form-control" name='ceo_name' value='' readonly>
 				</div>
 				<div class="form-group">
-					<label>구분</label> <input class="form-control" name='category'
-						value=''>
+					<label>구분</label> <input class="form-control" name='category' value='' readonly>
 				</div>
 				<div class="form-group">
-					<label>사업자 번호</label> <input class="form-control" name='biz_no'
-						value=''>
+					<label>사업자 번호</label> <input class="form-control" name='biz_no' value='' readonly>
 				</div>
 				<div class="form-group">
-					<label>운송 분류</label> <input class="form-control" name='transport_category'
-						value=''>
+					<label>운송 분류</label> <input class="form-control" name='transport_category' value='' readonly>
 				</div>
 				
 				<div class="form-group">
-					<label>phone</label> <input class="form-control"
-						name='phone' value=''>
+					<label>phone</label> <input class="form-control" name='phone' value='' readonly>
 				</div>
 
 			</div>
 			<div class="modal-footer">
 				<button id='modalModBtn' type="button" class="btn btn-warning">Modify</button>
-<!-- 				<button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
-				<button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button> -->
-				<button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+				<button type="button" class="btn btn-default modalCloseBtn">Close</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="componentModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+<!-- 				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button> -->
+				<h4 class="modal-title" id="myModalLabel">부품 상세 정보</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>부품 이름</label> <input class="form-control" name='compo_name' value='' readonly>
+				</div>
+				<div class="form-group">
+					<label>부품 번호</label> <input class="form-control" name='compo_no' value='' readonly>
+				</div>
+				<div class="form-group">
+					<label>부품 설명</label> <input class="form-control" name='detail' value='' readonly>
+				</div>
+				<div class="form-group">
+					<label>부품 단위</label> <input class="form-control" name='unit' value='' readonly>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button id='modalModBtn' type="button" class="btn btn-warning">Modify</button>
+				<button type="button" class="btn btn-default modalCloseBtn">Close</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -325,6 +321,7 @@
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/resources/test.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js" ></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -334,15 +331,19 @@
 			$('#supplierCardTitle').html($('#componentSearchBox').find('input').val());
 		});
 		
+		$('#componentDetail').on("click",function(e){
+			$('#componentModal').find("input[name='compo_name']").val($('#compo_name').val());
+			$('#componentModal').find("input[name='compo_no']").val($('#compo_no').val());
+			$('#componentModal').find("input[name='detail']").val($('#detail').val());
+			$('#componentModal').find("input[name='unit']").val($('#unit').val());
+			$("#componentModal").modal("show");
+		});
 		//모달 창
 		$(".supplierDetail").on("click", function(e){
 			var suppl_no=$(this).closest('tr').children('.ps-3').html();
-			console.log(suppl_no);
-			//detailService.get();
 			var supplierDetail;
 			Service.getSupplier(suppl_no,function(result){
 				 supplierDetail=result;
-				 //console.log(result.ceo_name);
 				 $('#myModal').find("input[name='suppl_name']").val(supplierDetail.suppl_name);
 				 $('#myModal').find("input[name='ceo_name']").val(supplierDetail.ceo_name);
 				 $('#myModal').find("input[name='category']").val(supplierDetail.category);
@@ -350,42 +351,57 @@
 				 $('#myModal').find("input[name='transport_category']").val(supplierDetail.transport_category);
 				 $('#myModal').find("input[name='phone']").val(supplierDetail.phone);
 			}); 
-			
-			$(".modal").modal("show");
-			
+			$("#myModal").modal("show");
 		});
 		
 		//모달창 닫기
-		$("#modalCloseBtn").on("click",function(e){
-			$(".modal").modal("hide");
+		$(".modalCloseBtn").on("click",function(e){
+			$("#myModal").modal("hide");
+			$("#componentModal").modal("hide");
 		});
+		var proposal=[];
+		var names=[];
+		var price=[];
+		var quantity=[];
+		
+		var makeChart = function(proposal,names,maxPrice,maxQuantity){
+			var chartDom = document.getElementById('echart-social-marketing-radar1');
+			var myChart = echarts.init(chartDom);
+			var option;
+
+			option = {
+			  title: {
+			    text: 'comparison'
+			  },
+			  legend: {
+			    data: names
+			  },
+			  radar: {
+			    // shape: 'circle',
+			    indicator: [
+			      { name: '단가', max: maxPrice },
+			      { name: '수량', max: maxQuantity },
+			      { name: '불량률', max: 10 },
+			      { name: '품질 등급', max: 10 },
+			      { name: '생산 기간', max: 10000 }
+			    ]
+			  },
+			  series: [
+			    {
+			      name: 'Budget vs spending',
+			      type: 'radar',
+			      data: proposal
+			    }
+			  ]
+			};
+			option && myChart.setOption(option);
+		}
 		//체크박스 클릭시 제안 표시
 		$('#bulk-select-body').find('input.form-check-input').on("change",function(){
 			var suppl_no=$(this).closest('tr').children('.ps-3').html();
 			var compo_name=$('#supplierCardTitle').html();
-			
-			//console.log($('#bulk-select-body').find('input.form-check-input').is(':checked'));
-			console.log($(this).closest('tr'));
 			if($(this).is(':checked')){
 				var str="";
-				var foot='<div class="font-sans-serif btn-reveal-trigger position-static">';
-				foot+='<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"';
-				foot+='type="button" data-bs-toggle="dropdown"';
-				foot+='data-boundary="window" aria-haspopup="true"';
-				foot+='aria-expanded="false" data-bs-reference="parent">';
-				foot+='<svg class="svg-inline--fa fa-ellipsis fs--2"';
-				foot+='aria-hidden="true" focusable="false" data-prefix="fas"';
-				foot+='data-icon="ellipsis" role="img"';
-				foot+='xmlns="http://www.w3.org/2000/svg"';
-				foot+='viewBox="0 0 448 512" data-fa-i2svg="">';
-				foot+='<path fill="currentColor"';
-					foot+='d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"></path></svg>';
-				foot+='</button>';
-				foot+='<div class="dropdown-menu dropdown-menu-end py-2">';
-				foot+='<a class="dropdown-item" href="#!">View</a><aclass="dropdown-item" href="#!">Export</a>';
-				foot+='<div class="dropdown-divider"></div>';
-				foot+='<a class="dropdown-item text-danger" href="#!">Remove</a>';
-				foot+='</div></div></td></tr>';
 				Service.getProposal({suppl_no:suppl_no,compo_name},function(result){
 					str+="<tr>";
 					str+='<td class="align-middle ps-3 proposal_no">'+result.proposal_no+'</td>';
@@ -395,73 +411,45 @@
 					str+='<td class="align-middle quantity">'+result.quantity+'</td>';
 					str+='<td class="align-middle defective_rate">'+result.defective_rate+'</td>';
 					str+='<td class="align-middle quality_grade">'+result.quality_grade+'</td>';
-					str+='<td class="align-middle prod_period">'+result.prod_period+'</td>';
-					str+='<td class="align-middle white-space-nowrap text-end pe-0">';	
-					$('#proposalList').append(str+foot);
+					str+='<td class="align-middle prod_period">'+result.prod_period+'</td></tr>';
+					var proposalDetail={};
+					var regex = /[^0-9]/g;
+					//차트 라벨
+					names.push(result.supplier.suppl_name);
+					
+					//max값 계산을 위해서
+					price.push(result.price);
+					let maxPrice=Math.max(...price);
+					quantity.push(result.quantity);
+					let maxQuantity=Math.max(...quantity);
+					//차트 각 데이터 이름
+					proposalDetail.name=result.supplier.suppl_name;
+					//정수 변환
+					let quality_grade=result.quality_grade.replace(regex,"");
+					let prod_period=result.prod_period.replace(regex,"");
+					//차트 각 데이터들
+					proposalDetail.value=[result.price,result.quantity,result.defective_rate,quality_grade,prod_period];
+					//proposal.push(result);
+					proposal.push(proposalDetail);
+					$('#proposalList').append(str);
+					makeChart(proposal,names,maxPrice,maxQuantity);
 				});
 			}else if(!($(this).is(':checked'))){
-				//console.log($('#proposalList').find('.proposal_no').html())
 				var td = $('#proposalList').find('.proposal_no');
 				Service.getProposal({suppl_no:suppl_no,compo_name},function(result){
 					var proposal_no=result.proposal_no;
 					for(let i=0; i<td.length;i++){
-/* 	 					console.log(td.eq(i).parent());
-	 					console.log(proposal_no);
-	 					console.log(td.eq(i).html()==proposal_no); */
+
 	 					if(td.eq(i).html()==proposal_no){
 							td.eq(i).parent().remove();
+							proposal.splice(i,1);
+							makeChart(proposal);
 						}
 					} 
 				})
- 				
-				
-			}	  
-
+			}
 		});
 	});
 </script>
-<!-- 차트 관련 -->
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js" ></script>
-<script type="text/javascript">
-var chartDom = document.getElementById('echart-social-marketing-radar1');
-var myChart = echarts.init(chartDom);
-var option;
 
-option = {
-  title: {
-    text: 'Basic Radar Chart'
-  },
-  legend: {
-    data: ['Allocated Budget', 'Actual Spending']
-  },
-  radar: {
-    // shape: 'circle',
-    indicator: [
-      { name: '단가', max: 6500 },
-      { name: '수량', max: 16000 },
-      { name: '불량률', max: 30000 },
-      { name: '품질 등급', max: 38000 },
-      { name: '생산 기간', max: 52000 }
-    ]
-  },
-  series: [
-    {
-      name: 'Budget vs spending',
-      type: 'radar',
-      data: [
-        {
-          value: [4200, 3000, 20000, 35000, 50000, 18000],
-          name: 'Allocated Budget'
-        },
-        {
-          value: [5000, 14000, 28000, 26000, 42000, 21000],
-          name: 'Actual Spending'
-        }
-      ]
-    }
-  ]
-};
-
-option && myChart.setOption(option);
-</script>
 <%@include file="includes/footer.jsp"%>

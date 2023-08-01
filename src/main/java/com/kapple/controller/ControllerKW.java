@@ -1,5 +1,7 @@
 package com.kapple.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,7 @@ public class ControllerKW {
 		model.addAttribute("sList",service.supplierListService(compo_name));
 		model.addAttribute("compo_name",compo_name);
 		model.addAttribute("count", service.supplierCount(compo_name));
+		model.addAttribute("compoDetail",service.componentDetail(compo_name));
 	}
 	
 	@GetMapping("/modal/{suppl_no}")
@@ -42,6 +45,9 @@ public class ControllerKW {
 	@GetMapping("/proposal/{compo_name}/{suppl_no}")
 	public ResponseEntity<ProposalVO> getProposal(@PathVariable("compo_name") String compo_no, @PathVariable("suppl_no") String suppl_no){
 		log.info("get proposal..........");
+
 		return new ResponseEntity<ProposalVO>(service.getProposal(compo_no, suppl_no),HttpStatus.OK);
 	}
+	
+	
 }

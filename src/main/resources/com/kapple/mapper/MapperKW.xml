@@ -29,8 +29,8 @@
 	<select id="supplierList" resultMap="supplierMap" parameterType="String">
 		<![CDATA[
 			select s.suppl_no, suppl_name, ceo_name, category
-				from supplier s join proposal p
-				on s.suppl_no=p.suppl_no join component c
+				from supplier s full outer join proposal p
+				on s.suppl_no=p.suppl_no full outer join component c
 				on p.compo_no=c.compo_no
 				where c.compo_name = #{compo_name}
 		]]>
@@ -75,10 +75,18 @@
 	</resultMap>
 
 	<select id="getProposal" resultMap="proposalMap">
-		select p.proposal_no, suppl_name, compo_name, price, quantity, defective_rate, quality_grade, prod_period
-		from proposal p full outer join supplier s
-		on p.suppl_no=s.suppl_no full outer join component c
-		on p.compo_no=c.compo_no
-		where compo_name=#{compo_name} and p.suppl_no=#{suppl_no}
+		<![CDATA[
+			select p.proposal_no, suppl_name, compo_name, price, quantity, defective_rate, quality_grade, prod_period
+			from proposal p full outer join supplier s
+			on p.suppl_no=s.suppl_no full outer join component c
+			on p.compo_no=c.compo_no
+			where compo_name=#{compo_name} and p.suppl_no=#{suppl_no}
+		]]>
+	</select>
+	
+	<select id="componentDetail" resultType="com.kapple.domain.ComponentVO">
+		<![CDATA[
+			select * from component where compo_name=#{compo_name}
+		]]>
 	</select>
 </mapper>
