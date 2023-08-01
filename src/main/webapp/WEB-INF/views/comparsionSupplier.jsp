@@ -260,7 +260,7 @@
 
 								<!--  그래프  -->
 								<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-5 ">
-									<div class="echart-social-marketing-radar" style="min-height: 320px; width: 100%"></div>
+									<div id="echart-social-marketing-radar1" style="min-height: 320px; width: 100%"></div>
 								</div>
 
 							</div>
@@ -359,49 +359,109 @@
 		$("#modalCloseBtn").on("click",function(e){
 			$(".modal").modal("hide");
 		});
-		
 		//체크박스 클릭시 제안 표시
 		$('#bulk-select-body').find('input.form-check-input').on("change",function(){
 			var suppl_no=$(this).closest('tr').children('.ps-3').html();
-			//console.log(suppl_no);
-			//console.log($('#supplierCardTitle').html());
 			var compo_name=$('#supplierCardTitle').html();
-			var str="";
-			var foot='<div class="font-sans-serif btn-reveal-trigger position-static">';
-			foot+='<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"';
-			foot+='type="button" data-bs-toggle="dropdown"';
-			foot+='data-boundary="window" aria-haspopup="true"';
-			foot+='aria-expanded="false" data-bs-reference="parent">';
-			foot+='<svg class="svg-inline--fa fa-ellipsis fs--2"';
-			foot+='aria-hidden="true" focusable="false" data-prefix="fas"';
-			foot+='data-icon="ellipsis" role="img"';
-			foot+='xmlns="http://www.w3.org/2000/svg"';
-			foot+='viewBox="0 0 448 512" data-fa-i2svg="">';
-			foot+='<path fill="currentColor"';
-				foot+='d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"></path></svg>';
-			foot+='</button>';
-			foot+='<div class="dropdown-menu dropdown-menu-end py-2">';
-			foot+='<a class="dropdown-item" href="#!">View</a><aclass="dropdown-item" href="#!">Export</a>';
-			foot+='<div class="dropdown-divider"></div>';
-			foot+='<a class="dropdown-item text-danger" href="#!">Remove</a>';
-			foot+='</div></div></td></tr>';
-			Service.getProposal({suppl_no:suppl_no,compo_name},function(result){
-				
-				str+="<tr>";
-				str+='<td class="align-middle ps-3 name">'+result.proposal_no+'</td>';
-				str+='<td class="align-middle email">'+result.supplier.suppl_name+'</td>';
-				str+='<td class="align-middle age">'+result.component.compo_name+'</td>';
-				str+='<td class="align-middle age">'+result.price+'</td>';
-				str+='<td class="align-middle age">'+result.quantity+'</td>';
-				str+='<td class="align-middle age">'+result.defective_rate+'</td>';
-				str+='<td class="align-middle age">'+result.quality_grade+'</td>';
-				str+='<td class="align-middle age">'+result.prod_period+'</td>';
-				str+='<td class="align-middle white-space-nowrap text-end pe-0">';	
-				$('#proposalList').append(str+foot);
-						
-			});
 			
+			//console.log($('#bulk-select-body').find('input.form-check-input').is(':checked'));
+			console.log($(this).closest('tr'));
+			if($(this).is(':checked')){
+				var str="";
+				var foot='<div class="font-sans-serif btn-reveal-trigger position-static">';
+				foot+='<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"';
+				foot+='type="button" data-bs-toggle="dropdown"';
+				foot+='data-boundary="window" aria-haspopup="true"';
+				foot+='aria-expanded="false" data-bs-reference="parent">';
+				foot+='<svg class="svg-inline--fa fa-ellipsis fs--2"';
+				foot+='aria-hidden="true" focusable="false" data-prefix="fas"';
+				foot+='data-icon="ellipsis" role="img"';
+				foot+='xmlns="http://www.w3.org/2000/svg"';
+				foot+='viewBox="0 0 448 512" data-fa-i2svg="">';
+				foot+='<path fill="currentColor"';
+					foot+='d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"></path></svg>';
+				foot+='</button>';
+				foot+='<div class="dropdown-menu dropdown-menu-end py-2">';
+				foot+='<a class="dropdown-item" href="#!">View</a><aclass="dropdown-item" href="#!">Export</a>';
+				foot+='<div class="dropdown-divider"></div>';
+				foot+='<a class="dropdown-item text-danger" href="#!">Remove</a>';
+				foot+='</div></div></td></tr>';
+				Service.getProposal({suppl_no:suppl_no,compo_name},function(result){
+					str+="<tr>";
+					str+='<td class="align-middle ps-3 proposal_no">'+result.proposal_no+'</td>';
+					str+='<td class="align-middle suppl_name">'+result.supplier.suppl_name+'</td>';
+					str+='<td class="align-middle compo_name">'+result.component.compo_name+'</td>';
+					str+='<td class="align-middle price">'+result.price+'</td>';
+					str+='<td class="align-middle quantity">'+result.quantity+'</td>';
+					str+='<td class="align-middle defective_rate">'+result.defective_rate+'</td>';
+					str+='<td class="align-middle quality_grade">'+result.quality_grade+'</td>';
+					str+='<td class="align-middle prod_period">'+result.prod_period+'</td>';
+					str+='<td class="align-middle white-space-nowrap text-end pe-0">';	
+					$('#proposalList').append(str+foot);
+				});
+			}else if(!($(this).is(':checked'))){
+				//console.log($('#proposalList').find('.proposal_no').html())
+				var td = $('#proposalList').find('.proposal_no');
+				Service.getProposal({suppl_no:suppl_no,compo_name},function(result){
+					var proposal_no=result.proposal_no;
+					for(let i=0; i<td.length;i++){
+/* 	 					console.log(td.eq(i).parent());
+	 					console.log(proposal_no);
+	 					console.log(td.eq(i).html()==proposal_no); */
+	 					if(td.eq(i).html()==proposal_no){
+							td.eq(i).parent().remove();
+						}
+					} 
+				})
+ 				
+				
+			}	  
+
 		});
 	});
+</script>
+<!-- 차트 관련 -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js" ></script>
+<script type="text/javascript">
+var chartDom = document.getElementById('echart-social-marketing-radar1');
+var myChart = echarts.init(chartDom);
+var option;
+
+option = {
+  title: {
+    text: 'Basic Radar Chart'
+  },
+  legend: {
+    data: ['Allocated Budget', 'Actual Spending']
+  },
+  radar: {
+    // shape: 'circle',
+    indicator: [
+      { name: '단가', max: 6500 },
+      { name: '수량', max: 16000 },
+      { name: '불량률', max: 30000 },
+      { name: '품질 등급', max: 38000 },
+      { name: '생산 기간', max: 52000 }
+    ]
+  },
+  series: [
+    {
+      name: 'Budget vs spending',
+      type: 'radar',
+      data: [
+        {
+          value: [4200, 3000, 20000, 35000, 50000, 18000],
+          name: 'Allocated Budget'
+        },
+        {
+          value: [5000, 14000, 28000, 26000, 42000, 21000],
+          name: 'Actual Spending'
+        }
+      ]
+    }
+  ]
+};
+
+option && myChart.setOption(option);
 </script>
 <%@include file="includes/footer.jsp"%>

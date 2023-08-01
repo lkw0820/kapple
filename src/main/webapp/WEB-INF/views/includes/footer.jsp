@@ -22,12 +22,12 @@
     <script src="resources/vendors/feather-icons/feather.min.js"></script>
     <script src="resources/vendors/dayjs/dayjs.min.js"></script>
     <script src="resources/assets/js/phoenix.js"></script>
-    <script src="resources/vendors/echarts/echarts.min.js"></script>
+    
     <script src="resources/vendors/leaflet/leaflet.js"></script>
     <script src="resources/vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
     <script src="resources/vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
     <script src="resources/assets/js/ecommerce-dashboard.js"></script>
-    <script src="resources/assets/js/crm-analytics.js"></script>
+    <!-- <script src="resources/assets/js/crm-analytics.js"></script> -->
     <script src="resources/vendors/dayjs/dayjs.min.js"></script>
     <script src="resources/vendors/tinymce/tinymce.min.js"></script>
     <script src="resources/vendors/dropzone/dropzone.min.js"></script>

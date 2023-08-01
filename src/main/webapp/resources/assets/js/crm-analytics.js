@@ -1,3 +1,4 @@
+
 (function (factory) {
   typeof define === 'function' && define.amd ? define(factory) :
   factory();
@@ -348,13 +349,13 @@
             },
           },
           indicator: [
-            { name: 'SAT', max: 5000 },
-            { name: 'FRI', max: 5000 },
-            { name: 'THU', max: 5000 },
-            { name: 'WED', max: 5000 },
-            { name: 'TUE', max: 5000 },
-            { name: 'MON', max: 5000 },
-            { name: 'SUN', max: 5000 },
+            { name: 'qwe', max: 5000 },
+            { name: 'qwe', max: 5000 },
+            { name: 'qwe', max: 5000 },
+            { name: 'qwe', max: 5000 },
+            { name: 'qwe', max: 5000 },
+            { name: 'qwe', max: 5000 },
+            { name: 'qwe', max: 5000 },
           ],
         },
         series: [
