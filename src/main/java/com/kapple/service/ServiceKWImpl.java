@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kapple.domain.ProposalVO;
 import com.kapple.domain.SupplierDetailVO;
 import com.kapple.domain.SupplierVO;
 import com.kapple.mapper.MapperKW;
@@ -28,6 +29,11 @@ public class ServiceKWImpl implements ServiceKW {
 	public int supplierCount(String compo_name) {
 		// 공급사 개수
 		return mapper.supplierCnt(compo_name);
+	}
+	@Override
+	public ProposalVO getProposal(String compo_name, String suppl_no) {
+		// 상품과 공급사에 해당하는 제안 출력
+		return mapper.getProposal(compo_name, suppl_no);
 	}
 
 }

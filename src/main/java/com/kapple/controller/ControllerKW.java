@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kapple.domain.ProposalVO;
 import com.kapple.domain.SupplierDetailVO;
 import com.kapple.service.ServiceKW;
 
@@ -36,5 +37,11 @@ public class ControllerKW {
 	public ResponseEntity<SupplierDetailVO> supplierDetail(@PathVariable("suppl_no") String suppl_no) {
 		log.info("supplier detail..........");
 		return new ResponseEntity<SupplierDetailVO>(service.supplierDetail(suppl_no),HttpStatus.OK);
+	}
+	
+	@GetMapping("/proposal/{compo_name}/{suppl_no}")
+	public ResponseEntity<ProposalVO> getProposal(@PathVariable("compo_name") String compo_no, @PathVariable("suppl_no") String suppl_no){
+		log.info("get proposal..........");
+		return new ResponseEntity<ProposalVO>(service.getProposal(compo_no, suppl_no),HttpStatus.OK);
 	}
 }
