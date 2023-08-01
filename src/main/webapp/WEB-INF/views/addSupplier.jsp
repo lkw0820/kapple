@@ -13,7 +13,7 @@
         
         <div class="mx-lg-n4 mt-3">
           <div class="row g-3">
-            <div class="col-12 col-xl-8 col-xxl-8 min-vh-75">
+            <div class="col-12 col-xl-8 col-xxl-8 min-vh-75 ">
               <div class="addSupplierCard card theme-wizard mb-5 min-vh-75" data-theme-wizard="data-theme-wizard">
 
                 <div class="card-header bg-100 pt-3 pb-2 border-bottom-0">
@@ -45,21 +45,34 @@
                           <div class="invalid-feedback">부품명을 정확히 입력하세요.</div>
                         </div>
                       </form>
+                      <div id="paginationButtons" class="text-end mt-3 mb-3 mx-2">
+		                    <button class="btn btn-outline-primary mx-1 p-1" onclick="changePage(-1)">이전</button>
+		                    <span id="currentPage">1</span>
+		                    <button class="btn btn-outline-primary mx-1 p-1" onclick="changePage(1)">다음</button>
+	                  </div>
                       <div id="componentBtnDiv" class="row my-1">
                       	<!-- 부품 버튼 동적 생성 -->
                       	<c:forEach items="${componentList}" var="component">
                       		<div class="col-md-3 mb-3">
-	                        	<button class="btn btn-phoenix-primary p-2 w-100 border-100" onclick="componentBtnClick('${component.compo_name}')">
-	                            	<p class="fs-sm--1 mb-1">${component.compo_no}</p>
-	                            	<h4 class="mb-2">${component.compo_name}</h4>
-	                            	(<span>${component.unit}</span>)
-	                            	<p class="mb-0">${component.detail}</p>
+	                        	<button class="btn btn-phoenix-info p-2 w-100 border-100" onclick="componentBtnClick('${component.compo_name}')">
+	                            	<p class="fs-sm--1 mb-1 text-secondary">${component.compo_no}</p>
+	                            	<h5 class="mb-1 mt-2 text-primary">${component.compo_name}</h5>
+	                            	<p class="fs-sm--2 mb-0 text-secondary">(${component.unit})</p>
+	                            	<p class="mb-0 text-secondary">${component.detail}</p>
 	                          	</button>
 	                        </div>
                       	</c:forEach>
-              
-               
                       </div>
+                      
+                      <div id="addComponentDIv" class=" text-center w-100 mt-10 " style="display:none" >
+	                      	<h4>해당하는 부품을 찾을 수 없습니다</h4>
+	                      	<p>아래 부품 추가 버튼을 이용하여 부품을 추가하십시오</p>
+	          
+	                      	<button class="btn btn-soft-primary w-50 p-3 mt-3" id="addProdutBtn">
+								<span class="fas fa-plus me-2"></span>부품 추가
+							</button>
+                      </div>
+                      
                     </div>
       
                     <div class="tab-pane" role="tabpanel" aria-labelledby="bootstrap-wizard-validation-tab2" id="bootstrap-wizard-validation-tab2">
@@ -352,34 +365,89 @@
             submitSupplierBtn.disabled = false;
           }
         });
-        
 
       });
       
-        /* componentBtn 클릭 이벤트 */
+      
+      /////////////////////////////////////////////////////////////////
+        /* componentBtn 클릭 이벤트=> 부품명 자동 입력 */
         function componentBtnClick(compoName) {
         	console.log(compoName);
         	$("#componentName-addSupplier").val(compoName);
         };
         
+        
+		/////////////////////////////////////////////////////////////////
+		/* 부품 이름 입력마다 필터링된 버튼 출력 & 필터링된 버튼이 아예 없는 경우 안내문 출력*/
         const componentNameInput = document.getElementById('componentName-addSupplier');
+		
 
-        // input 값이 변경될 때마다 필터링된 버튼들을 보여주는 함수
         function showFilteredButtons() {
-          const filterValue = componentNameInput.value.toLowerCase();
-          const buttons = document.querySelectorAll('#componentBtnDiv div');
-
-          buttons.forEach((button) => {
-            const buttonCompoName = button.querySelector('h4').innerText.toLowerCase();
-            if (buttonCompoName.includes(filterValue)) {
-              button.style.display = 'block';
-            } else {
-              button.style.display = 'none';
-            }
-          });
+        	const filterValue = componentNameInput.value.toLowerCase();
+          	const buttons = document.querySelectorAll('#componentBtnDiv div');
+          	let anyButtonDisplayed = false;
+			
+          	buttons.forEach((button) => {
+	            const buttonCompoName = button.querySelector('h5').innerText.toLowerCase();
+	            
+	            if (buttonCompoName.includes(filterValue)) {
+	             	button.style.display = 'block';
+	             	anyButtonDisplayed= true;
+	            } else {
+	              	button.style.display = 'none';
+	            }
+	         
+          	});
+          	
+          	// 해당하는 데이터가 없는 경우 
+	        const addComponentDIv = document.getElementById('addComponentDIv');
+	        addComponentDIv.style.display= anyButtonDisplayed ? 'none' : 'block';
+	       
+	        showButtonsByPage();
         }
-
+        
+        
         componentNameInput.addEventListener('input', showFilteredButtons);
+        
+		/////////////////////////////////////////////////////////////////	
+		// 페이지 당 버튼 개수
+		const buttonsPerPage = 16;
+		
+		// 현재 페이지 번호
+		let currentPageNumber = 1;
+		
+		// 페이지 버튼과 페이지 번호 요소 가져오기
+		const paginationButtons = document.getElementById('paginationButtons');
+		const currentPage = document.getElementById('currentPage');
+		
+		// 페이지 버튼 클릭 이벤트 처리
+		function changePage(pageDiff) {
+		    currentPageNumber += pageDiff;
+		    showButtonsByPage();
+		}
+
+// 페이지 번호와 버튼들을 업데이트하는 함수
+	function showButtonsByPage() {
+	    const buttons = document.querySelectorAll('#componentBtnDiv div');
+	    const totalPages = Math.ceil(buttons.length / buttonsPerPage);
+	
+	    currentPageNumber = Math.max(1, Math.min(currentPageNumber, totalPages));
+	
+	   
+	    buttons.forEach((button, index) => {
+	        const startIdx = (currentPageNumber - 1) * buttonsPerPage;
+	        const endIdx = startIdx + buttonsPerPage;
+	        if (index >= startIdx && index < endIdx  && computedStyle.display === 'block') {
+	            button.style.display = 'block';
+	        } else {
+	            button.style.display = 'none';
+	        }
+	    });
+	
+	    currentPage.textContent = currentPageNumber;
+	}
+	
+	showButtonsByPage();
 
     </script>
 
