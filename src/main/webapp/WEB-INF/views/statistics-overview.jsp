@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="includes/header.jsp"%>
 
@@ -101,8 +101,7 @@
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-primary-100 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">
-											Pending payment</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0"> Pending payment</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">48%</h6>
 									</div>
 								</div>
@@ -114,8 +113,7 @@
 							<div class="card-body">
 								<div class="d-flex justify-content-between">
 									<div>
-										<h5 class="mb-1">
-											New customers
+										<h5 class="mb-1"> New customers
 											<span class="badge badge-phoenix badge-phoenix-warning 
 												rounded-pill fs--1 ms-2">
 												<span class="badge-label">+26.5%</span>
@@ -148,20 +146,17 @@
 								<div>
 									<div class="d-flex align-items-center mb-2">
 										<div class="bullet-item bg-primary me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Percentage
-											discount</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Percentage discount</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">72%</h6>
 									</div>
 									<div class="d-flex align-items-center mb-2">
 										<div class="bullet-item bg-primary-200 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Fixed card
-											discount</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Fixed card discount</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">18%</h6>
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-info-500 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Fixed
-											product discount</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Fixed product discount</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">10%</h6>
 									</div>
 								</div>
@@ -184,14 +179,12 @@
 								<div class="mt-3">
 									<div class="d-flex align-items-center mb-2">
 										<div class="bullet-item bg-primary me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Paying
-											customer</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Paying customer</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">30%</h6>
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-primary-100 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">
-											Non-paying customer</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">Non-paying customer</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">70%</h6>
 									</div>
 								</div>
@@ -204,4 +197,4 @@
 	</div>
 </div>
 
-<%@include file="includes/footer.jsp"%> --%>
+<%@include file="includes/footer.jsp"%>
