@@ -27,7 +27,7 @@
     <script src="resources/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="resources/vendors/simplebar/simplebar.min.js"></script>
     <script src="resources/assets/js/config.js"></script>
-
+	<script src="resources/vendors/echarts/echarts.min.js"></script>
     <!-- ---------------------------- -->
     <!--       STYLE SHEET, 스타일    -->
     <!-- ---------------------------- -->
@@ -125,15 +125,25 @@
                   </a>
                   <div class="parent-wrapper label-1">
                     <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="nv-project-management">
-                      <li class="collapsed-nav-item-title d-none">통계(Statistics)
-                      </li>
-                      <li class="nav-item"><a class="nav-link" href="/statistics" data-bs-toggle="" aria-expanded="false">
+                      <li class="collapsed-nav-item-title d-none">통계(Statistics)</li>
+                      <li class="nav-item"><a class="nav-link" href="statistics" data-bs-toggle="" aria-expanded="false">
                           <div class="d-flex align-items-center"><span class="nav-link-text">통합 통계</span>
                           </div>
                         </a>
                         <!-- more inner pages-->
                       </li>
-                      
+                      <li class="nav-item"><a class="nav-link" href="/statistics-purchases" data-bs-toggle="" aria-expanded="false">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">구매 실적</span>
+                          </div>
+                        </a>
+                        <!-- more inner pages-->
+                      </li>                     
+                      <li class="nav-item"><a class="nav-link" href="/statistics-sales" data-bs-toggle="" aria-expanded="false">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">판매 실적</span>
+                          </div>
+                        </a>
+                        <!-- more inner pages-->
+                      </li>                     
                     </ul>
                   </div>
                 </div>
