@@ -14,17 +14,13 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
-public class ServiceTests {
+public class ServiceTestsBY {
 
 	@Autowired
-	private ServiceKW service;
-//	@Test
-//	public void test() {
-//		service.supplierListService("부품이름1").forEach(supplier -> log.info(supplier));
-//	}
+	private ServiceBY service;
 	@Test
 	public void test() {
-		log.info(service.getProposal("부품이름3", "SPPL10775"));
+		service.getComponentList().forEach(component -> log.info(component));
 	}
 
 }
