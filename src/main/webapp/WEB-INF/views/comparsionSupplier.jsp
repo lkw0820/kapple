@@ -215,7 +215,7 @@
 														scope="col">ACTION</th>
 												</tr>
 											</thead>
-											<tbody class="list">
+											<tbody class="list" id="proposalList">
 												<tr>
 													<td class="align-middle ps-3 name">제안번호 예시</td>
 													<td class="align-middle email">공급사이름 예시</td>
@@ -327,19 +327,20 @@
 <script type="text/javascript" src="/resources/test.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
 		$('#searchItem').on('click',function(){
 			$('form.position-relative').submit();
 			
 			$('#supplierCardTitle').html($('#componentSearchBox').find('input').val());
 		});
+		
 		//모달 창
-
 		$(".supplierDetail").on("click", function(e){
 			var suppl_no=$(this).closest('tr').children('.ps-3').html();
 			console.log(suppl_no);
 			//detailService.get();
 			var supplierDetail;
-			detailService.get(suppl_no,function(result){
+			Service.getSupplier(suppl_no,function(result){
 				 supplierDetail=result;
 				 //console.log(result.ceo_name);
 				 $('#myModal').find("input[name='suppl_name']").val(supplierDetail.suppl_name);
@@ -353,11 +354,54 @@
 			$(".modal").modal("show");
 			
 		});
+		
 		//모달창 닫기
 		$("#modalCloseBtn").on("click",function(e){
 			$(".modal").modal("hide");
-		})
+		});
 		
-	})
+		//체크박스 클릭시 제안 표시
+		$('#bulk-select-body').find('input.form-check-input').on("change",function(){
+			var suppl_no=$(this).closest('tr').children('.ps-3').html();
+			//console.log(suppl_no);
+			//console.log($('#supplierCardTitle').html());
+			var compo_name=$('#supplierCardTitle').html();
+			var str="";
+			var foot='<div class="font-sans-serif btn-reveal-trigger position-static">';
+			foot+='<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"';
+			foot+='type="button" data-bs-toggle="dropdown"';
+			foot+='data-boundary="window" aria-haspopup="true"';
+			foot+='aria-expanded="false" data-bs-reference="parent">';
+			foot+='<svg class="svg-inline--fa fa-ellipsis fs--2"';
+			foot+='aria-hidden="true" focusable="false" data-prefix="fas"';
+			foot+='data-icon="ellipsis" role="img"';
+			foot+='xmlns="http://www.w3.org/2000/svg"';
+			foot+='viewBox="0 0 448 512" data-fa-i2svg="">';
+			foot+='<path fill="currentColor"';
+				foot+='d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"></path></svg>';
+			foot+='</button>';
+			foot+='<div class="dropdown-menu dropdown-menu-end py-2">';
+			foot+='<a class="dropdown-item" href="#!">View</a><aclass="dropdown-item" href="#!">Export</a>';
+			foot+='<div class="dropdown-divider"></div>';
+			foot+='<a class="dropdown-item text-danger" href="#!">Remove</a>';
+			foot+='</div></div></td></tr>';
+			Service.getProposal({suppl_no:suppl_no,compo_name},function(result){
+				
+				str+="<tr>";
+				str+='<td class="align-middle ps-3 name">'+result.proposal_no+'</td>';
+				str+='<td class="align-middle email">'+result.supplier.suppl_name+'</td>';
+				str+='<td class="align-middle age">'+result.component.compo_name+'</td>';
+				str+='<td class="align-middle age">'+result.price+'</td>';
+				str+='<td class="align-middle age">'+result.quantity+'</td>';
+				str+='<td class="align-middle age">'+result.defective_rate+'</td>';
+				str+='<td class="align-middle age">'+result.quality_grade+'</td>';
+				str+='<td class="align-middle age">'+result.prod_period+'</td>';
+				str+='<td class="align-middle white-space-nowrap text-end pe-0">';	
+				$('#proposalList').append(str+foot);
+						
+			});
+			
+		});
+	});
 </script>
 <%@include file="includes/footer.jsp"%>

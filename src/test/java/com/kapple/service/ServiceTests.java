@@ -18,9 +18,13 @@ public class ServiceTests {
 
 	@Autowired
 	private ServiceKW service;
+//	@Test
+//	public void test() {
+//		service.supplierListService("부품이름1").forEach(supplier -> log.info(supplier));
+//	}
 	@Test
 	public void test() {
-		service.supplierListService("부품이름1").forEach(supplier -> log.info(supplier));
+		log.info(service.getProposal("부품이름3", "SPPL10775"));
 	}
 
 }
