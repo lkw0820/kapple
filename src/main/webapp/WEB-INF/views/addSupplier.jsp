@@ -379,7 +379,6 @@
           });
         }
 
-        // input 값이 변경될 때마다 showFilteredButtons 함수를 호출합니다.
         componentNameInput.addEventListener('input', showFilteredButtons);
 
     </script>
