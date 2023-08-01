@@ -36,6 +36,7 @@ var Service = (function(){
 		});
 	}
 	
+	
 	return{
 		getSupplier:getSupplier,
 		getProposal:getProposal

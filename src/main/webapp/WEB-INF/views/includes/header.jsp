@@ -27,7 +27,7 @@
     <script src="resources/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="resources/vendors/simplebar/simplebar.min.js"></script>
     <script src="resources/assets/js/config.js"></script>
-
+	<script src="resources/vendors/echarts/echarts.min.js"></script>
     <!-- ---------------------------- -->
     <!--       STYLE SHEET, 스타일    -->
     <!-- ---------------------------- -->
