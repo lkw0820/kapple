@@ -195,10 +195,10 @@
 									</div>
 
 									<div class="mb-2">
-										<label class="form-label" for="brNumber-addSupplier">사업자번호</label>
+										<label class="form-label" for="category-addSupplier">구분</label>
 										<input class="form-control" type="text" name="suppliername"
-											placeholder="Business Registration Number"
-											id="brNumber-addSupplier" required="required">
+											placeholder="Business Category"
+											id="category-addSupplier" required="required">
 										<div class="invalid-feedback">This field is required.</div>
 									</div>
 
@@ -239,10 +239,10 @@
 											<div class="invalid-feedback">This field is required.</div>
 										</div>
 										<div class="col-6">
-											<label class="form-label" for="quantity-addSupplier">단위</label>
+											<label class="form-label" for="quantity-addSupplier">수량</label>
 											<input class="form-control"
-												placeholder="Quantity of component(ex. kg, t, ml, pieces)"
-												name="cardName" type="text" id="quantity-addSupplier"
+												placeholder="Quantity of component"
+												name="cardName" type="number" id="quantity-addSupplier"
 												required="required">
 											<div class="invalid-feedback">This field is required.</div>
 										</div>
@@ -250,7 +250,7 @@
 											<label class="form-label" for="defectiveRate-addSupplier">불량률</label>
 											<input class="form-control"
 												placeholder="Defective rate of component" name="zipCode"
-												type="text" id="defectiveRate-addSupplier"
+												type="number" id="defectiveRate-addSupplier"
 												required="required">
 											<div class="invalid-feedback">This field is required.</div>
 										</div>
@@ -396,27 +396,27 @@
 								<div class="w-100 row">
 										<label class="col-sm-3 col-form-label fs-sm--1" for="preSupplierName">공급사명</label>
 										<div class="col-sm-9">
-											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preSupplierName" type="text" readonly="" value="" />
+											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preSupplierName" type="text" readonly value="" />
 										</div>
 			
 										<label class="col-sm-3 col-form-label fs-sm--1" for="preCeoName">대표자명</label>
 										<div class="col-sm-9">
-											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preCeoName" type="text" readonly="" value="" />
+											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preCeoName" type="text" readonly value="" />
 										</div>
 			
-										<label class="col-sm-3 col-form-label fs-sm--1" for="preBRNumber">사업자번호</label>
+										<label class="col-sm-3 col-form-label fs-sm--1" for="preCategory">구분</label>
 										<div class="col-sm-9">
-											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preBRNumber" type="text" readonly="" value="" />
+											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preCategory" type="text" readonly value="" />
 										</div>
 			
 										<label class="col-sm-3 col-form-label fs-sm--1" for="prePHNumber">대표번호</label>
 										<div class="col-sm-9">
-											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="prePHNumber" type="text" readonly="" value="" />
+											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="prePHNumber" type="text" readonly value="" />
 										</div>
 			
 										<label class="col-sm-3 col-form-label fs-sm--1" for="preAddress">주소</label>
 										<div class="col-sm-9">
-											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preAddress" type="text" readonly="" value="" />
+											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preAddress" type="text" readonly value="" />
 											<div class="mb-3 row"></div>
 										</div>
 								</div>
@@ -425,37 +425,38 @@
 								<div class="w-100 row">
 									<label class="col-sm-3 col-form-label fs-sm--1" for="preComponentName">부품명</label>
 									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preComponentName" type="text" readonly="" value="" />
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preComponentName" type="text" readonly value="" />
 									</div>
 									
 									<label class="col-sm-3 col-form-label fs-sm--1" for="prePrice">단가</label>
 									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="prePrice" type="text" readonly="" value="" />
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="prePrice" type="text" readonly value="" />
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="prePriceHide" type="number" readonly value="" />
 									</div>
 		
 									<label class="col-sm-3 col-form-label fs-sm--1" for="preQuantity">단위</label>
 									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preQuantity" type="text" readonly="" value="" />
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preQuantity" type="number" readonly value="" />
 									</div>
 		
 									<label class="col-sm-3 col-form-label fs-sm--1" for="preDefectiveRate">불량률</label>
 									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preDefectiveRate" type="text" readonly="" value="" />
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preDefectiveRate" type=number" readonly value="" />
 									</div>
 		
 									<label class="col-sm-3 col-form-label fs-sm--1" for="preQualityGrade">품질등급</label>
 									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preQualityGrade" type="text" readonly="" value="" />
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preQualityGrade" type="text" readonly value="" />
 									</div>
 		
 									<label class="col-sm-3 col-form-label fs-sm--1" for="preProdPeriod">생산기간(일)</label>
 									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preProdPeriod" type="text" readonly="" value="" />
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preProdPeriod" type="text" readonly value="" />
 									</div>
 									
 									<label class="col-sm-3 col-form-label fs-sm--1" for="preAttachFile">첨부파일</label>
 									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preAttachFile" type="text" readonly="" value="" />
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preAttachFile" type="text" readonly value="" />
 									</div>
 								</div>
 							</div>
@@ -547,6 +548,7 @@
 		    
 		});
         
+		
 
         /****************/
         /*  NEXT 버튼 이벤트  */
@@ -561,10 +563,9 @@
           $("#preComponentName").val($("#componentName-addSupplier").val());
           $("#componentName-addSuppliers").val($("#preComponentName").val());
 
-     	     
           $("#preSupplierName").val($("#suplierName-addSupplier").val());
           $("#preCeoName").val($("#ceoName-addSupplier").val());
-          $("#preBRNumber").val($("#brNumber-addSupplier").val());
+          $("#preCategory").val($("#category-addSupplier").val());
           $("#prePHNumber").val($("#phNumber-addSupplier").val());
           $("#preAddress").val($("#address-addSupplier").val());
           $("#pre-avatar-thumb-img").attr('src', $("#avatar-thumb-img").attr('src'));
@@ -579,12 +580,14 @@
          
           
           $("#prePrice").val(replaceValue);
+          $("#prePriceHide").val($("#price-addSupplier").val());
           $("#preQuantity").val($("#quantity-addSupplier").val());
           $("#preDefectiveRate").val($("#defectiveRate-addSupplier").val());
           $("#preQualityGrade").val($("#qualityGrade-addSupplier").val());
           $("#preProdPeriod").val($("#prodPeriod-addSupplier").val());
           $("#preAttachFile").val(proposalFileString);
-          console.log( "here :"  + $("#preAttachFile").val());
+          
+     	
           
 
           // 버튼 활성화 
@@ -594,8 +597,10 @@
           }
 
         });
-
+        
       });
+      
+      
       
       
       /////////////////////////////////////////////////////////////////
@@ -606,7 +611,6 @@
       };
         
 	
-
 		  //////////////////////////////////////////////////////////////////////////////////
 		  /* 부품 이름 입력마다 필터링된 버튼 출력 & 필터링된 버튼이 아예 없는 경우 안내문 출력*/
       const componentNameInput = document.getElementById('componentName-addSupplier');
@@ -726,6 +730,57 @@
 		    currentPage.textContent = currentPageNumber;
 		}
 		
+		 ///////////////////////////////////////////////
+        // 공급사 등록
+        $("#regiSupplierBtn").on('click', function() {
+            var supplier = {
+                suppl_name: $("#preSupplierName").val(),
+                ceo_name: $("#preCeoName").val(),
+                category: $("#preCategory").val(),
+                phone: $("#prePHNumber").val(),
+            };
+
+            var proposal = {
+                proposal_no: "12345",
+                supplier: {
+                    suppl_name: $("#preSupplierName").val(),
+                    ceo_name:  $("#preCeoName").val(),
+                    category: $("#preCategory").val(),
+                    phone: $("#prePHNumber").val(),
+                },
+                component: {
+                    //compo_no:$("#").val();
+                },
+                price:  $("#preSupplierName").val(),
+                quantity:  $("#preSupplierName").val(),
+                defective_rate:  $("#preSupplierName").val(),
+                quality_grade:  $("#preSupplierName").val(),
+                prod_period:  $("#preSupplierName").val(),
+            };
+
+            $.ajax({
+                url: "addSupplier/register",
+                type: "POST",
+                data: JSON.stringify({ supplier: supplier, proposal: proposal }),
+                processData: false,
+                contentType: "application/json",
+                success: function(response) {
+                    // 첫 번째 INSERT 성공 후 새로 생성된 데이터를 받아와서 두 번째 INSERT 수행
+                    var newSupplierId = response.id; // 예시: 새로 생성된 공급사 ID
+
+                    var component = {
+                        supplierId: newSupplierId,
+                        // component 테이블에 필요한 데이터
+                    };
+
+                    // 다음 AJAX 요청을 보낼 수 있음
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // 실패 처리
+                }
+            });
+        });
+
 		
     </script>
 
