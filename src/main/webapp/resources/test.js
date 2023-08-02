@@ -69,12 +69,46 @@ var Service = (function(){
 			}
 		});
 	}
+	function supplierDTO(suppl_name,callback,error){
+		$.ajax({
+			type:"get",
+			url:"/comparsionSupplier/"+suppl_name+".json",
+			success:function(result,status,xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error:function(xhr,status,e){
+				if(error){
+					error(e);
+				}	
+			}
+		});
+	}//get
+	function retailerDTO(retail_name,callback,error){
+	$.ajax({
+			type:"get",
+			url:"/comparsionRetailer/"+retail_name+".json",
+			success:function(result,status,xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error:function(xhr,status,e){
+				if(error){
+					error(e);
+				}	
+			}
+		});
+	}
 	
 	return{
 		getSupplier:getSupplier,
 		getProposal:getProposal,
 		getRetailer:getRetailer,
-		getPredict:getPredict
+		getPredict:getPredict,
+		supplierDTO:supplierDTO,
+		retailerDTO:retailerDTO
 	};
 	
 })();
