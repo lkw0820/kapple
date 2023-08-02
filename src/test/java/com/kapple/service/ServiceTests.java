@@ -24,7 +24,7 @@ public class ServiceTests {
 //	}
 	@Test
 	public void test() {
-		log.info(service.getProposal("부품이름3", "SPPL10775"));
+		log.info(service.productDetail("고객사이름51"));
 	}
 
 }

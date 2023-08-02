@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kapple.domain.ProposalVO;
+import com.kapple.domain.RetailerDetailVO;
+import com.kapple.domain.SalePredictVO;
 import com.kapple.domain.SupplierDetailVO;
 import com.kapple.service.ServiceKW;
 
@@ -49,5 +51,25 @@ public class ControllerKW {
 		return new ResponseEntity<ProposalVO>(service.getProposal(compo_no, suppl_no),HttpStatus.OK);
 	}
 	
+	@PostMapping("/comparsionRetailer")
+	public void comparsionRetailer(@RequestParam("prod_name") String prod_name, Model model) {
+		log.info("retailerList.....");
+		model.addAttribute("rList",service.retailerList(prod_name));
+		model.addAttribute("prod_name",prod_name);
+		model.addAttribute("count",service.retailerCount(prod_name));
+		model.addAttribute("productDetail",service.productDetail(prod_name));
+	}
 	
+	@GetMapping("/rmodal/{retail_no}")
+	public ResponseEntity<RetailerDetailVO> retailerDetail(@PathVariable("retail_no") String retail_no) {
+		log.info("retailer detail..........");
+		return new ResponseEntity<RetailerDetailVO>(service.retailerDetail(retail_no),HttpStatus.OK);
+	}
+	
+	@GetMapping("/predict/{prod_name}/{retail_no}")
+	public ResponseEntity<SalePredictVO> getPredict(@PathVariable("prod_name") String prod_name, @PathVariable("retail_no") String retail_no){
+		log.info("get predict..........");
+
+		return new ResponseEntity<SalePredictVO>(service.getPredict(prod_name, retail_no),HttpStatus.OK);
+	}
 }
