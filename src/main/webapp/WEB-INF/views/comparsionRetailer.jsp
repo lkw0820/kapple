@@ -219,16 +219,6 @@
 												</tr>
 											</thead>
 											<tbody class="lisr" id="predictList">
-												<tr>
-													<td class="align-middle ps-3 predict_no">예측 번호</td>
-													<td class="align-middle retail_name">판매사 이름</td>
-													<td class="align-middle product_name">판매사 이름</td>
-													<td class="align-middle sales_amount">예측 판매량</td>
-													<td class="align-middle purchasing_grade">구매자 등급</td>
-													<td class="align-middle price">단가</td>
-													<td class="align-middle transport_grade">운임등급</td>
-												</tr>
-												
 											</tbody>
 										</table>
 									</div>
@@ -237,7 +227,7 @@
 
 								<!--  그래프  -->
 								<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-5 ">
-									<div class="echart-social-marketing-radar" style="min-height: 320px; width: 100%"></div>
+									<div id="chart" style="min-height: 320px; width: 100%"></div>
 								</div>
 
 							</div>
@@ -348,6 +338,8 @@
 <input type="hidden" id="color" value="${productDetail.model.color }">
 <input type="hidden" id="release_date" value="${productDetail.model.release_date }">
 
+
+
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/resources/test.js"></script>
@@ -393,6 +385,99 @@
 			$("#myModal").modal("hide");
 			$("#productModal").modal("hide");
 		});
+		
+		
+		//chart
+		var names=[];
+		var predictAmount=[];
+		var predictPrice=[];
+		var maxAmount;
+		var maxPrice;
+		var makeChart = function(predictAmount,predictPrice,names,maxAmount,maxPrice){
+			var chartDom = document.getElementById('chart');
+			var myChart = echarts.init(chartDom);
+			var option;
+
+			option = {
+			  tooltip: {
+			    trigger: 'axis',
+			    axisPointer: {
+			      type: 'cross',
+			      crossStyle: {
+			        color: '#999'
+			      }
+			    }
+			  },
+			  toolbox: {
+			    feature: {
+			      dataView: { show: true, readOnly: false },
+			      magicType: { show: true, type: ['line', 'bar'] },
+			      restore: { show: true },
+			      saveAsImage: { show: true }
+			    }
+			  },
+			  legend: {
+			    data: ['예상 판매량', '단가']
+			  },
+			  xAxis: [
+			    {
+			      type: 'category',
+			      data: names,
+			      axisPointer: {
+			        type: 'shadow'
+			      }
+			    }
+			  ],
+			  yAxis: [
+			    {
+			      type: 'value',
+			      name: '예측 판매량',
+			      min: 0,
+			      max: 	maxAmount,
+			      interval: maxAmount/10,
+			      axisLabel: {
+			        formatter: '{value} 개'
+			      }
+			    },
+			    {
+			      type: 'value',
+			      name: '단가',
+			      min: 0,
+			      max: maxPrice,
+			      interval: maxPrice/10,
+			      axisLabel: {
+			        formatter: '{value} 만원'
+			      }
+			    }
+			  ],
+			  series: [
+			    {
+			      name: '예측판매량',
+			      type: 'bar',
+			      tooltip: {
+			        valueFormatter: function (value) {
+			          return value + ' 개';
+			        }
+			      },
+			      data: predictAmount
+			    },
+
+			    {
+			      name: '단가',
+			      type: 'line',
+			      yAxisIndex: 1,
+			      tooltip: {
+			        valueFormatter: function (value) {
+			          return value + ' 만원';
+			        }
+			      },
+			      data: predictPrice
+			    }
+			  ]
+			};
+
+			option && myChart.setOption(option);
+		}
 		//체크박스 클릭시 제안 표시
 		$('#bulk-select-body').find('input.form-check-input').on("change",function(){
 			var retail_no=$(this).closest('tr').children('.ps-3').html();
@@ -408,44 +493,34 @@
 					str+='<td class="align-middle purchasing_grade">'+result.purchasing_grade+'</td>';
 					str+='<td class="align-middle price">'+result.price+'</td>';
 					str+='<td class="align-middle transport_grade">'+result.transport_grade+'</td>';
-					console.log(str);
-/* 					var proposalDetail={};
-					var regex = /[^0-9]/g;
-					//차트 라벨
-					names.push(result.supplier.suppl_name);
+					names.push(result.retailer.retail_name);
+					predictAmount.push(result.sales_amount);
+					predictPrice.push(result.price);
 					
-					//max값 계산을 위해서
-					price.push(result.price);
-					let maxPrice=Math.max(...price);
-					quantity.push(result.quantity);
-					let maxQuantity=Math.max(...quantity);
-					//차트 각 데이터 이름
-					proposalDetail.name=result.supplier.suppl_name;
-					//정수 변환
-					let quality_grade=result.quality_grade.replace(regex,"");
-					let prod_period=result.prod_period.replace(regex,"");
-					//차트 각 데이터들
-					proposalDetail.value=[result.price,result.quantity,result.defective_rate,quality_grade,prod_period];
-					//proposal.push(result); 
-					proposal.push(proposalDetail);*/
+					maxAmount=Math.max(...predictAmount);
+					maxPrice=Math.max(...predictPrice)
 					$('#predictList').append(str);
-					//makeChart(proposal,names,maxPrice,maxQuantity);
+					makeChart(predictAmount,predictPrice,names,maxAmount,maxPrice);
 				});
 			}else if(!($(this).is(':checked'))){
-				var td = $('#proposalList').find('.proposal_no');
+				var td = $('#predictList').find('.sale_predict_no');
 				Service.getPredict({retail_no:retail_no,prod_name},function(result){
-					var proposal_no=result.proposal_no;
+					var sale_predict_no=result.sale_predict_no;
 					for(let i=0; i<td.length;i++){
 
-	 					if(td.eq(i).html()==proposal_no){
+	 					if(td.eq(i).html()==sale_predict_no){
 							td.eq(i).parent().remove();
-							proposal.splice(i,1);
-							//makeChart(proposal);
+							names.splice(i,1);
+							predictAmount.splice(i,1);
+							predictPrice.splice(i,1);
+							makeChart(predictAmount,predictPrice,names,maxAmount,maxPrice);
 						}
 					} 
 				})
 			}
 		});
+		
+		
 		
 	})
 		
