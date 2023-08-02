@@ -69,7 +69,6 @@ public class ControllerKW {
 	@GetMapping("/predict/{prod_name}/{retail_no}")
 	public ResponseEntity<SalePredictVO> getPredict(@PathVariable("prod_name") String prod_name, @PathVariable("retail_no") String retail_no){
 		log.info("get predict..........");
-
 		return new ResponseEntity<SalePredictVO>(service.getPredict(prod_name, retail_no),HttpStatus.OK);
 	}
 }
