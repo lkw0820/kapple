@@ -30,7 +30,7 @@ public class mapperTests {
 	
 	@Test
 	public void test() {
-		log.info(mapper.componentDetail("부품이름3"));
+		log.info(mapper.productDetail("고객사이름51"));
 	}
 
 }

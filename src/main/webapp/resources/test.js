@@ -35,13 +35,46 @@ var Service = (function(){
 			}
 		});
 	}
-	
-	
+	function getRetailer(retail_no,callback,error){
+		$.ajax({
+			type:"get",
+			url:"/rmodal/"+retail_no+".json",
+			success:function(result,status,xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error:function(xhr,status,e){
+				if(error){
+					error(e);
+				}	
+			}
+		});
+	}//get
+	function getPredict(param,callback,error){
+		let prod_name=param.prod_name;
+		let retail_no=param.retail_no;
+		$.ajax({
+			type:"get",
+			url:"/predict/"+prod_name+"/"+retail_no+".json",
+			success:function(result,status,xhr){
+				if(callback){
+					callback(result);
+				}			
+			},
+			error:function(xhr,status,e){
+				if(error){
+					error(e);
+				}				
+			}
+		});
+	}
 	
 	return{
 		getSupplier:getSupplier,
 		getProposal:getProposal,
-
+		getRetailer:getRetailer,
+		getPredict:getPredict
 	};
 	
 })();
