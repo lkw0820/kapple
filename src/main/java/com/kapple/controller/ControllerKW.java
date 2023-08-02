@@ -1,10 +1,12 @@
 package com.kapple.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,14 +31,17 @@ public class ControllerKW {
 	@Autowired
 	private ServiceKW service;
 	
-	@PostMapping("/comparsionSupplier") 
-	public void comparsionSupplier(@RequestParam("compo_name") String compo_name, Model model) {
-		log.info("supplierList...........");
-		model.addAttribute("sList",service.supplierListService(compo_name));
-		model.addAttribute("compo_name",compo_name);
-		model.addAttribute("count", service.supplierCount(compo_name));
-		model.addAttribute("compoDetail",service.componentDetail(compo_name));
-	}
+	
+	 @PostMapping("/comparsionSupplier") 
+	 public void comparsionSupplier(String compo_name, Model model) { 
+		 log.info("supplierList...........");
+		 model.addAttribute("sList",service.supplierListService(compo_name));
+		 model.addAttribute("compo_name",compo_name); 
+		 model.addAttribute("count",service.supplierCount(compo_name));
+		 model.addAttribute("compoDetail",service.componentDetail(compo_name)); 
+	 }
+	 
+
 	
 	@GetMapping("/modal/{suppl_no}")
 	public ResponseEntity<SupplierDetailVO> supplierDetail(@PathVariable("suppl_no") String suppl_no) {
@@ -52,7 +57,7 @@ public class ControllerKW {
 	}
 	
 	@PostMapping("/comparsionRetailer")
-	public void comparsionRetailer(@RequestParam("prod_name") String prod_name, Model model) {
+	public void comparsionRetailer(String prod_name, Model model) {
 		log.info("retailerList.....");
 		model.addAttribute("rList",service.retailerList(prod_name));
 		model.addAttribute("prod_name",prod_name);
@@ -70,5 +75,9 @@ public class ControllerKW {
 	public ResponseEntity<SalePredictVO> getPredict(@PathVariable("prod_name") String prod_name, @PathVariable("retail_no") String retail_no){
 		log.info("get predict..........");
 		return new ResponseEntity<SalePredictVO>(service.getPredict(prod_name, retail_no),HttpStatus.OK);
+	}
+	@GetMapping("/accessError")
+	public void accessDenied(Authentication auth, Model model) {
+		log.info("access Denied : "+auth);
 	}
 }
