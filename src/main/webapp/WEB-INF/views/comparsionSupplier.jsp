@@ -68,11 +68,7 @@
 										<h3 class="text-1100" id="supplierCardTitle">부품을 검색해주세요</h3>
 										<p class="mb-0 text-700"></p>
 									</c:if>
-										<input type="hidden" name="compo_name" id="compo_name" value="${compoDetail.compo_name }">
-										<input type="hidden" name="compo_no" id="compo_no" value="${compoDetail.compo_no }">
-										<input type="hidden" name="detail" id="detail" value="${compoDetail.detail }">
-										<input type="hidden" name="unit" id="unit" value="${compoDetail.unit }">
-
+										
 									</div>
 
 									
@@ -318,6 +314,11 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+<input type="hidden" id="compo_name" value="${compoDetail.compo_name }">
+<input type="hidden" id="compo_no" value="${compoDetail.compo_no }">
+<input type="hidden" id="detail" value="${compoDetail.detail }">
+<input type="hidden" id="unit" value="${compoDetail.unit }">
+
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/resources/test.js"></script>
@@ -341,9 +342,9 @@
 		//모달 창
 		$(".supplierDetail").on("click", function(e){
 			var suppl_no=$(this).closest('tr').children('.ps-3').html();
-			var supplierDetail;
-			Service.getSupplier(suppl_no,function(result){
-				 supplierDetail=result;
+			//var supplierDetail;
+			Service.getSupplier(suppl_no,function(supplierDetail){
+				 //supplierDetail=result;
 				 $('#myModal').find("input[name='suppl_name']").val(supplierDetail.suppl_name);
 				 $('#myModal').find("input[name='ceo_name']").val(supplierDetail.ceo_name);
 				 $('#myModal').find("input[name='category']").val(supplierDetail.category);
@@ -388,7 +389,7 @@
 			  },
 			  series: [
 			    {
-			      name: 'Budget vs spending',
+			      name: 'comparison',
 			      type: 'radar',
 			      data: proposal
 			    }
