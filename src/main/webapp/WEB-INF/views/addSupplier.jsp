@@ -52,25 +52,25 @@
 												<!-- <span class="fas fa-user"></span> Font Awesome fontawesome.com --></span></span><span
 											class="d-none d-md-block mt-1 fs--1">공급사등록</span>
 									</div>
-							</a></li>
+								</a>
+							</li>
 							<li class="nav-item" role="presentation"><a
 								class="addSupplierCardHead fw-semi-bold nav-link"
 								href="#bootstrap-wizard-validation-tab3" data-bs-toggle="tab"
 								data-wizard-step="3" aria-selected="false" tabindex="-1"
 								role="tab">
 									<div class="text-center d-inline-block">
-										<span class="nav-item-circle-parent"><span
-											class="nav-item-circle"><svg
-													class="svg-inline--fa fa-cog" aria-hidden="true"
-													focusable="false" data-prefix="fas" data-icon="cog"
-													role="img" xmlns="http://www.w3.org/2000/svg"
-													viewBox="0 0 460 512" data-fa-i2svg="">
-													<path fill="currentColor"
-														d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg>
-												<!-- <span class="fas fa-file-alt"></span> Font Awesome fontawesome.com --></span></span><span
-											class="d-none d-md-block mt-1 fs--1">부품상세</span>
+										<span class="nav-item-circle-parent">
+											<span class="nav-item-circle">
+												<svg class="svg-inline--fa fa-cog" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cog" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 512" data-fa-i2svg="">
+													<path fill="currentColor" d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path>
+													</svg> <!-- <span class="fas fa-file-alt"></span> Font Awesome fontawesome.com -->
+												</span>
+											</span>
+											<span class="d-none d-md-block mt-1 fs--1">부품상세</span>
 									</div>
-							</a></li>
+								</a>
+							</li>
 							<li class="nav-item" role="presentation"><a
 								class="addSupplierCardHead fw-semi-bold nav-link"
 								href="#bootstrap-wizard-validation-tab4" data-bs-toggle="tab"
@@ -384,116 +384,118 @@
 					</div>
 					<div class="card-body">
 						<div class="mb-3 row">
-
+							<div class="form">
 							
-							<div class="dz-preview-cover d-flex align-items-center justify-content-center mb-2 mx-6 dz-image-preview">
-								<div class="avatar avatar-4xl">
-									<img class="rounded-circle avatar-placeholder" id="pre-avatar-thumb-img" src="" alt="" data-dz-thumbnail="data-dz-thumbnail">
-								</div>
-							</div>
-							
-							
-							<div class="w-100 row">
-									<label class="col-sm-3 col-form-label fs-sm--1" for="preSupplierName">공급사명</label>
-									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preSupplierName" type="text" readonly="" value="" />
+								<div class="dz-preview-cover d-flex align-items-center justify-content-center mb-2 mx-6 dz-image-preview">
+									<div class="avatar avatar-4xl">
+										<img class="rounded-circle avatar-placeholder" id="pre-avatar-thumb-img" src="" alt="" data-dz-thumbnail="data-dz-thumbnail">
 									</div>
-		
-									<label class="col-sm-3 col-form-label fs-sm--1" for="preCeoName">대표자명</label>
-									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preCeoName" type="text" readonly="" value="" />
-									</div>
-		
-									<label class="col-sm-3 col-form-label fs-sm--1" for="preBRNumber">사업자번호</label>
-									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preBRNumber" type="text" readonly="" value="" />
-									</div>
-		
-									<label class="col-sm-3 col-form-label fs-sm--1" for="prePHNumber">대표번호</label>
-									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="prePHNumber" type="text" readonly="" value="" />
-									</div>
-		
-									<label class="col-sm-3 col-form-label fs-sm--1" for="preAddress">주소</label>
-									<div class="col-sm-9">
-										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preAddress" type="text" readonly="" value="" />
-										<div class="mb-3 row"></div>
-									</div>
-							</div>
-						
-							<hr>
-							<div class="w-100 row">
-								<label class="col-sm-3 col-form-label fs-sm--1" for="preComponentName">부품명</label>
-								<div class="col-sm-9">
-									<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preComponentName" type="text" readonly="" value="" />
 								</div>
 								
-								<label class="col-sm-3 col-form-label fs-sm--1" for="prePrice">단가</label>
-								<div class="col-sm-9">
-									<input class="form-control-plaintext outline-none text-center fs-sm--1" id="prePrice" type="text" readonly="" value="" />
-								</div>
-	
-								<label class="col-sm-3 col-form-label fs-sm--1" for="preQuantity">단위</label>
-								<div class="col-sm-9">
-									<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preQuantity" type="text" readonly="" value="" />
-								</div>
-	
-								<label class="col-sm-3 col-form-label fs-sm--1" for="preDefectiveRate">불량률</label>
-								<div class="col-sm-9">
-									<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preDefectiveRate" type="text" readonly="" value="" />
-								</div>
-	
-								<label class="col-sm-3 col-form-label fs-sm--1" for="preQualityGrade">품질등급</label>
-								<div class="col-sm-9">
-									<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preQualityGrade" type="text" readonly="" value="" />
-								</div>
-	
-								<label class="col-sm-3 col-form-label fs-sm--1" for="preProdPeriod">생산기간(일)</label>
-								<div class="col-sm-9">
-									<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preProdPeriod" type="text" readonly="" value="" />
-								</div>
 								
-								<label class="col-sm-3 col-form-label fs-sm--1" for="preAttachFile">첨부파일</label>
-								<div class="col-sm-9">
-									<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preAttachFile" type="text" readonly="" value="" />
+								<div class="w-100 row">
+										<label class="col-sm-3 col-form-label fs-sm--1" for="preSupplierName">공급사명</label>
+										<div class="col-sm-9">
+											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preSupplierName" type="text" readonly="" value="" />
+										</div>
+			
+										<label class="col-sm-3 col-form-label fs-sm--1" for="preCeoName">대표자명</label>
+										<div class="col-sm-9">
+											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preCeoName" type="text" readonly="" value="" />
+										</div>
+			
+										<label class="col-sm-3 col-form-label fs-sm--1" for="preBRNumber">사업자번호</label>
+										<div class="col-sm-9">
+											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preBRNumber" type="text" readonly="" value="" />
+										</div>
+			
+										<label class="col-sm-3 col-form-label fs-sm--1" for="prePHNumber">대표번호</label>
+										<div class="col-sm-9">
+											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="prePHNumber" type="text" readonly="" value="" />
+										</div>
+			
+										<label class="col-sm-3 col-form-label fs-sm--1" for="preAddress">주소</label>
+										<div class="col-sm-9">
+											<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preAddress" type="text" readonly="" value="" />
+											<div class="mb-3 row"></div>
+										</div>
+								</div>
+							
+								<hr>
+								<div class="w-100 row">
+									<label class="col-sm-3 col-form-label fs-sm--1" for="preComponentName">부품명</label>
+									<div class="col-sm-9">
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preComponentName" type="text" readonly="" value="" />
+									</div>
+									
+									<label class="col-sm-3 col-form-label fs-sm--1" for="prePrice">단가</label>
+									<div class="col-sm-9">
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="prePrice" type="text" readonly="" value="" />
+									</div>
+		
+									<label class="col-sm-3 col-form-label fs-sm--1" for="preQuantity">단위</label>
+									<div class="col-sm-9">
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preQuantity" type="text" readonly="" value="" />
+									</div>
+		
+									<label class="col-sm-3 col-form-label fs-sm--1" for="preDefectiveRate">불량률</label>
+									<div class="col-sm-9">
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preDefectiveRate" type="text" readonly="" value="" />
+									</div>
+		
+									<label class="col-sm-3 col-form-label fs-sm--1" for="preQualityGrade">품질등급</label>
+									<div class="col-sm-9">
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preQualityGrade" type="text" readonly="" value="" />
+									</div>
+		
+									<label class="col-sm-3 col-form-label fs-sm--1" for="preProdPeriod">생산기간(일)</label>
+									<div class="col-sm-9">
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preProdPeriod" type="text" readonly="" value="" />
+									</div>
+									
+									<label class="col-sm-3 col-form-label fs-sm--1" for="preAttachFile">첨부파일</label>
+									<div class="col-sm-9">
+										<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preAttachFile" type="text" readonly="" value="" />
+									</div>
 								</div>
 							</div>
-						</div>
-						
-						<div class="card-footer border-top-1" data-wizard-footer="data-wizard-footer">
-							<div class="d-flex pager wizard list-inline ">
-								<button id="submitSupplierBtn" class="btn btn-primary w-100" type="button" data-bs-toggle="modal" data-bs-target="#verticallyCentered" disabled="true">
-									공급사 등록
-								</button>
+							
+							<div class="card-footer border-top-1" data-wizard-footer="data-wizard-footer">
+								<div class="d-flex pager wizard list-inline ">
+									<button id="submitSupplierBtn" class="btn btn-primary w-100" type="button" data-bs-toggle="modal" data-bs-target="#verticallyCentered" disabled="true">
+										공급사 등록
+									</button>
+								</div>
 							</div>
+							
+							<!--  모달창 : 공급사 등록 확인 모달창  -->
+						    <div class="modal fade" id="verticallyCentered" tabindex="-1" aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true" style="display: none;">
+						        <div class="modal-dialog modal-dialog-centered">
+						           	<div class="modal-content">
+						               	<div class="modal-header">
+						                   	<h5 class="modal-title" id="verticallyCenteredModalLabel">부품별 공급사 등록</h5>
+						                    <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><svg class="svg-inline--fa fa-xmark fs--1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path></svg><!-- <span class="fas fa-times fs--1"></span> Font Awesome fontawesome.com --></button>
+						                </div>
+						                <div class="modal-body">
+						                 	<p class="text-700 lh-lg mb-0">입력하신 사항대로 공급사를 등록하시겠습니까?</p>
+						                 	
+						                </div>
+						                <div class="modal-footer">
+						                 	<button class="btn btn-primary" type="button" id="regiSupplierBtn">등록</button>
+						                    <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">취소</button>
+						                </div>
+									</div>
+								</div>
+							</div>
+							
 						</div>
-
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!--  모달창 : 공급사 등록 확인 모달창  -->
-    <div class="modal fade" id="verticallyCentered" tabindex="-1" aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-dialog-centered">
-           	<div class="modal-content">
-               	<div class="modal-header">
-                   	<h5 class="modal-title" id="verticallyCenteredModalLabel">부품별 공급사 등록</h5>
-                    <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><svg class="svg-inline--fa fa-xmark fs--1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path></svg><!-- <span class="fas fa-times fs--1"></span> Font Awesome fontawesome.com --></button>
-                </div>
-                <div class="modal-body">
-                 	<p class="text-700 lh-lg mb-0">입력하신 사항대로 공급사를 등록하시겠습니까?</p>
-                 	
-                </div>
-                <div class="modal-footer">
-                 	<button class="btn btn-primary" type="button">등록</button>
-                    <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">취소</button>
-                </div>
-			</div>
-		</div>
-	</div>
+
                     
 
 
@@ -725,9 +727,6 @@
 		}
 		
 		
-		
-
-
     </script>
 
 <%@include file="includes/footer.jsp"%>
