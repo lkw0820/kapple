@@ -12,4 +12,16 @@
 		]]>
 	</select> 
 	
+	<!-- 공급사 등록 -->
+	<insert id="insertSupplier">
+		insert into supplier (suppl_no, suppl_name, ceo_name, category, phone)
+		values (#{suppl_no}, #{suppl_name}, #{ceo_name}, #{category}, #{phone})
+	</insert>
+
+	<!-- 제안 등록 -->
+	<insert id="insertProposal">
+		insert into proposal (proposal_no, suppl_no, compo_no, price, quantity, defective_rate, quality_grade, prod_period, proposal_date)
+		values (#{proposal_no}, #{supplier.suppl_no}, #{component.compo_no}, #{price}, #{quantity}, #{defective_rate}, #{quality_grade}, #{prod_period}, sysdate)
+	</insert>
+	
 </mapper>

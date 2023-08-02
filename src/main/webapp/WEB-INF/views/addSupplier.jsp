@@ -456,14 +456,13 @@
 								<label class="col-sm-3 col-form-label fs-sm--1" for="preAttachFile">첨부파일</label>
 								<div class="col-sm-9">
 									<input class="form-control-plaintext outline-none text-center fs-sm--1" id="preAttachFile" type="text" readonly="" value="" />
-									
 								</div>
 							</div>
 						</div>
 						
 						<div class="card-footer border-top-1" data-wizard-footer="data-wizard-footer">
 							<div class="d-flex pager wizard list-inline ">
-								<button id="submitSupplierBtn" class="btn btn-primary w-100" type="submit" data-wizard-prev-btn="data-wizard-prev-btn"disabled="true">
+								<button id="submitSupplierBtn" class="btn btn-primary w-100" type="button" data-bs-toggle="modal" data-bs-target="#verticallyCentered" disabled="true">
 									공급사 등록
 								</button>
 							</div>
@@ -476,6 +475,26 @@
 		</div>
 	</div>
 
+	<!--  모달창 : 공급사 등록 확인 모달창  -->
+    <div class="modal fade" id="verticallyCentered" tabindex="-1" aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-dialog-centered">
+           	<div class="modal-content">
+               	<div class="modal-header">
+                   	<h5 class="modal-title" id="verticallyCenteredModalLabel">부품별 공급사 등록</h5>
+                    <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><svg class="svg-inline--fa fa-xmark fs--1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path></svg><!-- <span class="fas fa-times fs--1"></span> Font Awesome fontawesome.com --></button>
+                </div>
+                <div class="modal-body">
+                 	<p class="text-700 lh-lg mb-0">입력하신 사항대로 공급사를 등록하시겠습니까?</p>
+                 	
+                </div>
+                <div class="modal-footer">
+                 	<button class="btn btn-primary" type="button">등록</button>
+                    <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">취소</button>
+                </div>
+			</div>
+		</div>
+	</div>
+                    
 
 
 
@@ -495,18 +514,52 @@
 
         // 부품 - 미리보기 채우기 및 등록 버튼 활성화 
         var btnNextAdd = $("#btnNextAdd");
+		
+      	// Dropzone -> 첨부파일명 가져오기 
+	    const myDropzone = Dropzone.forElement("#dropzone-multiple");
+      	
+        let proposalFileString = "";
+		let proposalFileList = [];
+		
+		// 파일이 추가되었을 때 이벤트 처리
+		myDropzone.on("addedfile", function (file) {
+			
+		    const fileName = file.name;
+		    proposalFileList.push(fileName);
+		    
+		    if (proposalFileList.length < 3) {
+		    	
+		    	if(proposalFileList.length == 2) {		    		
+				    proposalFileString += ', ';
+		    	}
+		    	
+		    	proposalFileString += fileName;
+			    
+			    if(proposalFileString.length > 23) {
+			    	proposalFileString = proposalFileString.substring(0, 20);
+			    	proposalFileString += "...";
+			    }
+		    } else if(proposalFileList.length == 3 && proposalFileString.length < 20) {
+		    	proposalFileString += " ...";
+		    }
+		    
+		});
         
-        /* NEXT 버튼 이벤트 */
-        btnNextAdd.click(function(){
 
+        /****************/
+        /*  NEXT 버튼 이벤트  */
+ 		/****************/
+        btnNextAdd.click(function(){
+		
+          // 현재 활성화된 탭 표시 
           console.log($('.nav-link.active').attr('href'));
           var nextPageHref = $('.nav-link.active').attr('href');
-          
+           
           // 미리 보기 자동 입력 
           $("#preComponentName").val($("#componentName-addSupplier").val());
           $("#componentName-addSuppliers").val($("#preComponentName").val());
 
-          
+     	     
           $("#preSupplierName").val($("#suplierName-addSupplier").val());
           $("#preCeoName").val($("#ceoName-addSupplier").val());
           $("#preBRNumber").val($("#brNumber-addSupplier").val());
@@ -515,23 +568,26 @@
           $("#pre-avatar-thumb-img").attr('src', $("#avatar-thumb-img").attr('src'));
           
           
+          // 단가 -> 세자리마다 쉼표 처리
           const priceInput = document.getElementById('price-addSupplier');
           console.log("priceInput: " +  priceInput.value);
           
           let replaceValue = priceInput.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
           console.log("priceInput2: " +  priceInput.value);
+         
           
           $("#prePrice").val(replaceValue);
           $("#preQuantity").val($("#quantity-addSupplier").val());
           $("#preDefectiveRate").val($("#defectiveRate-addSupplier").val());
           $("#preQualityGrade").val($("#qualityGrade-addSupplier").val());
           $("#preProdPeriod").val($("#prodPeriod-addSupplier").val());
+          $("#preAttachFile").val(proposalFileString);
+          console.log( "here :"  + $("#preAttachFile").val());
           
 
           // 버튼 활성화 
           if (nextPageHref === "#bootstrap-wizard-validation-tab4") {
             const submitSupplierBtn = document.getElementById('submitSupplierBtn');
-            console.log(submitSupplierBtn);
             submitSupplierBtn.disabled = false;
           }
 
@@ -547,9 +603,9 @@
         $("#componentName-addSupplier").val(compoName);
       };
         
-	      
-        
-		  /////////////////////////////////////////////////////////////////
+	
+
+		  //////////////////////////////////////////////////////////////////////////////////
 		  /* 부품 이름 입력마다 필터링된 버튼 출력 & 필터링된 버튼이 아예 없는 경우 안내문 출력*/
       const componentNameInput = document.getElementById('componentName-addSupplier');
 
@@ -564,7 +620,11 @@
 		const paginationButtons = document.getElementById('paginationButtons');
 		const currentPage = document.getElementById('currentPage');
 		
+		// 검색 필터링된 부품 리스트
 		let displayedBtn = [];
+		
+		// 기본 페이지 or 검색 페이지 확인 플래그
+		let isSearchPage = false; 
 		
 		
 		// 검색 결과에 따라 버튼들의 상태를 업데이트하는 함수
@@ -581,11 +641,15 @@
 		        if (buttonCompoName.includes(filterValue)) {
 		        	console.log("here!");
 		            button.style.display = 'block';
+		            
 		            anyButtonDisplayed = true;
+		            isSearchPage = true;
+		            
 		            btnCount++;
 		            displayedBtn.push(button);
 		        } else {
 		            button.style.display = 'none';
+		            isSearchPage = false;
 		        }
 		    });
 		
@@ -596,7 +660,7 @@
 		    const paginationButtons = document.getElementById('paginationButtons');
 		      paginationButtons.style.display= anyButtonDisplayed ? 'block' : 'none';
 		    
-		    // 페이지 번호 초기화하고 버튼들을 보여줍니다.
+		    // 페이지 번호 초기화하고 버튼 출력
 		    currentPageNumber = 1;
 		    showButtonsBySearch();
 		}
@@ -606,7 +670,11 @@
 		// 페이지 버튼 클릭 이벤트 처리
 		function changePage(pageDiff) {
 		    currentPageNumber += pageDiff;
-		    showButtonsByPage();
+		    if (isSearchPage) {
+		    	showButtonsBySearch();
+		    } else {
+		    	showButtonsByPage();
+		    }
 		}
 		
 		// 페이지 번호와 버튼들을 업데이트하는 함수
@@ -655,6 +723,8 @@
 		
 		    currentPage.textContent = currentPageNumber;
 		}
+		
+		
 		
 
 
