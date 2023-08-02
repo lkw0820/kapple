@@ -164,11 +164,14 @@
 		<collection property="retailer" resultMap="retailerMap"></collection>
 		<collection property="product" resultMap="productMap"></collection>
 	</resultMap>
+	
 	<select id="getPredict" resultMap="salePredictMap">
-		select sale_predict_no, retail_name, prod_name, sales_amount, purchasing_grade, price, transport_grade
-		from sale_predict s join product p
-		on s.prod_no=p.prod_no join retailer r
-		on s.retail_no=r.retail_no
-		where prod_name=#{prod_name} and r.retail_no=#{retail_no}
+		<![CDATA[
+			select sale_predict_no, retail_name, prod_name, sales_amount, purchasing_grade, price, transport_grade
+			from sale_predict s join product p
+			on s.prod_no=p.prod_no join retailer r
+			on s.retail_no=r.retail_no
+			where prod_name=#{prod_name} and r.retail_no=#{retail_no}
+		]]>
 	</select>
 </mapper>

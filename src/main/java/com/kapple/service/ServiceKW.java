@@ -22,4 +22,5 @@ public interface ServiceKW {
 	public RetailerDetailVO retailerDetail(String retail_no);
 	public ProductVO productDetail(String prod_name);
 	public SalePredictVO getPredict(String prod_name, String retail_no);
+
 }
