@@ -24,8 +24,8 @@
 				
 					<!-- 부품/상품 검색창 -->
 					<div class="search-box" id="productSearchBox">
-						<form class="position-relative" data-bs-toggle="search" data-bs-display="static" action="/comparsionRetailer" method="post">
-							<input class="form-control search-input search" type="search" placeholder="상품 검색창" aria-label="Search" name="prod_name"/> 
+						<form class="position-relative" data-bs-toggle="search" data-bs-display="static" action="/comparsionRetailer" method="get">
+							<input class="form-control search-input search" type="search" placeholder="상품 검색창" aria-label="Search" name="prod_name" id="searchItemInput"/> 
 							<span class="fas fa-search search-box-icon"></span>
 						</form>
 					</div>
@@ -58,23 +58,17 @@
 								<div class="row justify-content-between align-items-center mb-4">
 								
 									<!-- 카드 타이틀 및 설명, 카드 헤더 내용 -->
-									<div class="col-auto">
-									<c:if test="${not empty prod_name }">
-										<h3 class="text-1100" id="retailerCardTitle"><c:out value="${prod_name }"/></h3>
-										<button class="btn btn-primary" id="productDetail">
-											제품상세보기
-										</button>
-										<p class="mb-0 text-700"><c:out value="${prod_name } 판매사"/></p>
-									</c:if>
-									<c:if test="${empty prod_name }">
+									<div class="col-auto" id="head">
+
+
 										<h3 class="text-1100" id="retailerCardTitle">상품을 검색해주세요</h3>
 										<p class="mb-0 text-700"></p>
-									</c:if>
-										<input type="hidden" name="prod_name" id="prod_name" value="${prodDetail.prod_name }">
+
+<%-- 										<input type="hidden" name="prod_name" id="prod_name" value="${prodDetail.prod_name }">
 										<input type="hidden" name="prod_no" id="prod_no" value="${prodDetail.prod_no }">
 										<input type="hidden" name="prod_detail" id="prod_detail" value="${prodDetail.prod_detail }">
 										<input type="hidden" name="unit" id="unit" value="${prodDetail.unit }">
-										<input type="hidden" name="model" id="model" value="${prodDetail.model }">
+										<input type="hidden" name="model" id="model" value="${prodDetail.model }"> --%>
 									</div>
 									
 									<!-- 검색 결과 개수 표시 -->
@@ -121,39 +115,6 @@
 											</thead>
 											
 											<tbody class="list" id="bulk-select-body">
-												<c:forEach items="${rList }" var="retailer">
-													<tr>
-													<td class="fs--1 align-middle">
-														<div class="form-check mb-0 fs-0">
-															<input class="form-check-input" type="checkbox"
-																data-bulk-select-row="{&quot;name&quot;:&quot;Anna&quot;,&quot;email&quot;:&quot;anna@example.com&quot;,&quot;age&quot;:18}" />
-														</div>
-													</td>
-													<td class="align-middle ps-3 no"><c:out value="${retailer.retail_no }"/></td>
-													<td class="align-middle name"><c:out value="${retailer.retail_name }"/></td>
-													<td class="align-middle ceo"><c:out value="${retailer.ceo_name }"/></td>
-													<td class="align-middle cate"><c:out value="${retailer.category }"/></td>
-														<td class="align-middle cate"><c:out value="${retailer.scale_grade }"/></td>
-													<td class="align-middle white-space-nowrap text-end pe-0">
-														<div
-															class="font-sans-serif btn-reveal-trigger position-static">
-															<button
-																class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-																type="button" data-bs-toggle="dropdown"
-																data-boundary="window" aria-haspopup="true"
-																aria-expanded="false" data-bs-reference="parent">
-																<span class="fas fa-ellipsis-h fs--2"></span>
-															</button>
-															<div class="dropdown-menu dropdown-menu-end py-2">
-																<a class="dropdown-item retailerDetail" href="#!" >View</a><a
-																	class="dropdown-item" href="#!">Export</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#!">Remove</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												</c:forEach>
 											</tbody>
 										</table>
 									</div>
@@ -346,29 +307,68 @@
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js" ></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+	    function handleEnterKeyPress(event) {
+	        if (event.key === 'Enter') {
+	            event.preventDefault(); // 기본 Enter 동작 막기
+	            document.getElementById('searchItem').click(); // 검색 버튼 클릭
+	        }
+	    }
+	    const searchInput = document.getElementById('searchItemInput');
+	    searchInput.addEventListener('keypress', handleEnterKeyPress);
+		var prod_name;
 		$('#searchItem').on('click',function(){
-			$('form.position-relative').submit();
-			$('#retailerCardTitle').html($('#productSearchBox').find('input').val());
-		});
-		
-		$('#productDetail').on("click",function(e){
-			$('#productModal').find("input[name='product_name']").val($('#product_name').val());
-			$('#productModal').find("input[name='product_no']").val($('#product_no').val());
-			$('#productModal').find("input[name='product_detail']").val($('#product_detail').val());
-			$('#productModal').find("input[name='product_unit']").val($('#product_unit').val());
-			$('#productModal').find("input[name='model_name']").val($('#model_name').val());
-			$('#productModal').find("input[name='capacity']").val($('#capacity').val());
-			$('#productModal').find("input[name='color']").val($('#color').val());
-			$('#productModal').find("input[name='release_date']").val($('#release_date').val());
+			//$('form.position-relative').submit();
+			prod_name=$('#productSearchBox').find('input').val();
 			
-			$("#productModal").modal("show"); 
+			$('#retailerCardTitle').html(prod_name);
+			var str="";
+			var str2="";
+			Service.retailerDTO(prod_name,function(data){
+				
+				for(let i=0;i<data.rlist.length;i++){
+					str+='<tr><td class="fs--1 align-middle"><div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"data-bulk-select-row="{&quot;name&quot;:&quot;Anna&quot;,&quot;email&quot;:&quot;anna@example.com&quot;,&quot;age&quot;:18}" />'
+					str+='</div></td><td class="align-middle ps-3 no">'+data.rlist[i].retail_no+'</td><td class="align-middle name">'+data.rlist[i].retail_name+'</td>'
+					str+="<td class='align-middle ceo'>"+data.rlist[i].ceo_name+"</td><td class='align-middle cate'>"+data.rlist[i].category+"</td>"
+					str+="<td class='align-middle scale'>"+data.rlist[i].scale_grade+"</td><td class='align-middle white-space-nowrap text-end pe-0'>"
+					str+="<div class='font-sans-serif btn-reveal-trigger position-static'>"
+					str+="<button class='btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2' type='button' data-bs-toggle='dropdown' data-boundary='window' aria-haspopup='true' aria-expanded='false' data-bs-reference='parent'>"
+					str+="<span class='fas fa-ellipsis-h fs--2'></span></button><div class='dropdown-menu dropdown-menu-end py-2'><a class='dropdown-item retailerDetail' href='#!' >View</a><a class='dropdown-item' href='#!'>Export</a>"
+					str+="<div class='dropdown-divider'></div><a class='dropdown-item text-danger' href='#!'>Remove</a></div></div></td></tr>"
+				}
+			
+				$('#bulk-select-body').empty();
+				$('#bulk-select-body').append(str);
+				str2='<h3 class="text-1100" id="retailerCardTitle">'+prod_name+'</h3><button class="btn btn-primary" id="productDetail">상품상세보기</button><p class="mb-0 text-700">'+prod_name+' 공급사</p>'
+				$('#head').empty();
+				$('#head').append(str2);
+				$('#retailerTasks').html('');
+				$('#retailerTasks').html(data.count+' task');
+			})
 		});
 		
-		$(".retailerDetail").on("click", function(e){
+		$('#head').on("click",'#productDetail',function(e){
+			
+			Service.retailerDTO(prod_name,function(data){
+				console.log(data)
+				$('#productModal').find("input[name='product_name']").val(data.prodDetail.prod_name);
+				$('#productModal').find("input[name='product_no']").val(data.prodDetail.prod_no);
+				$('#productModal').find("input[name='product_detail']").val(data.prodDetail.prod_detail);
+				$('#productModal').find("input[name='product_unit']").val(data.prodDetail.unit);
+				$('#productModal').find("input[name='model_name']").val(data.prodDetail.model.model_name);
+				$('#productModal').find("input[name='capacity']").val(data.prodDetail.model.capacity);
+				$('#productModal').find("input[name='color']").val(data.prodDetail.model.color);
+				$('#productModal').find("input[name='release_date']").val(data.prodDetail.model.color);
+		
+				$("#productModal").modal("show"); 
+			})
+		});
+		
+		$('#bulk-select-body').on("click",".retailerDetail",function(e){
+			console.log('asdasd');
 			var retail_no=$(this).closest('tr').children('.ps-3').html();
-			var retailerDetail;
-			Service.getRetailer(retail_no,function(result){
-				retailerDetail=result;
+			//var retailerDetail;
+			Service.getRetailer(retail_no,function(retailerDetail){
+				//retailerDetail=result;
 				console.log(retailerDetail.retail_name);
 				 $('#myModal').find("input[name='retail_name']").val(retailerDetail.retail_name);
 				 $('#myModal').find("input[name='ceo_name']").val(retailerDetail.ceo_name);
@@ -479,7 +479,7 @@
 			option && myChart.setOption(option);
 		}
 		//체크박스 클릭시 제안 표시
-		$('#bulk-select-body').find('input.form-check-input').on("change",function(){
+		$('#bulk-select-body').on("change",'input.form-check-input',function(){
 			var retail_no=$(this).closest('tr').children('.ps-3').html();
 			var prod_name=$('#retailerCardTitle').html();
 			if($(this).is(':checked')){
@@ -520,7 +520,7 @@
 			}
 		});
 		
-		
+
 		
 	})
 		
