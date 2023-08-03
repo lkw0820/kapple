@@ -33,6 +33,7 @@ public class ControllerKW {
 	@Autowired
 	private ServiceKW service;
 	
+	
 	 @GetMapping("/comparsionSupplier/{compo_name}") 
 	 public ResponseEntity<SupplierDTO> comparsionSupplier(@PathVariable("compo_name") String compo_name) { 
 		 log.info("supplierList...........");
@@ -75,15 +76,10 @@ public class ControllerKW {
 		log.info("get predict..........");
 		return new ResponseEntity<SalePredictVO>(service.getPredict(prod_name, retail_no),HttpStatus.OK);
 	}
-	@GetMapping("/accessError")
-	public void accessDenied(Authentication auth, Model model) {
-		log.info("access Denied : "+auth);
-	}
 	@GetMapping("/customLogin")
 	public void customLogin(String error, String logout, Model model) {
 		log.info("error: "+error);
 		log.info("logout: "+logout);
-		log.info("asdasd");
 		if(error != null) {
 			model.addAttribute("error","Login Error Check Your Account");
 		}

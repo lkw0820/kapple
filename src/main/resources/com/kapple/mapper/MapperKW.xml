@@ -174,4 +174,34 @@
 			where prod_name=#{prod_name} and r.retail_no=#{retail_no}
 		]]>
 	</select>
+	
+	<resultMap type="com.kapple.domain.EmpVO" id="empMap">
+		<id property="emp_no" column="emp_no"/>
+		<result property="emp_name" column="emp_name"/>
+		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
+		<result property="address" column="address"/>
+		<result property="id" column="id"/>
+		<result property="pw" column="pw"/>
+		<collection property="authList" resultMap="authListMap"></collection>
+		<collection property="department" resultMap="deptMap"></collection>
+	</resultMap>
+	<resultMap type="com.kapple.domain.DepartmentVO" id="deptMap">
+		<id property="dept_no" column="dept_no"/>
+		<result property="dept_no" column="dept_no"/>
+		<result property="dept_name" column="dept_name"/>
+		<result property="TOO" column="TOO"/>
+		<result property="ext_phone" column="ext_phone"/>
+	</resultMap>
+	<resultMap type="com.kapple.domain.AuthorityVO" id="authListMap">
+		<result property="emp_no" column="emp_no"/>
+		<result property="auth_grade" column="auth_grade"/>
+	</resultMap>
+	<select id="read" resultMap="empMap">
+		select e.emp_no,emp_name, email, phone, address, id, pw, auth_grade, d.dept_name, dept_name, TOO, ext_phone
+		from emp e join department d
+		on e.dept_no=d.dept_no join authority a
+		on e.emp_no=a.emp_no
+		where id=#{id} 
+	</select>
 </mapper>
