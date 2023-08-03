@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kapple.domain.ProposalVO;
+import com.kapple.domain.RetailerDTO;
 import com.kapple.domain.RetailerDetailVO;
 import com.kapple.domain.SalePredictVO;
+import com.kapple.domain.SupplierDTO;
 import com.kapple.domain.SupplierDetailVO;
 import com.kapple.service.ServiceKW;
 
@@ -32,13 +34,20 @@ public class ControllerKW {
 	private ServiceKW service;
 	
 	
-	 @PostMapping("/comparsionSupplier") 
-	 public void comparsionSupplier(String compo_name, Model model) { 
+//	 @PostMapping("/comparsionSupplier") 
+//	 public void comparsionSupplier(String compo_name, Model model) { 
+//		 log.info("supplierList...........");
+//		 model.addAttribute("sList",service.supplierListService(compo_name));
+//		 model.addAttribute("compo_name",compo_name); 
+//		 model.addAttribute("count",service.supplierCount(compo_name));
+//		 model.addAttribute("compoDetail",service.componentDetail(compo_name)); 
+//	 }
+	 @GetMapping("/comparsionSupplier/{compo_name}") 
+	 public ResponseEntity<SupplierDTO> comparsionSupplier(@PathVariable("compo_name") String compo_name) { 
 		 log.info("supplierList...........");
-		 model.addAttribute("sList",service.supplierListService(compo_name));
-		 model.addAttribute("compo_name",compo_name); 
-		 model.addAttribute("count",service.supplierCount(compo_name));
-		 model.addAttribute("compoDetail",service.componentDetail(compo_name)); 
+		 
+		 SupplierDTO dto=new SupplierDTO(service.supplierListService(compo_name),compo_name,service.supplierCount(compo_name),service.componentDetail(compo_name));
+		 return new ResponseEntity<SupplierDTO>(dto,HttpStatus.OK);
 	 }
 	 
 
@@ -56,13 +65,24 @@ public class ControllerKW {
 		return new ResponseEntity<ProposalVO>(service.getProposal(compo_no, suppl_no),HttpStatus.OK);
 	}
 	
-	@PostMapping("/comparsionRetailer")
-	public void comparsionRetailer(String prod_name, Model model) {
+//	@PostMapping("/comparsionRetailer")
+//	public void comparsionRetailer(String prod_name, Model model) {
+//		log.info("retailerList.....");
+//		model.addAttribute("rList",service.retailerList(prod_name));
+//		model.addAttribute("prod_name",prod_name);
+//		model.addAttribute("count",service.retailerCount(prod_name));
+//		model.addAttribute("productDetail",service.productDetail(prod_name));
+//	}
+	@GetMapping("/comparsionRetailer/{prod_name}")
+	public ResponseEntity<RetailerDTO> comparsionRetailer(@PathVariable("prod_name") String prod_name, Model model) {
 		log.info("retailerList.....");
 		model.addAttribute("rList",service.retailerList(prod_name));
 		model.addAttribute("prod_name",prod_name);
 		model.addAttribute("count",service.retailerCount(prod_name));
 		model.addAttribute("productDetail",service.productDetail(prod_name));
+		
+		RetailerDTO dto = new RetailerDTO(service.retailerList(prod_name),prod_name,service.retailerCount(prod_name),service.productDetail(prod_name));
+		return new ResponseEntity<RetailerDTO>(dto,HttpStatus.OK);
 	}
 	
 	@GetMapping("/rmodal/{retail_no}")
