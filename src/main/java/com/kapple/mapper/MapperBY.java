@@ -15,6 +15,12 @@ public interface MapperBY {
 	// 공급사 등록
 	public int insertSupplier(SupplierVO supplier);
 	
+	// 공급사 등록 with Select Key
+	public int insertSupplierWithSK(SupplierVO supplier);
+	
 	// 공급사 제안 등록 
 	public int insertProposal(ProposalVO proposal);
+	
+	// 공급사 제안 등록 with Select Key
+	public int insertProposalWithSK(ProposalVO proposal);
 }
