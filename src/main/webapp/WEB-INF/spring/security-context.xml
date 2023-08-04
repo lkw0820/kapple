@@ -9,7 +9,7 @@
 	<bean id="customUserDetailsService" class="com.kapple.security.CustomUserDetailsService"></bean>
 	<security:http>
 		
-		<security:form-login login-page="/customLogin"/>
+		<security:form-login login-page="/customLogin" />
 		<security:logout logout-url="/customLogout" invalidate-session="true" logout-success-url="/home"/>
 		<!-- <security:form-login/> -->
 		<!-- <security:access-denied-handler error-page="accessError"/> -->

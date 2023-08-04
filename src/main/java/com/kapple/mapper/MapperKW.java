@@ -29,4 +29,5 @@ public interface MapperKW {
 	public ProductVO productDetail(String prod_name);
 	public SalePredictVO getPredict(@Param("prod_name") String prod_name, @Param("retail_no")String retail_no);
 	public EmpVO read(String id);
+	public int updateEmp(EmpVO vo);
 }

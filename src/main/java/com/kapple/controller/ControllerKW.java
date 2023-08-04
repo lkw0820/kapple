@@ -6,7 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kapple.domain.EmpVO;
 import com.kapple.domain.ProposalVO;
 import com.kapple.domain.RetailerDTO;
 import com.kapple.domain.RetailerDetailVO;
@@ -32,7 +38,10 @@ public class ControllerKW {
 
 	@Autowired
 	private ServiceKW service;
-	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
+	@Autowired
+    private AuthenticationManager authenticationManager;
 	
 	 @GetMapping("/comparsionSupplier/{compo_name}") 
 	 public ResponseEntity<SupplierDTO> comparsionSupplier(@PathVariable("compo_name") String compo_name) { 
@@ -96,5 +105,32 @@ public class ControllerKW {
 	@GetMapping("/customLogout")
 	public void logout(){
 		log.info("logout");
+	}
+//	@PreAuthorize("isAuthenticated()")
+//	@PostMapping("/checkPw/{id}/{checkPw}")
+//	public ResponseEntity<String> checkPw(@PathVariable("id") String id, @PathVariable("checkPw") String checkPw) {
+//		log.info("asdasdasdasdasda");
+//		//EmpVO vo = service.read(id);
+//		//String currentPw=vo.getPw();
+//		String Pw=passwordEncoder.encode(checkPw);
+//		boolean check = passwordEncoder.matches("pw185",Pw);
+//		log.info(check);
+//		
+//		return check==true?new ResponseEntity<String>("success", HttpStatus.OK)
+//				:new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		//return new ResponseEntity<String>("success", HttpStatus.OK);
+//		
+//	}
+	@GetMapping("/modify")
+	public void modify() {
+	}
+	@PostMapping("/modify")
+	public String modifyProc(EmpVO vo,RedirectAttributes rttr) {
+		if(service.updateEmp(vo)) {
+			rttr.addFlashAttribute("result","success");
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(vo.getId(), vo.getPw()));
+	        SecurityContextHolder.getContext().setAuthentication(authentication);
+		}
+		return "redirect:/home";
 	}
 }

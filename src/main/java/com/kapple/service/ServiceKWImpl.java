@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kapple.domain.ComponentVO;
+import com.kapple.domain.EmpVO;
 import com.kapple.domain.ProductVO;
 import com.kapple.domain.ProposalVO;
 import com.kapple.domain.RetailerDetailVO;
@@ -70,6 +71,16 @@ public class ServiceKWImpl implements ServiceKW {
 	public SalePredictVO getPredict(String prod_name, String retail_no) {
 		// 상품과 판매사에 해당하는 판매 예측 출력
 		return mapper.getPredict(prod_name, retail_no);
+	}
+	@Override
+	public EmpVO read(String id) {
+		// emp정보 출력
+		return mapper.read(id);
+	}
+	@Override
+	public boolean updateEmp(EmpVO vo) {
+		// emp 정보 업데이트
+		return mapper.updateEmp(vo)==1?true:false;
 	}
 
 

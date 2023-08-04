@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.kapple.domain.EmpVO;
+
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -41,23 +43,24 @@ public class mapperTests {
 //		log.info(mapper.supplierList("부품이름1"));
 //	}
 	
-	@Test
-	public void test() {
-		log.info(mapper.read("id184"));
-	}
+//	@Test
+//	public void test() {
+//		log.info(mapper.read("id184"));
+//	}
 //	@Test
 //	public void updatePwTest() {
 //		String sql= "update emp set pw=? where id=?";
 //		String sql2="insert into authority values(?,?)";
+//		String sql3 ="update emp set hiredate=sysdate where id=?";
 //		
-//		for(int i=184;i<194;i++) {
+//		for(int i=194;i<284;i++) {
 //			Connection con = null;
 //			PreparedStatement pstmt = null;
 //			try {
 //				con = ds.getConnection();
-//				pstmt = con.prepareStatement(sql2);
-//				pstmt.setString(1, "EMPL10"+i);
-//				pstmt.setString(2, "ROLE_ADMIN");
+//				pstmt = con.prepareStatement(sql3);
+//				pstmt.setString(1, "id"+i);
+//				//pstmt.setString(2, "ROLE_ADMIN");
 //				pstmt.executeUpdate();
 //			} catch (Exception e) {
 //				e.printStackTrace();
@@ -79,5 +82,14 @@ public class mapperTests {
 //			}
 //		}
 //	}
+	@Test
+	public void updateEmpTest() {
+		EmpVO vo = new EmpVO();
+		vo.setAddress("update address");
+		vo.setEmail("update email");
+		vo.setPhone("update phone");
+		vo.setId("id200");
+		mapper.updateEmp(vo);
+	}
 
 }
