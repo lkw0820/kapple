@@ -11,7 +11,7 @@ public class SaleVO {
 	private ProductVO product;
 	private Long price;
 	private Long quantity;
-	private Long supply_amount;
+	private Long supply_amount; //컬럼명 suppl_amount
 	private Long vat_amount;
 	private Long total_amount;
 	private Long discount_rate;

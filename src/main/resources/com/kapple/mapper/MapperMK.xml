@@ -4,10 +4,87 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kapple.mapper.MapperMK">
 
+ 	<select id="getSaleList" resultMap="SaleMap"> 
+    <![CDATA[
+	      SELECT sale_no, RETAIL_NO, PROD_NO, price, quantity, 
+		        suppl_amount, vat_amount, total_amount, discount_rate, sale_date
+	      FROM SALE
+    ]]> </select>
+	
+	<select id="getModelList" resultMap="ModelMap"> 
+    <![CDATA[
+	      SELECT model_no, capacity, color, release_date, model_name
+	      FROM MODEL
+    ]]> </select>
 
-	<insert id="insert">
-		insert into test_tbl (TEST_NO, CONTENTS, ANYNUM, REG_DATE)
-		values ('TEST'||TEST_TBL_SEQ.nextval, #{contents}, #{anynum}, SYSDATE)
-	</insert>
+	<select id="getProductList" resultMap="ProductMap"> 
+    <![CDATA[
+	      SELECT prod_no, unit, prod_name, prod_detail, model_no
+	      FROM PRODUCT
+    ]]> </select>
+	
+	<select id="getRetailerList" resultMap="RetailerMap"> 
+    <![CDATA[
+	      SELECT retail_no, transport_no, retail_name, ceo_name, category, phone, scale_grade
+	      FROM RETAILER
+    ]]> </select>
+	
+	
+	
+	<!-- property 값은 MemberVO의 변수명과 대소문자까지 똑같아야 함! -->
+    <!-- <resultMap type="org.zerock.domain.MemberVO" id="memberMap">
+       <id property="userid" column="userid"/>
+       <result property="userid" column="userid"/>    
+       <result property="userpw" column="userpw"/>    
+       <collection property="authList" resultMap="authMap"></collection>    
+    </resultMap> -->
+	<resultMap type="com.kapple.domain.SaleVO" id="SaleMap">
+       <id property="sale_no" column="sale_no"/>
+       <result property="price" column="price"/>    
+       <result property="quantity" column="quantity"/>    
+       <result property="supply_amount" column="suppl_amount"/>    
+       <result property="vat_amount" column="vat_amount"/>    
+       <result property="total_amount" column="total_amount"/>    
+       <result property="discount_rate" column="discount_rate"/>    
+       <result property="sale_date" column="sale_date"/>    
+       <collection property="retailer" resultMap="RetailerMap"/>    
+       <collection property="product" resultMap="ProductMap"/>    
+	</resultMap>
+	<resultMap type="com.kapple.domain.RetailerVO" id="RetailerMap">
+       <id property="retail_no" column="retail_no"/>
+       <result property="retail_name" column="retail_name"/>    
+       <result property="ceo_name" column="ceo_name"/>    
+       <result property="category" column="category"/>    
+       <result property="phone" column="phone"/>    
+       <result property="scale_grade" column="scale_grade"/>    
+		<collection property="transport" resultMap="TransportMap"/>
+	</resultMap>
+	<resultMap type="com.kapple.domain.TransportationVO" id="TransportMap">
+		<id property="transport_no" column="transport_no"/>
+		<result property="transport_category" column="transport_category"/>
+		<result property="transport_charge" column="transport_charge"/>
+		<result property="additional_condition" column="additional_condition"/>
+	</resultMap>
 
+	 <resultMap type="com.kapple.domain.ProductVO" id="ProductMap">
+		<id property="prod_no" column="prod_no"/>
+		<result property="unit" column="unit"/>
+		<result property="prod_name" column="prod_name"/>
+		<result property="prod_detail" column="prod_detail"/>
+		<association property="model" resultMap="ModelMap"/>
+	</resultMap>
+	 
+	 <resultMap type="com.kapple.domain.ModelVO" id="ModelMap">
+		<id property="model_no" column="model_no"/>
+		<result property="capacity" column="capacity"/>
+		<result property="color" column="color"/>
+		<result property="release_date" column="release_date"/>
+		<result property="model_name" column="model_name"/>
+	</resultMap>
+	<!-- <insert id="insert">
+		<![CDATA[
+			insert into test_tbl (TEST_NO, CONTENTS, ANYNUM, REG_DATE)
+			values ('TEST'||TEST_TBL_SEQ.nextval, #{contents}, #{anynum}, SYSDATE)
+		]]>
+	</insert> -->
 </mapper>

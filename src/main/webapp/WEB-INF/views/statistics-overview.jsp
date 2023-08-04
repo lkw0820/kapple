@@ -22,7 +22,7 @@
 						border-start-xxl border-end-xxl-0 border-bottom-xxl-0 
 						border-end border-bottom pb-4 pb-xxl-0 ">
 						<span class="uil fs-3 lh-1 uil-download-alt text-primary"></span>
-						<h1 class="fs-3 pt-3">28,00</h1>
+						<h1 class="fs-3 pt-3">2,800</h1>
 						<p class="fs--1 mb-0">총 입고량</p>
 					</div>
 					<div
@@ -196,5 +196,11 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+
+
+</script>
 
 <%@include file="includes/footer.jsp"%>
