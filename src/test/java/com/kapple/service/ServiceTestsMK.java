@@ -25,15 +25,9 @@ public class ServiceTestsMK {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void test() {
-//		List<SaleVO> saleList = statisticsService.overviewSale();
-//		log.info("saleList==============================\n"+saleList);
-
-//		List<ModelVO> modelList = statisticsService.overviewModel();
-//		log.info("saleList==============================\n"+modelList);
-//		Date date = new Date(0, 0, 0);
 		PeriodRequestDTO period = new PeriodRequestDTO();
 
-	    LocalDate startLocalDate = LocalDate.of(2021, 1, 1);
+	    LocalDate startLocalDate = LocalDate.of(2022, 1, 1);
 	    Date startDate = Date.valueOf(startLocalDate);
 	    period.setStartDate(startDate);
 
@@ -41,9 +35,8 @@ public class ServiceTestsMK {
 	    Date endDate = Date.valueOf(endLocalDate);
 	    period.setEndDate(endDate);
 		
-		
-		List<SaleVO> saleList = statisticsService.getTotalSalesByPeriod(period);
-    	log.info(saleList);
+//		List<SaleVO> saleList = statisticsService.getTotalSalesByPeriod(period);
+//    	log.info(saleList);
 	}
 
 }

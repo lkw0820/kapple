@@ -8,8 +8,13 @@
     <![CDATA[
 	      SELECT sale_no, RETAIL_NO, PROD_NO, price, quantity, 
 		        suppl_amount, vat_amount, total_amount, discount_rate, sale_date
-	      FROM SALE    WHERE sale_date 
-	      BETWEEN #{startDate} AND #{endDate}
+	      FROM SALE   WHERE sale_date   BETWEEN #{startDate} AND #{endDate}
+    ]]> </select>
+    
+    <select id="getTotalSalesAmountByPeriod" resultMap="SaleMap" parameterType="java.sql.Date"> 
+    <![CDATA[
+	      SELECT sum(price*quantity) AS "sales_amount"
+	      FROM SALE   WHERE sale_date   BETWEEN #{startDate} AND #{endDate};
     ]]> </select>
 
 <!--  	<select id="getSaleList" resultMap="SaleMap"> 
@@ -74,7 +79,7 @@
 		<result property="additional_condition" column="additional_condition"/>
 	</resultMap>
 
-	 <resultMap type="com.kapple.domain.ProductVO" id="ProductMap">
+ 	 <resultMap type="com.kapple.domain.ProductVO" id="ProductMap">
 		<id property="prod_no" column="prod_no"/>
 		<result property="unit" column="unit"/>
 		<result property="prod_name" column="prod_name"/>

@@ -32,6 +32,7 @@ public class mapperTestMK {
 //		log.info(statisticsMapper.getRetailerList());
 //		log.info(statisticsMapper.getSaleListByPeriod(new PeriodRequestDTO(new Date("Tue Jul 25 09:00:00 KST 2000"), new Date("Sat Aug 05 15:45:31 KST 2023"))));
 //		log.info(statisticsMapper.getSaleListByPeriod());
+		
 	}
 
 }

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="includes/header.jsp"%>
 
+
 <div class="content">
 
 	<div class="pb-5">
@@ -234,30 +235,31 @@
 <!-- Ajax 호출에 필요한 jQuery 라이브러리 로드 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+
+// 기간 (시작일, 종료일) => DatePicker같은 거 있으면 좋겠다
 	$(document).ready(function() {
-		
-		// 기간 (시작일, 종료일) => DatePicker같은 거 있으면 좋겠다
-		let startDate = new Date("2000-07-25");
-		let endDate = new Date();
-		console.log(startDate, endDate);		
+/* 		let startDate = new Date("2022-01-01");
+		let endDate = new Date("2023-01-01");
+		console.log(startDate, endDate);
+		 */
 		requestPeriod(startDate, endDate);
 		function requestPeriod(startDate, endDate) {
-			$.post({
-				//type: "POST",
+			$.ajax({
+				type: "GET",
 				url: "/statistics-overview", // 엔드포인트 URL
-				data: JSON.stringify({ "startDate": startDate, "endDate": endDate }), // 요청 페이로드
+				data: JSON.stringify({ "startDate": "2022-01-01", "endDate": "2023-01-01" }), // 요청 페이로드
 				contentType: "application/json; charset=utf-8;", // 요청 컨텐츠 타입
 				dataType: "json", // 응답 데이터 형식 (리턴형) (이거 안써주면 XML(document형)으로 됨)
 				success: function(response) {
 					// 성공적인 응답 처리
-					// AJAX 요청의 success 콜백 함수에서 받은 JSON 데이터를 활용하여 UI 업데이트나 처리를 수행합니다.
+					// AJAX 요청의 success 콜백 함수에서 받은 JSON 데이터를 활용하여 UI 업데이트나 처리를 수행
 					//console.log("기간:", response.period);
 					//console.log("시작일:", new Date(response.period.startDate));
 					//console.log("종료일:", new Date(response.period.endDate));
-					//console.log("종료일:", new Date(response));
+					console.log("SALE리스트:", response);
 					
-					updatePeriodUI();
-					// 이제 응답 데이터를 필요에 따라 처리하고 UI에 표시할 수 있습니다.
+					// 이제 응답 데이터를 필요에 따라 처리하고 UI에 표시할 수 있다.
+					updatePeriodUI(); 
 				},
 			    error: function(xhr, status, error) {
 					console.error(xhr); // 에러 오브젝트. 얘만 있어도 status나 에러코드 알 수 있음
