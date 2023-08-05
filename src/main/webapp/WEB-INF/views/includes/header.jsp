@@ -126,7 +126,7 @@
                   <div class="parent-wrapper label-1">
                     <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="nv-project-management">
                       <li class="collapsed-nav-item-title d-none">통계(Statistics)</li>
-                      <li class="nav-item"><a class="nav-link" href="statistics" data-bs-toggle="" aria-expanded="false">
+                      <li class="nav-item"><a class="nav-link" href="/statistics-overview" data-bs-toggle="" aria-expanded="false">
                           <div class="d-flex align-items-center"><span class="nav-link-text">통합 통계</span>
                           </div>
                         </a>

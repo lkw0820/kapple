@@ -4,12 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kapple.mapper.MapperMK">
 
- 	<select id="getSaleList" resultMap="SaleMap"> 
+ 	<select id="getSaleListByPeriod" resultMap="SaleMap" parameterType="java.sql.Date"> 
+    <![CDATA[
+	      SELECT sale_no, RETAIL_NO, PROD_NO, price, quantity, 
+		        suppl_amount, vat_amount, total_amount, discount_rate, sale_date
+	      FROM SALE    WHERE sale_date 
+	      BETWEEN #{startDate} AND #{endDate}
+    ]]> </select>
+
+<!--  	<select id="getSaleList" resultMap="SaleMap"> 
     <![CDATA[
 	      SELECT sale_no, RETAIL_NO, PROD_NO, price, quantity, 
 		        suppl_amount, vat_amount, total_amount, discount_rate, sale_date
 	      FROM SALE
-    ]]> </select>
+    ]]> </select> -->
 	
 	<select id="getModelList" resultMap="ModelMap"> 
     <![CDATA[

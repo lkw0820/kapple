@@ -3,5 +3,8 @@
 <%@include file="includes/header.jsp"%>
 <h1>구매실적/h1>
 
+<div class="content">
+
+</div>
 
 <%@include file="includes/footer.jsp"%>

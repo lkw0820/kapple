@@ -1,6 +1,9 @@
 package com.kapple.mapper;
 
+import java.util.Date;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.kapple.domain.ComponentVO;
 import com.kapple.domain.ContractVO;
@@ -15,11 +18,14 @@ import com.kapple.domain.SaleVO;
 import com.kapple.domain.SupplierVO;
 import com.kapple.domain.TestTblVO;
 import com.kapple.domain.TransportationVO;
+import com.kapple.dto.PeriodRequestDTO;
 
 public interface MapperMK {
 
 	void insert(TestTblVO test);
 
+	public List<SaleVO> getSaleListByPeriod(@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+	
 	public List<SaleVO> getSaleList();
 	public List<ProductVO> getProductList();
 	public List<ModelVO> getModelList();
@@ -34,4 +40,5 @@ public interface MapperMK {
 	public List<SupplierVO> getSupplierList();
 	public List<ContractVO> getContractList();
 	public List<OrderReturnVO> getOrderReturnList();
+
 }
