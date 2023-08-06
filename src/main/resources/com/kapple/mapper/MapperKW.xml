@@ -200,7 +200,7 @@
 	</resultMap>
 	<select id="read" resultMap="empMap">
 		<![CDATA[
-			select e.emp_no,emp_name, email, phone, address, id, pw, hiredate, auth_grade, d.dept_name, dept_name, TOO, ext_phone
+			select e.emp_no,emp_name, email, phone, address, id, pw, hiredate, auth_grade, d.dept_name, TOO, ext_phone
 			from emp e join department d
 			on e.dept_no=d.dept_no join authority a
 			on e.emp_no=a.emp_no

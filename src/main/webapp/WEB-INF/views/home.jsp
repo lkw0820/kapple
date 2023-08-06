@@ -16,12 +16,12 @@
 	            </div>
 	            <div class="col-auto">
 	              <div class="row g-2 g-sm-3">
-	                <div class="col-auto">
+	                <!-- <div class="col-auto">
 	                  <button class="btn btn-phoenix-danger"><span class="fas fa-trash-alt me-2"></span>delete account</button>
 	                </div>
 	                <div class="col-auto">
 	                  <button class="btn btn-phoenix-secondary pw"><span class="fas fa-key me-2 pw"></span>change pw</button>
-	                </div>
+	                </div> -->
 	              </div>
 	            </div>
 	          </div>
@@ -40,9 +40,22 @@
 	                        <div class="col-12 col-sm-auto flex-1">
 	                          <h3 class="fw-bolder mb-2"><c:out value="${pinfo.emp.emp_name }"/></h3>
 	                          <p class="mb-0">
-	                          <c:forEach items="${pinfo.emp.authList}" var="auth">
+<%--  	                          <c:forEach items="${pinfo.emp.authList}" var="auth" varStatus="status">
+	                          	<c:if test="${status.index eq 1}">
+	                          		관리자
+	                          	</c:if>
+	                          	<c:if test="${status.index eq 0}">
+	                          		사원
+	                          	</c:if>	                          	
 	                          	<c:out value="${auth.auth_grade }"/><br>
-	                          </c:forEach></p>
+	                          </c:forEach></p> --%>
+	                          <c:if test="${pinfo.emp.authList.size() eq 2}">
+	                          	관리자<br>
+	                          </c:if>
+	                          <c:if test="${pinfo.emp.authList.size() eq 1}">
+	                          	사원<br>
+	                          </c:if>
+	                          </p>
 	                          <a class="fw-bold dept" href="#!">
 	                          	<c:out value="${pinfo.emp.department.dept_name }"/>
 	                          </a>
@@ -68,6 +81,7 @@
 	                </div>
 	              </div>
 	            </div>
+	            
 	            <div class="col-12 col-lg-8">
 	              <div class="card h-100">
 	                <div class="card-body">
@@ -76,30 +90,58 @@
 	                      <button class="btn btn-link p-0 modify" type="button"> <span class="fas fa-edit fs--1 ms-3 text-500"></span></button>
 	                    </h4>
 	                  </div>
-	                  <div class="pt-4 mb-2">
-	                    <div class="row justify-content-between">
-	                      <div class="col-4">
-	                        <h5 class="text-1000">Address</h5>
-	                      </div>
-	                      <div class="col-auto">
-	                        <p class="text-800"><c:out value="${pinfo.emp.address }"/></p>
-	                      </div>
-	                    </div>
-	                  </div>
-	                  <div class="border-top border-dashed border-300 pt-4">
-	                    <div class="row flex-between-center mb-2">
-	                      <div class="col-auto">
-	                        <h5 class="text-1000 mb-0">Email</h5>
-	                      </div>
-	                      <div class="col-auto"><a class="lh-1" href="mailto:${pinfo.emp.email }"><c:out value="${pinfo.emp.email }"/></a></div>
-	                    </div>
-	                    <div class="row flex-between-center">
-	                      <div class="col-auto">
-	                        <h5 class="text-1000 mb-0">Phone</h5>
-	                      </div>
-	                      <div class="col-auto"><a href="tel:+${pinfo.emp.phone }">+<c:out value="${pinfo.emp.phone }"/></a></div>
-	                    </div>
-	                  </div>
+						<c:if test="${vo eq null }">
+							<div class="pt-4 mb-2">
+		                    <div class="row justify-content-between">
+		                      <div class="col-4">
+		                        <h5 class="text-1000">Address</h5>
+		                      </div>
+		                      <div class="col-auto">
+		                        <p class="text-800"><c:out value="${pinfo.emp.address }"/></p>
+		                      </div>
+		                    </div>
+		                  </div>
+		                  <div class="border-top border-dashed border-300 pt-4">
+		                    <div class="row flex-between-center mb-2">
+		                      <div class="col-auto">
+		                        <h5 class="text-1000 mb-0">Email</h5>
+		                      </div>
+		                      <div class="col-auto"><a class="lh-1" href="mailto:${pinfo.emp.email }"><c:out value="${pinfo.emp.email }"/></a></div>
+		                    </div>
+		                    <div class="row flex-between-center">
+		                      <div class="col-auto">
+		                        <h5 class="text-1000 mb-0">Phone</h5>
+		                      </div>
+		                      <div class="col-auto"><a href="tel:+${pinfo.emp.phone }">+<c:out value="${pinfo.emp.phone }"/></a></div>
+		                    </div>
+		                  </div>
+						</c:if>
+						<c:if test="${vo ne null }">
+							<div class="pt-4 mb-2">
+		                    <div class="row justify-content-between">
+		                      <div class="col-4">
+		                        <h5 class="text-1000">Address</h5>
+		                      </div>
+		                      <div class="col-auto">
+		                        <p class="text-800"><c:out value="${vo.address }"/></p>
+		                      </div>
+		                    </div>
+		                  </div>
+		                  <div class="border-top border-dashed border-300 pt-4">
+		                    <div class="row flex-between-center mb-2">
+		                      <div class="col-auto">
+		                        <h5 class="text-1000 mb-0">Email</h5>
+		                      </div>
+		                      <div class="col-auto"><a class="lh-1" href="mailto:${vo.email }"><c:out value="${vo.email }"/></a></div>
+		                    </div>
+		                    <div class="row flex-between-center">
+		                      <div class="col-auto">
+		                        <h5 class="text-1000 mb-0">Phone</h5>
+		                      </div>
+		                      <div class="col-auto"><a href="tel:+${vo.phone }">+<c:out value="${vo.phone }"/></a></div>
+		                    </div>
+		                  </div>
+						</c:if>
 	                </div>
 	              </div>
 	            </div>

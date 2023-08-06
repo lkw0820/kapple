@@ -40,8 +40,8 @@ public class ControllerKW {
 	private ServiceKW service;
 	@Autowired
     private PasswordEncoder passwordEncoder;
-	@Autowired
-    private AuthenticationManager authenticationManager;
+	//@Autowired
+    //private AuthenticationManager authenticationManager;
 	
 	 @GetMapping("/comparsionSupplier/{compo_name}") 
 	 public ResponseEntity<SupplierDTO> comparsionSupplier(@PathVariable("compo_name") String compo_name) { 
@@ -128,8 +128,7 @@ public class ControllerKW {
 	public String modifyProc(EmpVO vo,RedirectAttributes rttr) {
 		if(service.updateEmp(vo)) {
 			rttr.addFlashAttribute("result","success");
-			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(vo.getId(), vo.getPw()));
-	        SecurityContextHolder.getContext().setAuthentication(authentication);
+			rttr.addFlashAttribute("vo",vo);
 		}
 		return "redirect:/home";
 	}
