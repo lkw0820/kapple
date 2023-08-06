@@ -24,11 +24,23 @@ public class ServiceMKImpl implements ServiceMK {
 
 	@Autowired
 	private MapperMK statisticsMapper;
+	
+	// 총 부품 구매 수량 ============================================
+	@Override
+	public Long getTotalOrderQtyByPeriod(PeriodRequestDTO period) {
+		Long totalOrderQty = getTotalOrderQtyByPeriod(period);
+		return null;
+	}
 
+	@Override
+	public List<SaleVO> getSaleList() { // 제품 판매 리스트
+		List<SaleVO> saleList = statisticsMapper.getSaleList();
+		return saleList;
+	}
+	
 	@Override
 	public List<SaleVO> getSaleListByPeriod(PeriodRequestDTO period) {
 		log.debug("서비스1=====================================");
-
     	log.debug("Before - START: "+period.getStartDate() + ", END: "+period.getEndDate());
 //		LocalDate startLocalDate = period.getStartDate().toInstant()
 //                .atZone(ZoneId.systemDefault())
@@ -40,9 +52,18 @@ public class ServiceMKImpl implements ServiceMK {
 //		Date startDate = Date.valueOf(startLocalDate);
 //	    Date endDate = Date.valueOf(endLocalDate);
 		
-		//List<SaleVO> saleList  = statisticsMapper.getSaleListByPeriod(period.getStartDate(), period.getEndDate());
-    	List<SaleVO> saleList  = null;
-    	log.debug(saleList);
+		
+	    //LocalDate startLocalDate = LocalDate.of(2022, 1, 1);
+	    Date startDate = Date.valueOf(period.getStartDate().toLocalDate());
+	    period.setStartDate(startDate);
+
+	    //LocalDate endLocalDate = LocalDate.of(2023, 1, 1);
+	    Date endDate = Date.valueOf(period.getEndDate().toLocalDate());
+	    period.setEndDate(endDate);
+	    
+		List<SaleVO> saleList  = statisticsMapper.getSaleListByPeriod(period.getStartDate(), period.getEndDate());
+    	//List<SaleVO> saleList  = null;
+    	//log.debug(saleList);
 		return saleList;
 	}
 
@@ -92,7 +113,8 @@ public class ServiceMKImpl implements ServiceMK {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+
 	
 //	totalSales.put("TOTAL_SALES_AMOUNT", "테스트");
 //	totalSales.put("TOTAL_SALES_VARIANCE_RATE", "");

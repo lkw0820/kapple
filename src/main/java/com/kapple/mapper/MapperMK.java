@@ -1,6 +1,5 @@
 package com.kapple.mapper;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -19,16 +18,21 @@ import com.kapple.domain.SaleVO;
 import com.kapple.domain.SupplierVO;
 import com.kapple.domain.TestTblVO;
 import com.kapple.domain.TransportationVO;
-import com.kapple.dto.PeriodRequestDTO;
 
 public interface MapperMK {
 
 	void insert(TestTblVO test);
 
-	public List<SaleVO> getSaleListByPeriod(@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
-	public Long getSalesAmountByPeriod(@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+	public Long getTotalOrderQtyByPeriod(
+			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
 	
+	public List<SaleVO> getSaleListByPeriod(
+			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+	public Long getSalesAmountByPeriod(
+			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);	
 	public List<SaleVO> getSaleList();
+	//===================================
+	
 	public List<ProductVO> getProductList();
 	public List<ModelVO> getModelList();
 	public List<RetailerVO> getRetailerList();

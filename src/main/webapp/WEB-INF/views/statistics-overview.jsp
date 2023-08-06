@@ -3,15 +3,16 @@
 <%@include file="includes/header.jsp"%>
 
 <div class="content">
-
 	<div class="pb-5">
 		<div class="row g-4">
-
 			<!-- 페이지 타이틀, 동적으로 변경 원할시 아이디 추가해서 사용 -->
 			<div class="mb-5">
-				<h2 id="heading" class="mb-2">통합 통계</h2>
-				<h5 id="subheading" class="text-700 fw-semi-bold">통합 통계 화면 설명</h5>
+				<h2 id="heading" class="mb-2">통계 및 분석</h2>
+				<h5 id="subheading" class="text-700 fw-semi-bold">통계 요약 및 분석</h5>
 			</div>
+			<button id="testBtn">What is it</button>
+<!-- 			<div class="echart-projection-actual"
+										style="height: 180px; width: 100%;"></div> -->
 			
 			<!-- 왼쪽 통계 그래프들 -->
 			<!-- 데이트피커 -->
@@ -32,7 +33,7 @@
 						border-end border-bottom pb-4 pb-xxl-0 ">
 						<span class="uil fs-3 lh-1 uil-download-alt text-primary"></span>
 						<h1 class="fs-3 pt-3">★2,800</h1>
-						<p class="fs--1 mb-0">★총 입고량</p>
+						<p class="fs--1 mb-0">입고량</p>
 					</div>
 					<div
 						class="col-6 col-md-4 col-xxl-3 text-center 
@@ -40,7 +41,7 @@
 						border-end-md border-bottom pb-4 pb-xxl-0">
 						<span class="uil fs-3 lh-1 uil-upload text-info"></span>
 						<h1 class="fs-3 pt-3">★1,866</h1>
-						<p class="fs--1 mb-0">★총 생산수</p>
+						<p class="fs--1 mb-0">생산수</p>
 					</div>
 					<div
 						class="col-6 col-md-4 col-xxl-3 text-center 
@@ -48,14 +49,14 @@
 						border-end border-end-md-0 pb-4 pb-xxl-0 pt-4 pt-md-0">
 						<span class="uil fs-3 lh-1 uil-money-bill-stack text-primary"></span>
 						<h1 class="fs-3 pt-3">★1,366</h1>
-						<p class="fs--1 mb-0">★총 판매량</p>
+						<p class="fs--1 mb-0">판매량</p>
 					</div>
 					<div
 						class="col-6 col-md-4 col-xxl-3 text-center 
 						border-start-xxl border-end-xxl pb-md-4 pb-xxl-0 pt-4 pt-xxl-0">
 						<span class="uil fs-3 lh-1 uil-usd-circle text-danger"></span>
 						<h1 class="fs-3 pt-3">★1,200</h1>
-						<p class="fs--1 mb-0">★총 반품량</p>
+						<p class="fs--1 mb-0">반품량</p>
 					</div>
 				</div>
 				<!-- class="row justify-content-between" END -->
@@ -64,16 +65,16 @@
 				<!--  그래프 1 상단  -->
 				<div class="row flex-between-center mb-4 g-3">
 					<div class="col-auto">
-						<h3>★총 판매량</h3>
-						<p class="text-700 lh-sm mb-0">★총 판매량 그래프 설명</p>
+						<h3>판매량 비교</h3>
+						<p class="text-700 lh-sm mb-0">직전 단위기간 대비 판매량</p>
 					</div>
 					<div class="col-6 col-sm-4">
 						<!--  셀렉트, 내용 변경 가능 -->
 						<select class="form-select form-select-sm mt-2"
-							id="selectTotalSale">
-							<option>★Mar 1 - 31, 2022</option>
-							<option>★April 1 - 30, 2022</option>
-							<option>★May 1 - 31, 2022</option>
+							id="selectPeriod">
+							<option>2023년도</option>
+							<option>2022년도</option>
+							<option>2021년도</option>
 						</select>
 					</div>
 				</div>
@@ -231,28 +232,109 @@
 </div>
 <!-- class="content" END -->
 
-<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js" defer></script> -->
 <script type="text/javascript" defer>
 	$(document).ready(function() {
-		$("#totalSalesAmount").html("새로운 내용");
+
+		var periodOption=[]; //셀렉트 옵션 기간
+		
+  		var orderList=[]; 		//부품 구매
+		var productList=[]; 	//제품
+		var saleList=[];			//제품 판매
+		var predictList=[];	//매출액 예측
+		var returnList=[];		//반품 (정 시간없으면 삭제해도..)
+		
+		var orderQty;
+		var produceQty; // = productQuantity
+		var saleQty;
+		var returnQty;
+		
+		var total;
+		//console.log(startDate);
+		//console.log(bigChart);
+		
+
+		
+		// 테스트
+		 $("#testBtn").html("TEST버튼");
+		 $(document).on("click", "#testBtn", function() {
+		      $("#totalSalesAmount").html("새로운 내용");
+		 		var strStart = new Date('2022-07-01');
+				var strEnd = new Date('2023-01-01');
+		      requestPeriod(strStart, strEnd);
+			}); 
+		 
+		 // 셀렉트옵션
+		 $("#selectPeriod").on("change", function() {
+		        var selectedValue = $(this).val(); // 선택된 옵션의 값 가져오기
+		        // 선택된 옵션의 내용을 다른 요소에 출력
+		        $("#selectPeriod").html("* " + selectedValue);
+		        
+		        // Selected Value
+		        var text = $('#selectPeriod option:selected').text();
+		        var value = $('#selectPeriod').val();
+		        // Deselected Values
+		        var str = "";
+		        $('#selectPeriod option:not(:selected)').each(function(){
+		            var text = $(this).text();
+		            var value = $(this).val();
+		            str += text + "/" + value + ", ";
+		        });
+		        // 선택된 값으로 바꾸기
+		        $('#selectPeriod').val('#0000ff');
+		    });
+		 
+		 //* / 왼쪽 큰 그래프
+	        // Draw the chart
+	        //var makeChart = function(strStart, strEnd){
+				/*var bigChartDom = document.getElementById('echart-total-sales-chart');
+				var bigChart = echarts.init(bigChartDom);
+				var bigChartOption = {
+				          	title: {
+					            text: 'ECharts Getting Started Example'
+					          },
+					          tooltip: {},
+					          xAxis: {
+					            data: ['shirt', 'cardigan', 'chiffon', 'pants', 'heels', 'socks']
+					          },
+					          yAxis: {},
+					          series: [
+					            {
+					              name: 'sales',
+					              type: 'bar',
+					              data: [5, 20, 36, 10, 10, 20]
+					            }
+					          ]
+					        };
+				bigChart.setOption(bigChartOption);*/
+		 	
+		    //bigChart.setOption(option); */
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
 		//let stringStartDate= "2022-01-01";
 		//let stringEndDate= "2023-01-01";
 		
- 		var startDate = new Date("2022-01-01");
-		var endDate = new Date("2023-01-01");
 		//console.log(startDate, endDate);
 		//console.log(stringStartDate, stringEndDate);
 		//let date = moment(stringStartDate).format("YYYY-MM-DD").toDate();
-		//console.log(date);
 		
- 		requestPeriod(startDate, endDate);
-		function requestPeriod(startDate, endDate) {
+		function requestPeriod(strStart, strEnd) {
 			$.ajax({
 				type: "POST",
 				url: "/statistics-overview", // 엔드포인트 URL
 				data: JSON.stringify({
-					"startDate": startDate,
-					"endDate":  endDate
+					"startDate": strStart,
+					"endDate":  strEnd
 				}), // 요청 페이로드
 				contentType: "application/json; charset=utf-8;", // 요청 컨텐츠 타입
 				dataType: "json", // 응답 데이터 형식 (리턴형) (이거 안써주면 XML(document형)으로 됨)
@@ -262,11 +344,10 @@
 					//console.log("기간:", response.period);
 					//console.log("시작일:", new Date(response.period.startDate));
 					//console.log("종료일:", new Date(response.period.endDate));
-					//console.log("SALE리스트:", response);
-					console.log("SALE리스트를 받을 준비..");
+					console.log("SALE리스트:", response);
 					
 					// 이제 응답 데이터를 필요에 따라 처리하고 UI에 표시할 수 있다.
-					updatePeriodUI(); 
+					//updatePeriodUI(); 
 				},
 			    error: function(xhr, status, error) {
 					console.error(xhr); // 에러 오브젝트. 얘만 있어도 status나 에러코드 알 수 있음
@@ -275,11 +356,11 @@
 			});
 		}
 		
-		function updatePeriodUI() {
+/* 		function updatePeriodUI() {
 			console.log("====UI업데이트 메소드");
 			// id가 totalSalesAmount인 요소의 하위요소인 H4태그의 내용 값을 바꾸려면?
 			$("#totalSalesAmount h4").html("새로운 내용22");
-		}
+		} */
 		
 }); 
 </script>
