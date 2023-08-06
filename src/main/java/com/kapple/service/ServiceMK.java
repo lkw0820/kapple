@@ -13,9 +13,11 @@ import com.kapple.dto.PeriodRequestDTO;
 
 public interface ServiceMK {
 
-	public List<SaleVO> getTotalSalesByPeriod(PeriodRequestDTO period);
-	public List<SaleVO> getTotalSalesByPeriod(LocalDate startDate, LocalDate endDate);
-	
+	public Long getTotalSalesAmountByPeriod(PeriodRequestDTO period);
+	public Long getTotalSalesAmountByPeriod(LocalDate startDate, LocalDate endDate);
+
+	public List<SaleVO> getSaleListByPeriod(PeriodRequestDTO period);
+	public List<SaleVO> getSaleListByPeriod(LocalDate startLocalDate, LocalDate endLocalDate);
 	
 //	public List<SaleVO> overviewSale();
 //	public List<ModelVO> overviewModel();

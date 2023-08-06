@@ -1,7 +1,9 @@
 package com.kapple.service;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,19 +26,71 @@ public class ServiceMKImpl implements ServiceMK {
 	private MapperMK statisticsMapper;
 
 	@Override
-	public List<SaleVO> getTotalSalesByPeriod(PeriodRequestDTO period) {
-		log.info("서비스1=====================================");
-		List<SaleVO> saleList  = statisticsMapper.getSaleListByPeriod(period.getStartDate(), period.getEndDate());
-    	log.info(saleList);
+	public List<SaleVO> getSaleListByPeriod(PeriodRequestDTO period) {
+		log.debug("서비스1=====================================");
+
+    	log.debug("Before - START: "+period.getStartDate() + ", END: "+period.getEndDate());
+//		LocalDate startLocalDate = period.getStartDate().toInstant()
+//                .atZone(ZoneId.systemDefault())
+//                .toLocalDate(); //
+//		LocalDate endLocalDate = period.getEndDate().toInstant()
+//                .atZone(ZoneId.systemDefault())
+//                .toLocalDate();
+//		
+//		Date startDate = Date.valueOf(startLocalDate);
+//	    Date endDate = Date.valueOf(endLocalDate);
+		
+		//List<SaleVO> saleList  = statisticsMapper.getSaleListByPeriod(period.getStartDate(), period.getEndDate());
+    	List<SaleVO> saleList  = null;
+    	log.debug(saleList);
 		return saleList;
 	}
 
 	@Override
-	public List<SaleVO> getTotalSalesByPeriod(LocalDate start, LocalDate end) {
-		log.info("서비스2=====================================");
-		List<SaleVO> saleList  = statisticsMapper.getSaleListByPeriod(start, end);
-    	log.info(saleList);
+	public List<SaleVO> getSaleListByPeriod(LocalDate startLocalDate, LocalDate endLocalDate) {
+		log.debug("서비스2=====================================");
+		Date startDate = Date.valueOf(startLocalDate);
+	    Date endDate = Date.valueOf(endLocalDate);
+		List<SaleVO> saleList  = statisticsMapper.getSaleListByPeriod(startDate, endDate);
+    	log.debug(saleList);
 		return saleList;
+	}
+
+	@Override
+	public Long getTotalSalesAmountByPeriod(PeriodRequestDTO period) {
+		Long result;
+    	log.info("getTotalSalesAmountByPeriod=====================================");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String strStart = format.format(period.getStartDate());
+        String strEnd = format.format(period.getEndDate());
+        
+        String[] stringsStart = strStart.split("-");
+        String[] stringsEnd = strEnd.split("-");
+        log.debug("start : "+stringsStart+", end : "+stringsEnd);
+        
+	    LocalDate startLocalDate = LocalDate.of(
+	    		Integer.parseInt(stringsStart[0]), Integer.parseInt(stringsStart[1]), Integer.parseInt(stringsStart[2]));
+	    Date startDate = Date.valueOf(startLocalDate);
+	    period.setStartDate(startDate);
+
+	    LocalDate endLocalDate = LocalDate.of(
+	    		Integer.parseInt(stringsEnd[0]), Integer.parseInt(stringsEnd[1]), Integer.parseInt(stringsEnd[2]));
+	    Date endDate = Date.valueOf(endLocalDate);
+	    period.setEndDate(endDate);
+//	    try {
+	    	result = statisticsMapper.getSalesAmountByPeriod(period.getStartDate(), period.getEndDate());
+//	    } catch (Exception e) {
+//	    	e.printStackTrace();
+//	    } finally {
+//			
+//		}
+		return result;
+	}
+
+	@Override
+	public Long getTotalSalesAmountByPeriod(LocalDate startDate, LocalDate endDate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

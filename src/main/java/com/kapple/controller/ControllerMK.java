@@ -31,36 +31,22 @@ public class ControllerMK {
 	//	@Autowired
 	private ServiceMK statisticsService;
 
-//	@GetMapping("/statistics-overview")
-//	public String overview(Model model) {
-//		return "/statistics-overview";
-//	}
-
 	@GetMapping("/statistics-overview")
-    public ResponseEntity<List<SaleVO>> getStatisticsByPeriod(
-            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        try {
-            log.info("=====================================");
-            log.info("START: " + startDate + ", END: " + endDate);
-
-            List<SaleVO> saleList = statisticsService.getTotalSalesByPeriod(startDate, endDate);
-            log.info("=====================================");
-            log.info(saleList);
-
-            return ResponseEntity.ok(saleList);
-        } catch (Exception e) {
-            log.error("에러가 발생했습니다.", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+	public String overview(Model model) {
+		return "/statistics-overview";
+	}
 	
 	@PostMapping("/statistics-overview")
 	@ResponseBody 
-	public ResponseEntity<Map<String, Object>>  requestByPeriod(@RequestBody PeriodRequestDTO period) {
+	public ResponseEntity<Map<String, Object>>  requestByPeriod (
+		@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+        @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+    	log.info("requestByPeriod=====================================");
+    	log.info("Before - START: "+startDate + ", END: "+endDate);
+
+    	HashMap<String, Object> response = new HashMap<String, Object>();
+    	Long result;
         try {
-        	log.info("=====================================");
-        	log.info("Before - START: "+period.getStartDate() + ", END: "+period.getEndDate());
         	
 //    	    LocalDate startLocalDate = LocalDate.of(2022, 1, 1);
 //    	    Date startDate = Date.valueOf(startLocalDate);
@@ -72,20 +58,45 @@ public class ControllerMK {
     	    
 //        	log.info("After - START: "+period.getStartDate() + ", END: "+period.getEndDate());
     	    
-        	List<SaleVO> saleList = statisticsService.getTotalSalesByPeriod(period);
+     //   	List<SaleVO> saleList = statisticsService.getSaleListByPeriod(period);
         	//log.info("=====================================");
         	//log.info(saleList);
         	
-        	HashMap<String, Object> response = new HashMap<String, Object>();
-        	response.put("saleList", saleList);
+        	
+    //    	response.put("saleList", saleList);
+        	result = statisticsService.getTotalSalesAmountByPeriod(startDate, endDate);
+           	response.put("salesAmount", result);
         	return ResponseEntity.ok(response);
         	
         } catch (Exception e) {
-        	log.error("requestByPeriod에서 에러: "+e);
-        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("errer", "Error occured"));
-        }
+        	log.error("requestByPeriod에서 에러: "+e.getMessage());
+        	e.printStackTrace();
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        			.body(Collections.singletonMap("errer", "Error occured"));
+        } finally {
+        	log.info("response: "+response);
+		}
     }
-	
+
+	//	@GetMapping("/statistics-overview")
+//  public ResponseEntity<List<SaleVO>> getStatisticsByPeriod(
+//          @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+//          @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+//      try {
+//          log.info("=====================================");
+//          log.info("START: " + startDate + ", END: " + endDate);
+//
+//          List<SaleVO> saleList = statisticsService.getTotalSalesByPeriod(startDate, endDate);
+//          log.info("=====================================");
+//          log.info(saleList);
+//
+//          return ResponseEntity.ok(saleList);
+//      } catch (Exception e) {
+//          log.error("에러가 발생했습니다.", e);
+//          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//      }
+//  }
+//
 //	@PostMapping("/statistics-overview")
 //	@ResponseBody 
 //	public HashMap<String, Object> requestByPeriod(@RequestBody PeriodRequestDTO period) {

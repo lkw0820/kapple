@@ -25,8 +25,8 @@ public interface MapperMK {
 
 	void insert(TestTblVO test);
 
-	public List<SaleVO> getSaleListByPeriod(@Param(value = "startDate") LocalDate startDate, @Param(value = "endDate") LocalDate endDate);
-	public Long getTotalSalesAmountByPeriod(@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+	public List<SaleVO> getSaleListByPeriod(@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+	public Long getSalesAmountByPeriod(@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
 	
 	public List<SaleVO> getSaleList();
 	public List<ProductVO> getProductList();

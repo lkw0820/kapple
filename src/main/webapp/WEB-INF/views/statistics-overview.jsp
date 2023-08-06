@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@include file="includes/header.jsp"%>
 
-
 <div class="content">
 
 	<div class="pb-5">
@@ -13,10 +12,18 @@
 				<h2 id="heading" class="mb-2">통합 통계</h2>
 				<h5 id="subheading" class="text-700 fw-semi-bold">통합 통계 화면 설명</h5>
 			</div>
-
+			
 			<!-- 왼쪽 통계 그래프들 -->
+			<!-- 데이트피커 -->
+<!-- 			<div class="row justify-content-between">
+					<div
+						class="col-6 col-md-4 col-xxl-3 text-center 
+						border-start-xxl border-end-xxl-0 border-bottom-xxl-0 
+						border-end border-bottom pb-4 pb-xxl-0 ">
+						<input type="text" id="datePicker" class="form-control" value="2019-06-27">
+					</div>
+			</div> -->
 			<div class="col-12 col-xxl-6">
-
 				<!-- 통계 값 패널, 이모티콘 : Unicons Line, 다른거 사용 가능, 동적 변환 원하면 클래스명 또는 아이디값 부여 -->
 				<div class="row justify-content-between">
 					<div
@@ -107,8 +114,7 @@
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-primary-100 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Pending
-											payment</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Pending payment</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★48%</h6>
 									</div>
 								</div>
@@ -119,14 +125,13 @@
 						<!-- class="card h-100" END -->
 					</div>
 					<!-- class="col-12 col-md-6" END -->
-					<div id="totalSalesAmount" class="col-12 col-md-6">
+					<div id="totalSales" class="col-12 col-md-6">
 						<div class="card h-100">
 							<div class="card-body">
 								<div class="d-flex justify-content-between">
 									<div>
-										<h5 class="mb-1" id="totalSalesAmount">
-											총 매출액<span
-												class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
+										<h5 class="mb-1" id="totalSalesAmount"> 총 매출액
+												<span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
 												<span class="badge-label">★+26.5%</span>
 											</span>
 										</h5>
@@ -163,20 +168,17 @@
 								<div>
 									<div class="d-flex align-items-center mb-2">
 										<div class="bullet-item bg-primary me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Percentage
-											discount</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Percentage discount</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★72%</h6>
 									</div>
 									<div class="d-flex align-items-center mb-2">
 										<div class="bullet-item bg-primary-200 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Fixed card
-											discount</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Fixed card discount</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★18%</h6>
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-info-500 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Fixed
-											product discount</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Fixed product discount</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★10%</h6>
 									</div>
 								</div>
@@ -202,14 +204,12 @@
 								<div class="mt-3">
 									<div class="d-flex align-items-center mb-2">
 										<div class="bullet-item bg-primary me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Paying
-											customer</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Paying customer</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★30%</h6>
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-primary-100 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Non-paying
-											customer</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Non-paying customer</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★70%</h6>
 									</div>
 								</div>
@@ -231,23 +231,29 @@
 </div>
 <!-- class="content" END -->
 
-
-<!-- Ajax 호출에 필요한 jQuery 라이브러리 로드 -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-
-// 기간 (시작일, 종료일) => DatePicker같은 거 있으면 좋겠다
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js" defer></script>
+<script type="text/javascript" defer>
 	$(document).ready(function() {
-/* 		let startDate = new Date("2022-01-01");
-		let endDate = new Date("2023-01-01");
-		console.log(startDate, endDate);
-		 */
-		requestPeriod(startDate, endDate);
+		$("#totalSalesAmount").html("새로운 내용");
+		//let stringStartDate= "2022-01-01";
+		//let stringEndDate= "2023-01-01";
+		
+ 		var startDate = new Date("2022-01-01");
+		var endDate = new Date("2023-01-01");
+		//console.log(startDate, endDate);
+		//console.log(stringStartDate, stringEndDate);
+		//let date = moment(stringStartDate).format("YYYY-MM-DD").toDate();
+		//console.log(date);
+		
+ 		requestPeriod(startDate, endDate);
 		function requestPeriod(startDate, endDate) {
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: "/statistics-overview", // 엔드포인트 URL
-				data: JSON.stringify({ "startDate": "2022-01-01", "endDate": "2023-01-01" }), // 요청 페이로드
+				data: JSON.stringify({
+					"startDate": startDate,
+					"endDate":  endDate
+				}), // 요청 페이로드
 				contentType: "application/json; charset=utf-8;", // 요청 컨텐츠 타입
 				dataType: "json", // 응답 데이터 형식 (리턴형) (이거 안써주면 XML(document형)으로 됨)
 				success: function(response) {
@@ -256,14 +262,15 @@
 					//console.log("기간:", response.period);
 					//console.log("시작일:", new Date(response.period.startDate));
 					//console.log("종료일:", new Date(response.period.endDate));
-					console.log("SALE리스트:", response);
+					//console.log("SALE리스트:", response);
+					console.log("SALE리스트를 받을 준비..");
 					
 					// 이제 응답 데이터를 필요에 따라 처리하고 UI에 표시할 수 있다.
 					updatePeriodUI(); 
 				},
 			    error: function(xhr, status, error) {
 					console.error(xhr); // 에러 오브젝트. 얘만 있어도 status나 에러코드 알 수 있음
-					console.error("에러메시지: ", error); // 에러 메시지 안나옴...왜냐면 서버에서 안보냈으니깐.
+					console.error("서버로부터 오류 메시지: ", error); // 에러 메시지 안나옴...왜냐면 서버에서 안보냈으니깐.
 				}
 			});
 		}
@@ -271,34 +278,12 @@
 		function updatePeriodUI() {
 			console.log("====UI업데이트 메소드");
 			// id가 totalSalesAmount인 요소의 하위요소인 H4태그의 내용 값을 바꾸려면?
-			$("#totalSalesAmount h4").text("새로운 내용");
+			$("#totalSalesAmount h4").html("새로운 내용22");
 		}
 		
-/* 	
-     $.ajax({
-      type: "GET",
-      url: "/statistics-overview", // Ajax로 데이터를 요청할 컨트롤러 URL
-      data: { "start_date": startDate, "end_date": endDate},
-      success: function (data) {
-    		console.log("test3-----------------");
-        // 서버로부터 받은 결과 데이터를 동적으로 표시
-        const totalSalesAmount = data.TOTAL_SALES_AMOUNT;
-        console.log(totalSalesAmount);
-         const totalSalesVarianceRate = data.TOTAL_SALES_VARIANCE_RATE; 
-
-        // 총 매출액 표시
-//        $("#totalSalesAmount").text("총 매출액: " + totalSalesAmount);
-//        $("#totalSalesAmount").html("총 매출액: ");
-
-        // 매출액 증감률 표시
-//        $("#salesVariance").text("★" + totalSalesVarianceRate);
-      },
-      error: function () {
-        alert("서버 오류가 발생하였습니다.");
-      }
-    }); 
-  }*/
 }); 
 </script>
-
+<!-- 날짜 포맷에 필요한 moment.js 라이브러리 (부트스트랩 데이트피커 JS에서도 사용) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"/>
 <%@include file="includes/footer.jsp"%>
