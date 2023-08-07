@@ -34,8 +34,10 @@ public class ControllerMK {
 		RequestDTO period = new RequestDTO();
 		period.setStartDate(Date.valueOf(LocalDate.of(2022, 8, 7)));
 		period.setEndDate(Date.valueOf(LocalDate.of(2023, 8, 7))); 
+		period.setOn("YoY");
     	log.info("START DATE: "+period.getStartDate() + ", END DATE: "+period.getEndDate());
 		log.info(statisticsService.getTotalOrderQtyByPeriod(period));
+		
 		model.addAttribute("orderQ", statisticsService.getTotalOrderQtyByPeriod(period));
 		model.addAttribute("produceQ", statisticsService.getTotalProduceQtyByPeriod(period));
 		model.addAttribute("saleQ", statisticsService.getTotalSalesQtyByPeriod(period));

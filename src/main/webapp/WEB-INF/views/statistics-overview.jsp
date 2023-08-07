@@ -6,16 +6,13 @@
 		<div class="row g-4">
 			<!-- 페이지 타이틀, 동적으로 변경 원할시 아이디 추가해서 사용 -->
 			<div class="mb-5">
+				<button id="testBtn">What is it</button>
 				<h2 id="heading" class="mb-2">통계 및 분석</h2>
 				<h5 id="subheading" class="text-700 fw-semi-bold">통계 요약 및 분석</h5>
 			</div>
-			<button id="testBtn">What is it</button>
-<!-- 			<div class="echart-projection-actual"
-										style="height: 180px; width: 100%;"></div> -->
-			
 			<!-- 왼쪽 통계 그래프들 -->
 			<!-- 데이트피커 -->
-<!-- 			<div class="row justify-content-between">
+			<!-- 			<div class="row justify-content-between">
 					<div
 						class="col-6 col-md-4 col-xxl-3 text-center 
 						border-start-xxl border-end-xxl-0 border-bottom-xxl-0 
@@ -31,7 +28,9 @@
 						border-start-xxl border-end-xxl-0 border-bottom-xxl-0 
 						border-end border-bottom pb-4 pb-xxl-0 ">
 						<span class="uil fs-3 lh-1 uil-download-alt text-primary"></span>
-						<h1 class="fs-3 pt-3" id="orderQt">${ orderQ }</h1>
+						<h1 class="fs-3 pt-3" id="orderQt">
+							<fmt:formatNumber value="${ orderQ }" pattern="#,###" />
+						</h1>
 						<p class="fs--1 mb-0">부품 주문량</p>
 					</div>
 					<div
@@ -39,7 +38,9 @@
 						border-start-xxl border-end-xxl-0 border-bottom-xxl-0 
 						border-end-md border-bottom pb-4 pb-xxl-0">
 						<span class="uil fs-3 lh-1 uil-upload text-info"></span>
-						<h1 class="fs-3 pt-3" id="produceQt">${ produceQ }</h1>
+						<h1 class="fs-3 pt-3" id="produceQt">
+							<fmt:formatNumber value="${ produceQ }" pattern="#,###" />
+						</h1>
 						<p class="fs--1 mb-0">제품 생산량</p>
 					</div>
 					<div
@@ -47,14 +48,18 @@
 						border-start-xxl border-bottom-xxl-0 border-bottom 
 						border-end border-end-md-0 pb-4 pb-xxl-0 pt-4 pt-md-0">
 						<span class="uil fs-3 lh-1 uil-money-bill-stack text-primary"></span>
-						<h1 class="fs-3 pt-3" id="salesQt">${ saleQ }</h1>
+						<h1 class="fs-3 pt-3" id="salesQt">
+							<fmt:formatNumber value="${ saleQ }" pattern="#,###" />
+						</h1>
 						<p class="fs--1 mb-0">제품 판매량</p>
 					</div>
 					<div
 						class="col-6 col-md-4 col-xxl-3 text-center 
 						border-start-xxl border-end-xxl pb-md-4 pb-xxl-0 pt-4 pt-xxl-0">
 						<span class="uil fs-3 lh-1 uil-usd-circle text-danger"></span>
-						<h1 class="fs-3 pt-3" id="returnQt">${ returnQ }</h1>
+						<h1 class="fs-3 pt-3" id="returnQt">
+							<fmt:formatNumber value="${ returnQ }" pattern="#,###" />
+						</h1>
 						<p class="fs--1 mb-0">제품 반품량</p>
 					</div>
 				</div>
@@ -64,9 +69,9 @@
 				<!--  그래프 1 상단  -->
 				<div class="row flex-between-center mb-4 g-3">
 					<div class="col-auto">
-						<h3 id="compareTitle">판매량 비교</h3> 
-						<p class="text-700 lh-sm mb-0" 
-							id="compareComment">직전 단위기간 대비 판매량</p>
+						<h3 id="compareTitle">비교 통계</h3>
+						<p class="text-700 lh-sm mb-0" id="compareComment">직전 단위기간 대비
+							판매량</p>
 					</div>
 					<div class="col-6 col-sm-4">
 						<!--  셀렉트, 내용 변경 가능 -->
@@ -79,7 +84,7 @@
 					</div>
 				</div>
 				<!-- 그래프 -->
-				<div id="compareChart" class="echart-total-sales-chart" 
+				<div id="compareChart" class="echart-total-sales-chart"
 					style="min-height: 320px; width: 100%"></div>
 			</div>
 			<!-- class="col-12 col-xxl-6" -->
@@ -93,7 +98,8 @@
 								<div class="d-flex justify-content-between">
 									<div>
 										<h5 class="mb-1" id="salesTopBadge">
-											제품별 판매량<!-- <span
+											제품별 판매량
+											<!-- <span
 												class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
 												<span class="badge-label">★-6.8%</span> -->
 											</span>
@@ -106,22 +112,20 @@
 								<div class="d-flex justify-content-center px-4 py-6">
 									<!--  첫번째 차트 코드  -->
 									<div id="salesTopChart" class="echart-total-orders"
-										style="height:115%; width: 100%"></div>
+										style="height: 115%; width: 100%"></div>
 								</div>
 								<div class="mt-2">
 									<div class="d-flex align-items-center mb-2">
 										<div class="bullet-item bg-primary me-2"></div>
 										<h6 class="text-900 fw-semi-bold flex-1 mb-0"
 											id="salesTopText">★Completed</h6>
-										<h6 class="text-900 fw-semi-bold mb-0"
-											id="salesTopCompleted">★52%</h6>
+										<h6 class="text-900 fw-semi-bold mb-0" id="salesTopCompleted">★52%</h6>
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-primary-100 me-2"></div>
 										<h6 class="text-900 fw-semi-bold flex-1 mb-0"
 											id="salesTopAnotherText">★Pending payment</h6>
-										<h6 class="text-900 fw-semi-bold mb-0"
-											id="salesTopPending">★48%</h6>
+										<h6 class="text-900 fw-semi-bold mb-0" id="salesTopPending">★48%</h6>
 									</div>
 								</div>
 								<!-- lass="mt-2" END -->
@@ -136,8 +140,9 @@
 							<div class="card-body">
 								<div class="d-flex justify-content-between">
 									<div>
-										<h5 class="mb-1" id="totalSalesAmount"> 판매 예측 정확도
-												<!-- <span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
+										<h5 class="mb-1" id="totalSalesAmount">
+											판매 예측 정확도
+											<!-- <span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
 												<span class="badge-label" id="totalSalesBadge">★+26.5%</span> -->
 											</span>
 										</h5>
@@ -174,17 +179,20 @@
 								<div>
 									<div class="d-flex align-items-center mb-2">
 										<div class="bullet-item bg-primary me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Percentage discount</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Percentage
+											discount</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★72%</h6>
 									</div>
 									<div class="d-flex align-items-center mb-2">
 										<div class="bullet-item bg-primary-200 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Fixed card discount</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Fixed card
+											discount</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★18%</h6>
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-info-500 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Fixed product discount</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Fixed
+											product discount</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★10%</h6>
 									</div>
 								</div>
@@ -200,22 +208,26 @@
 								<div class="d-flex justify-content-between">
 									<div>
 										<h5 class="mb-2">부품 회전율</h5>
-										<h6 class="text-700" id="compoTurnoverPeriod">★Last 7 days</h6>
+										<h6 class="text-700" id="compoTurnoverPeriod">★Last 7
+											days</h6>
 									</div>
 								</div>
-								<div id="compoTurnoverChart" class="d-flex justify-content-center pt-3 flex-1">
+								<div id="compoTurnoverChart"
+									class="d-flex justify-content-center pt-3 flex-1">
 									<div class="echarts-paying-customer-chart"
 										style="height: 100%; width: 100%;"></div>
 								</div>
 								<div class="mt-3">
 									<div class="d-flex align-items-center mb-2">
 										<div class="bullet-item bg-primary me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Paying customer</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Paying
+											customer</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★30%</h6>
 									</div>
 									<div class="d-flex align-items-center">
 										<div class="bullet-item bg-primary-100 me-2"></div>
-										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Non-paying customer</h6>
+										<h6 class="text-900 fw-semi-bold flex-1 mb-0">★Non-paying
+											customer</h6>
 										<h6 class="text-900 fw-semi-bold mb-0">★70%</h6>
 									</div>
 								</div>
@@ -236,31 +248,29 @@
 	<!-- class="pb-5" END -->
 </div>
 <!-- class="content" END -->
-
 </main>
 <!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js" defer></script> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js" ></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	const { getColor, getData, getDates } = window.phoenix.utils;
-	 
+
 	// 테스트
 	 $("#testBtn").html("수량:"+${orderQ});
 	 $(document).on("click", "#testBtn", function() {
 	      $("#totalSalesAmount").html("새로운 내용");
-	      displayChart();
+	      displayCompareChart();
+	      console.log(getDates);
 	      // requestPeriod(startDate, endDate);
-		    const dates = getDates(
-				      new Date('5/1/2022'),
-				      new Date('5/30/2022'),
-				      1000 * 60 * 60 * 24
-				    );
-		    console.log(dates);
+	      //$("#selectComparePeriod").remove();
+	      //$("#selectbox").prepend("<option>옵션</option>");//selectbox 옵션 최상단에 추가
 		});  
 		var periodOption=[]; //셀렉트 옵션 기간
- 		var startDate = new Date('2022-07-01');
-		var endDate = new Date('2023-01-01');
+ 		var startDate = new Date('1/1/2022');
+		var endDate = new Date('12/31/2022');
+		var periodOn =  (30 * 1000 * 60 * 60 * 24); // 연도별 = 한 달 간격 차트
 		var onString;		//기간 종류
 		
 		var saleList=[];			//제품 판매 리스트**
@@ -284,6 +294,25 @@ $(document).ready(function(){
 		var supplyDependence;  //전체 부품 공급 의존도 //우측 8시
 		var compoInventoryTurnover; //부품 회전율 //우측 4시
 
+		// 셀렉트 테스트 데이터
+		const selOptVal = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013];
+		 $("#selectComparePeriod").on("change", function() {
+		        var selectedValue = $(this).val(); // 선택된 옵션의 값 가져오기
+		        $("#selectComparePeriod").html("* " + selectedValue);// 선택된 옵션의 내용을 다른 요소에 출력
+		        // Selected Value
+		        var text = $('#selectComparePeriod option:selected').text();
+		        var value = $('#selectComparePeriod').val();
+		        // Deselected Values
+		        var str = "";
+		        $('#selectComparePeriod option:not(:selected)').each(function(){
+		            var text = $(this).text();
+		            var value = $(this).val();
+		            str += text + "/" + value + ", ";
+		        });
+		        // 선택된 값으로 바꾸기
+		        $('#selectComparePeriod').val('#0000ff');
+		    });
+		
 		//1. orderQt, produceQt, salesQt, returnQt,
 		//2. compareTitle, compareComment, compareChart, 
 		//2-1. selectComparePeriod, salesPeriod,
@@ -293,97 +322,134 @@ $(document).ready(function(){
 		//5. suppleDependPeriod, suppleDependChart, 
 		//6. compoTurnoverPeriod, compoTurnoverChart
 		
-		 /////////////////////////////////////////////차트
-		 var displayChart = function() {
-			// 좌측하단 비교 통계  
-
-			
-			
+		 // 차트 ===============================================================
+		// // 좌측하단 비교 통계 차트
+		  var displayCompareChart = function() {
+		    const periods = getDates(
+		    	startDate,
+		      	endDate,
+		      	13 * 1000 * 60 * 60 * 24	//데이터가 30개라 365/30=12.xx를 ceiling한 것뿐임
+		    );
+		    const currentMonthData = [
+		        100, 200, 300, 300, 300, 250, 200, 200, 200, 200, 200, 500, 500, 500, 600,
+		        700, 800, 900, 1000, 1100, 850, 600, 600, 600, 400, 200, 200, 300, 300, 300
+		      ];
+		    const prevMonthData = [
+		        200, 200, 100, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 200, 400, 600,
+		        600, 600, 800, 1000, 700, 400, 450, 500, 600, 700, 650, 600, 550
+		      ];
 			var myChart = echarts.init(document.getElementById('compareChart'));
-		      // Specify the configuration items and data for the chart
-		      var option = {
-		        title: {
-		          text: '판매량 비교',
-		          subtext: '단위 기간 동안'
-		        },
+		    var option = {
+		        title: {},
 		        tooltip: {},
-	/* 	        toolbox: {
+	 	        toolbox: {
 		            show: true,
 		            feature: {
 		              saveAsImage: {}
 		            }
-		          }, */
-		        legend: {
-		          data: ['sales']
-		        },
-		        xAxis: {
-		            type: 'category',
-		            data: getDates(
-		              new Date('5/1/2022'),
-		              new Date('5/7/2022'),
-		              1000 * 60 * 60 * 24
-		            ),
-		            show: true,
-		            boundaryGap: false,
-		            axisLine: {
-		              show: true,
-		              lineStyle: { color: getColor('gray-200') }
+		         },
+		        legend: { data: ['sales'] },
+		        xAxis: [
+		            {
+		              type: 'category',
+		              data: periods,
+		              axisLabel: {
+		                formatter: value => window.dayjs(value).format('DD MMM'),
+		                interval: 13,
+		                showMinLabel: true,
+		                showMaxLabel: false,
+		                color: getColor('gray-800'),
+		                align: 'left',
+		                fontFamily: 'Nunito Sans',
+		                fontWeight: 600,
+		                fontSize: 12.8
+		              },
+		              axisLine: { show: true, 
+		            	  lineStyle: { color: getColor('gray-200') }
+		              	}
+		              },
+		              axisTick: { show: false },
+		              splitLine: {
+		                show: true,
+		                interval: 0,
+		                lineStyle: {
+		                  color:
+		                    window.config.config.phoenixTheme === 'dark'
+		                      ? getColor('gray-100')
+		                      : getColor('gray-200')
+		                }
+		              },
+		              boundaryGap: false
 		            },
-		            axisTick: {
-		              show: false
-		            },
-		            axisLabel: {
-		              formatter: value => window.dayjs(value).format('DD MMM'),
-		              interval: 6,
-		              showMinLabel: true,
-		              showMaxLabel: true,
-		              color: getColor('gray-800')
+		            {
+		              type: 'category',
+		              position: 'bottom',
+		              data: periods,
+		              axisLabel: {
+		                formatter: value => window.dayjs(value).format('DD MMM'),
+		                interval: 130,
+		                showMaxLabel: true,
+		                showMinLabel: false,
+		                color: getColor('gray-800'),
+		                align: 'right',
+		                fontFamily: 'Nunito Sans',
+		                fontWeight: 600,
+		                fontSize: 12.8
+		              },
+		              axisLine: { show: false },
+		              axisTick: { show: false },
+		              splitLine: { show: false },
+		              boundaryGap: false
 		            }
-		          },
+		          ],
 		        yAxis: {},
 		        series: [
-		          {
-		            name: 'sales',
-		            type: 'line',
-		            data: [5, 20, 36, 10, 10, 20]
-		          }
-		        ]
+		            {
+		              name: 'd',
+		              type: 'line',
+		              // data: Array.from(Array(30).keys()).map(() =>
+		              //   getRandomNumber(100, 300)
+		              // ),
+		              data: currentMonthData,
+		              showSymbol: false,
+		              symbol: 'circle'
+		            },
+		            {
+		              name: 'e',
+		              type: 'line',
+		              // data: Array.from(Array(30).keys()).map(() =>
+		              //   getRandomNumber(100, 300)
+		              // ),
+		              data: prevMonthData,
+		              // symbol: 'none',
+		              lineStyle: {
+		                type: 'dashed',
+		                width: 1,
+		                color: getColor('info')
+		              },
+		              showSymbol: false,
+		              symbol: 'circle'
+		            }
+		          ],
+		          grid: {}
 		      };
+		      //var newDates = getDates(newStartDate, newEndDate, 30 * 1000 * 60 * 60 * 24);
+		   // xAxis.data에 새로운 날짜 배열 할당
+		   //option.xAxis[0].data = newDates;
+		   // ECharts 업데이트
+		   myChart.setOption(option);
 		   // Display the chart using the configuration items and data just specified.
-		      myChart.setOption(option);
+		    //option && myChart.setOption(option);
 		}
 	      
 		
 		
-		
-
 		 
-		 // 셀렉트옵션 테스트
-		 $("#selectPeriod").on("change", function() {
-		        var selectedValue = $(this).val(); // 선택된 옵션의 값 가져오기
-		        // 선택된 옵션의 내용을 다른 요소에 출력
-		        $("#selectPeriod").html("* " + selectedValue);
-		        
-		        // Selected Value
-		        var text = $('#selectPeriod option:selected').text();
-		        var value = $('#selectPeriod').val();
-		        // Deselected Values
-		        var str = "";
-		        $('#selectPeriod option:not(:selected)').each(function(){
-		            var text = $(this).text();
-		            var value = $(this).val();
-		            str += text + "/" + value + ", ";
-		        });
-		        // 선택된 값으로 바꾸기
-		        $('#selectPeriod').val('#0000ff');
-		    });
 		 
-		
-		 
-		 //* / 왼쪽 큰 그래프
+		 /* 왼쪽 큰 그래프
 	        // Draw the chart
-	        //var makeChart = function(startDate, endDate){
-				/*var bigChartDom = document.getElementById('echart-total-sales-chart');
+	        var makeChart = function(startDate, endDate){
+				var bigChartDom = document.getElementById('echart-total-sales-chart');
 				var bigChart = echarts.init(bigChartDom);
 				var bigChartOption = {
 				          	title: {
@@ -402,7 +468,7 @@ $(document).ready(function(){
 					            }
 					          ]
 					        };
-				bigChart.setOption(bigChartOption);*/
+				bigChart.setOption(bigChartOption);
 		 	
 		    //bigChart.setOption(option); */
 		
@@ -434,6 +500,8 @@ $(document).ready(function(){
 }); 
 </script>
 <!-- 날짜 포맷에 필요한 moment.js 라이브러리 (부트스트랩 데이트피커 JS에서도 사용) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"/>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js" />
 <%@include file="includes/footer.jsp"%>
