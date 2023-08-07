@@ -66,6 +66,7 @@ public class ControllerKW {
 		return new ResponseEntity<ProposalVO>(service.getProposal(compo_no, suppl_no),HttpStatus.OK);
 	}
 	
+
 	@GetMapping("/comparsionRetailer/{prod_name}")
 	public ResponseEntity<RetailerDTO> comparsionRetailer(@PathVariable("prod_name") String prod_name) {
 		log.info("retailerList.....");

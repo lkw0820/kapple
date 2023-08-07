@@ -306,6 +306,7 @@
 			
 		});
 		
+
 		$('#head').on("click",'#componentDetail',function(e){
 			Service.supplierDTO(compo_name,function(data){
 				console.log(data)
