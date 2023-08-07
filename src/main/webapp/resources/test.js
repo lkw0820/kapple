@@ -101,6 +101,26 @@ var Service = (function(){
 			}
 		});
 	}
+
+	function checkPw(param,callback,error){
+		let id=param.id;
+		let checkPw=param.checkPw;
+		$.ajax({
+				type:"post",
+				url:"/checkPw/"+id+"/"+checkPw,
+				success:function(result,status,xhr){
+					if(callback){
+						callback(result);
+					}
+				},
+				error:function(xhr,status,e){
+					if(error){
+						error(e);
+					}	
+				}
+		});
+	}
+
 	
 	return{
 		getSupplier:getSupplier,
@@ -108,7 +128,9 @@ var Service = (function(){
 		getRetailer:getRetailer,
 		getPredict:getPredict,
 		supplierDTO:supplierDTO,
-		retailerDTO:retailerDTO
+		retailerDTO:retailerDTO,
+		checkPw:checkPw
+
 	};
 	
 })();
