@@ -96,7 +96,7 @@
             </ul>
             <div class="d-grid d-lg-flex align-items-center">
               <div class="nav-item d-flex align-items-center d-none d-lg-block pe-2">
-                <a class="text-700 hover-text-1100 px-2 d-none d-lg-inline lh-sm" href="#" data-bs-toggle="modal" data-bs-target="#searchBoxModal"><span data-feather="search" style="height: 20px; width: 20px;"></span></a><a class="btn btn-link text-900 order-1 order-lg-0 ps-4 me-lg-2" href="resources/pages/authentication/simple/sign-in.html">Sign in</a><a class="btn btn-phoenix-primary order-0" href="resources/pages/authentication/simple/sign-up.html"><span class="fw-bold">Sign Up</span></a>
+                <a class="text-700 hover-text-1100 px-2 d-none d-lg-inline lh-sm" href="#" data-bs-toggle="modal" data-bs-target="#searchBoxModal"><span data-feather="search" style="height: 20px; width: 20px;"></span></a><a class="btn btn-link text-900 order-1 order-lg-0 ps-4 me-lg-2" href="home">Sign in</a><a class="btn btn-phoenix-primary order-0" href="resources/pages/authentication/simple/sign-up.html"><span class="fw-bold">Sign Up</span></a>
             </div>
           </div>
         </nav>

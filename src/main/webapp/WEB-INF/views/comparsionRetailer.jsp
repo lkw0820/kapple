@@ -308,16 +308,17 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
-	    function handleEnterKeyPress(event) {
+ 	    function handleEnterKeyPress(event) {
 	        if (event.key === 'Enter') {
 	            event.preventDefault(); // 기본 Enter 동작 막기
 	            document.getElementById('searchItem').click(); // 검색 버튼 클릭
 	        }
 	    }
 	    const searchInput = document.getElementById('searchItemInput');
-	    searchInput.addEventListener('keypress', handleEnterKeyPress);
-
-
+	    searchInput.addEventListener('keypress', handleEnterKeyPress); 
+	    var prod_name;
+		$('#searchItem').on('click',function(){
+			prod_name=$('#productSearchBox').find('input').val()
 			$('#retailerCardTitle').html(prod_name);
 			var str="";
 			var str2="";
@@ -340,6 +341,7 @@
 				$('#head').append(str2);
 				$('#retailerTasks').html('');
 				$('#retailerTasks').html(data.count+' task');
+			}
 			})
 		});
 		
