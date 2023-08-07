@@ -363,7 +363,7 @@
 			      { name: '수량', max: maxQuantity },
 			      { name: '불량률', max: 10 },
 			      { name: '품질 등급', max: 10 },
-			      { name: '생산 기간', max: 10000 }
+			      { name: '생산 기간', max: 10 }
 			    ]
 			  },
 			  series: [
