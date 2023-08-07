@@ -12,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kapple.domain.SaleVO;
-import com.kapple.dto.PeriodRequestDTO;
+import com.kapple.dto.RequestDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -28,15 +28,23 @@ public class ServiceTestsMK {
 		 	//log.info(statisticsService.getSaleList());
 		 
 		 
-			PeriodRequestDTO period = new PeriodRequestDTO();
-		    LocalDate startLocalDate = LocalDate.of(2022, 1, 1);
-		    Date startDate = Date.valueOf(startLocalDate);
-		    period.setStartDate(startDate);
-
-		    LocalDate endLocalDate = LocalDate.of(2023, 1, 1);
-		    Date endDate = Date.valueOf(endLocalDate);
-		    period.setEndDate(endDate);
-		    log.info(statisticsService.getSaleListByPeriod(period));
+//			RequestDTO period = new RequestDTO();
+//		    LocalDate startLocalDate = LocalDate.of(2022, 1, 1);
+//		    Date startDate = Date.valueOf(startLocalDate);
+//		    period.setStartDate(startDate);
+//
+//		    LocalDate endLocalDate = LocalDate.of(2023, 1, 1);
+//		    Date endDate = Date.valueOf(endLocalDate);
+//		    period.setEndDate(endDate);
+//		    log.info(statisticsService.getSaleListByPeriod(period));
+		RequestDTO period = new RequestDTO();
+		period.setStartDate(Date.valueOf(LocalDate.of(2000, 8, 7)));
+		period.setEndDate(Date.valueOf(LocalDate.of(2022, 8, 7))); 
+		period.setOn("YoY"); 
+		//log.info(statisticsService.getTotalOrderQtyByPeriod(period));
+		//log.info(statisticsService.getTotalSalesAmountByPeriod(period));
+		 log.info(statisticsService.getTotalProduceQtyByPeriod(period));
+	
 	}
 
 //	@SuppressWarnings("deprecation")

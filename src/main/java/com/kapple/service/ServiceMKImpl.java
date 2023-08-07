@@ -1,19 +1,16 @@
 package com.kapple.service;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kapple.domain.ModelVO;
 import com.kapple.domain.SaleVO;
-import com.kapple.dto.PeriodRequestDTO;
+import com.kapple.dto.RequestDTO;
 import com.kapple.mapper.MapperMK;
 
 import lombok.extern.log4j.Log4j;
@@ -24,147 +21,120 @@ public class ServiceMKImpl implements ServiceMK {
 
 	@Autowired
 	private MapperMK statisticsMapper;
+
 	
-	// 총 부품 구매 수량 ============================================
 	@Override
-	public Long getTotalOrderQtyByPeriod(PeriodRequestDTO period) {
-		Long totalOrderQty = getTotalOrderQtyByPeriod(period);
-		return null;
+	public List<HashMap<String, Object>> getSupplyDependence(RequestDTO period) {
+		List<HashMap<String, Object>> resultHashMap = 
+				statisticsMapper.getSupplyDependence(period.getStartDate(), period.getEndDate());
+		return resultHashMap;
+	}
+	
+	@Override
+	public Long getTotaReturnQtyByPeriod(RequestDTO period) {
+		Long result = 
+				statisticsMapper.getTotalReturnQtyByPeriod(period.getStartDate(), period.getEndDate());
+		return result;
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> getSaleQtyListByPeriodWithLank(RequestDTO period) {
+		List<HashMap<String, Object>> resultHashMap = 
+				statisticsMapper.getSaleQtyListByPeriodWithLank(period.getStartDate(), period.getEndDate());
+		return resultHashMap;
 	}
 
-	@Override
-	public List<SaleVO> getSaleList() { // 제품 판매 리스트
+	@Override // 제품 총 생산량 (기간별)
+	public Long getTotalProduceQtyByPeriod(RequestDTO period) {
+		Long result = statisticsMapper.getTotalProduceQtyByPeriod(period.getStartDate(), period.getEndDate());
+		return result;
+	}
+	
+	@Override // 부품 구매 총 수량 (기간별)
+	public Long getTotalOrderQtyByPeriod(RequestDTO period) {
+		Long result = statisticsMapper.getTotalOrderQtyByPeriod(period.getStartDate(), period.getEndDate());
+		return result;
+	}
+
+	@Override // 제품 총 판매량 (기간별)
+	public Long getTotalSalesQtyByPeriod(RequestDTO period) {
+		Long result = statisticsMapper.getTotalSalesQtyByPeriod(period.getStartDate(), period.getEndDate());
+		return result;
+	}
+
+	@Override // 제품 총 판매금액 (직전 기간과 비교)
+	public List<Long> getTotalSalesAmountByPeriod(RequestDTO period) {
+		log.info("getTotalSalesAmountByPeriod===");
+		List<Long> result = new ArrayList<Long>();
+		result.add(statisticsMapper.getTotalSalesAmountByPeriod(period.getStartDate(), period.getEndDate()));
+//		log.info(getPrecendingPeriod(period).getStartDate()+"///"+getPrecendingPeriod(period).getEndDate());
+//		result.add(statisticsMapper.getTotalSalesAmountByPeriod(
+//				getPrecendingPeriod(period).getStartDate(), getPrecendingPeriod(period).getEndDate()));
+//		log.info(getPrecendingPeriod(period).getStartDate()+"///"+getPrecendingPeriod(period).getEndDate());
+		return result;
+	}
+
+	@Override // 제품 판매 리스트 (기간별)
+	public List<SaleVO> getSaleListByPeriod(RequestDTO period) {
+		log.info("getSaleListByPeriod===");
+		List<SaleVO> saleList = statisticsMapper.getSaleListByPeriod(period.getStartDate(), period.getEndDate());
+		return saleList;
+	}
+
+	@Override // 제품 판매 리스트 (전체)
+	public List<SaleVO> getSaleList() {
 		List<SaleVO> saleList = statisticsMapper.getSaleList();
 		return saleList;
 	}
 	
-	@Override
-	public List<SaleVO> getSaleListByPeriod(PeriodRequestDTO period) {
-		log.debug("서비스1=====================================");
-    	log.debug("Before - START: "+period.getStartDate() + ", END: "+period.getEndDate());
-//		LocalDate startLocalDate = period.getStartDate().toInstant()
-//                .atZone(ZoneId.systemDefault())
-//                .toLocalDate(); //
-//		LocalDate endLocalDate = period.getEndDate().toInstant()
-//                .atZone(ZoneId.systemDefault())
-//                .toLocalDate();
-//		
-//		Date startDate = Date.valueOf(startLocalDate);
-//	    Date endDate = Date.valueOf(endLocalDate);
+	// 직전 단위기간 구하는 메소드
+	public RequestDTO getPrecendingPeriod(RequestDTO period) {
+		log.info("getPrecendingPeriod===");
+		log.info(period);
 		
+		Calendar startCal = Calendar.getInstance();
+		Calendar endCal = Calendar.getInstance();
+		startCal.setTime(period.getStartDate());
+		endCal.setTime(period.getEndDate());
+
+		String on = period.getOn();
+		log.info("on==="+on);
 		
-	    //LocalDate startLocalDate = LocalDate.of(2022, 1, 1);
-	    Date startDate = Date.valueOf(period.getStartDate().toLocalDate());
-	    period.setStartDate(startDate);
-
-	    //LocalDate endLocalDate = LocalDate.of(2023, 1, 1);
-	    Date endDate = Date.valueOf(period.getEndDate().toLocalDate());
-	    period.setEndDate(endDate);
-	    
-		List<SaleVO> saleList  = statisticsMapper.getSaleListByPeriod(period.getStartDate(), period.getEndDate());
-    	//List<SaleVO> saleList  = null;
-    	//log.debug(saleList);
-		return saleList;
-	}
-
-	@Override
-	public List<SaleVO> getSaleListByPeriod(LocalDate startLocalDate, LocalDate endLocalDate) {
-		log.debug("서비스2=====================================");
-		Date startDate = Date.valueOf(startLocalDate);
-	    Date endDate = Date.valueOf(endLocalDate);
-		List<SaleVO> saleList  = statisticsMapper.getSaleListByPeriod(startDate, endDate);
-    	log.debug(saleList);
-		return saleList;
-	}
-
-	@Override
-	public Long getTotalSalesAmountByPeriod(PeriodRequestDTO period) {
-		Long result;
-    	log.info("getTotalSalesAmountByPeriod=====================================");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String strStart = format.format(period.getStartDate());
-        String strEnd = format.format(period.getEndDate());
-        
-        String[] stringsStart = strStart.split("-");
-        String[] stringsEnd = strEnd.split("-");
-        log.debug("start : "+stringsStart+", end : "+stringsEnd);
-        
-	    LocalDate startLocalDate = LocalDate.of(
-	    		Integer.parseInt(stringsStart[0]), Integer.parseInt(stringsStart[1]), Integer.parseInt(stringsStart[2]));
-	    Date startDate = Date.valueOf(startLocalDate);
-	    period.setStartDate(startDate);
-
-	    LocalDate endLocalDate = LocalDate.of(
-	    		Integer.parseInt(stringsEnd[0]), Integer.parseInt(stringsEnd[1]), Integer.parseInt(stringsEnd[2]));
-	    Date endDate = Date.valueOf(endLocalDate);
-	    period.setEndDate(endDate);
-//	    try {
-	    	result = statisticsMapper.getSalesAmountByPeriod(period.getStartDate(), period.getEndDate());
-//	    } catch (Exception e) {
-//	    	e.printStackTrace();
-//	    } finally {
-//			
-//		}
-		return result;
-	}
-
-	@Override
-	public Long getTotalSalesAmountByPeriod(LocalDate startDate, LocalDate endDate) {
-		// TODO Auto-generated method stub
-		return null;
+		switch (on) {
+		case "YoY": //YoY
+			log.info("YoY");
+			startCal.add(Calendar.YEAR, -1);
+			endCal.add(Calendar.YEAR, -1);
+			break;
+		case "HoH"://HoH
+			log.info("HoH");
+			startCal.add(Calendar.MONTH, -6);
+			endCal.add(Calendar.MONTH, -6);
+			break;
+		case "QoQ": //QoQ
+			log.info("QoQ");
+			startCal.add(Calendar.MONTH, -3);
+			endCal.add(Calendar.MONTH, -3);
+			break;
+		case "MoM": //MoM
+			log.info("MoM");
+			startCal.add(Calendar.MONTH, -1);
+			endCal.add(Calendar.MONTH, -1);
+			break;
+		default:
+			log.info("default===");
+			startCal.add(Calendar.YEAR, -1);
+			endCal.add(Calendar.YEAR, -1);
+			break;
+		}
+		period.setStartDate(new Date(startCal.getTimeInMillis()));
+		period.setEndDate(new Date(endCal.getTimeInMillis()));
+		log.info("getPrecendingPeriod===");
+		log.info(period);
+		return period;
 	}
 
 
-	
-//	totalSales.put("TOTAL_SALES_AMOUNT", "테스트");
-//	totalSales.put("TOTAL_SALES_VARIANCE_RATE", "");
-//	totalSales.put("TOTAL_SALES_START_DATE", period.getStartDate());
-//	totalSales.put("TOTAL_SALES_END_DATE",  period.getStartDate());
-//	totalSales.put("TOTAL_SALES_PERIOD", "");
-	
-	
-//	@Override
-//	public HashMap<String, String> getTotalSales() { 
-//		log.info("1=================================");
-//		List<SaleVO> saleList = statisticsMapper.getSaleList();
-//		log.info("2=================================");
-//		
-//		// total_sale_amount 계산
-////        Long totalSaleAmount = 0L;
-////        for (SaleVO sale : saleList) {
-////            totalSaleAmount += sale.getPrice() * sale.getQuantity();
-////        }
-//		
-//		HashMap<String, String> totalSales = new HashMap<String, String>();
-//		log.info("3=================================");
-//		totalSales.put("TOTAL_SALES_AMOUNT", "테스트");
-//		log.info("4=================================");
-////		totalSales.put("TOTAL_SALES_VARIANCE_RATE", "");
-//		totalSales.put("TOTAL_SALES_START_DATE", "");
-//		totalSales.put("TOTAL_SALES_END_DATE", "");
-////		totalSales.put("TOTAL_SALES_PERIOD", "");
-//		
-//		return totalSales;
-//	}
-//	
-//	@Override
-//	public List<SaleVO> getTotalSalesByPeriod(PeriodRequestDTO period) {
-//    	log.info("왜 안나와=====================================");
-//		/* List<SaleVO> saleList  = statisticsMapper.getSaleListByPeriod(period.getStartDate(), period.getEndDate()); */
-//    	Long amount = getTotalSalesAmountByPeriod(period);
-////    	log.info(saleList);
-//		return saleList;
-//	}
-//	
-//	@Override
-//	public List<SaleVO> overviewSale() {
-//		List<SaleVO> saleList = statisticsMapper.getSaleList();
-//		return saleList;
-//	}
-//
-//	@Override
-//	public List<ModelVO> overviewModel() {
-//		List<ModelVO> modelList = statisticsMapper.getModelList();
-//		return modelList;
-//	}
+
+
 }

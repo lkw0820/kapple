@@ -1,6 +1,7 @@
 package com.kapple.mapper;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -23,13 +24,33 @@ public interface MapperMK {
 
 	void insert(TestTblVO test);
 
+	// 부품 공급 의존도
+	public List<HashMap<String, Object>> getSupplyDependence(
+			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+	
+	// 제품별 판매량 리스트
+	public List<HashMap<String, Object>> getSaleQtyListByPeriodWithLank(
+			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+	
+	//제품 반품
+	public Long getTotalReturnQtyByPeriod(
+			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+
+	//제품 생산
+	public Long getTotalProduceQtyByPeriod(
+			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+	
+	//부품 구매
 	public Long getTotalOrderQtyByPeriod(
 			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
 	
+	//제품 판매
+	public Long getTotalSalesQtyByPeriod(
+			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+	public Long getTotalSalesAmountByPeriod(
+			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);	
 	public List<SaleVO> getSaleListByPeriod(
 			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
-	public Long getSalesAmountByPeriod(
-			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);	
 	public List<SaleVO> getSaleList();
 	//===================================
 	
