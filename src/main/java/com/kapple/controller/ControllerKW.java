@@ -6,7 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kapple.domain.EmpVO;
 import com.kapple.domain.ProposalVO;
 import com.kapple.domain.RetailerDTO;
 import com.kapple.domain.RetailerDetailVO;
@@ -32,16 +38,11 @@ public class ControllerKW {
 
 	@Autowired
 	private ServiceKW service;
+	@Autowired
+    private PasswordEncoder passwordEncoder;
+	//@Autowired
+    //private AuthenticationManager authenticationManager;
 	
-	
-//	 @PostMapping("/comparsionSupplier") 
-//	 public void comparsionSupplier(String compo_name, Model model) { 
-//		 log.info("supplierList...........");
-//		 model.addAttribute("sList",service.supplierListService(compo_name));
-//		 model.addAttribute("compo_name",compo_name); 
-//		 model.addAttribute("count",service.supplierCount(compo_name));
-//		 model.addAttribute("compoDetail",service.componentDetail(compo_name)); 
-//	 }
 	 @GetMapping("/comparsionSupplier/{compo_name}") 
 	 public ResponseEntity<SupplierDTO> comparsionSupplier(@PathVariable("compo_name") String compo_name) { 
 		 log.info("supplierList...........");
@@ -65,21 +66,10 @@ public class ControllerKW {
 		return new ResponseEntity<ProposalVO>(service.getProposal(compo_no, suppl_no),HttpStatus.OK);
 	}
 	
-//	@PostMapping("/comparsionRetailer")
-//	public void comparsionRetailer(String prod_name, Model model) {
-//		log.info("retailerList.....");
-//		model.addAttribute("rList",service.retailerList(prod_name));
-//		model.addAttribute("prod_name",prod_name);
-//		model.addAttribute("count",service.retailerCount(prod_name));
-//		model.addAttribute("productDetail",service.productDetail(prod_name));
-//	}
+
 	@GetMapping("/comparsionRetailer/{prod_name}")
-	public ResponseEntity<RetailerDTO> comparsionRetailer(@PathVariable("prod_name") String prod_name, Model model) {
+	public ResponseEntity<RetailerDTO> comparsionRetailer(@PathVariable("prod_name") String prod_name) {
 		log.info("retailerList.....");
-		model.addAttribute("rList",service.retailerList(prod_name));
-		model.addAttribute("prod_name",prod_name);
-		model.addAttribute("count",service.retailerCount(prod_name));
-		model.addAttribute("productDetail",service.productDetail(prod_name));
 		
 		RetailerDTO dto = new RetailerDTO(service.retailerList(prod_name),prod_name,service.retailerCount(prod_name),service.productDetail(prod_name));
 		return new ResponseEntity<RetailerDTO>(dto,HttpStatus.OK);
@@ -96,8 +86,51 @@ public class ControllerKW {
 		log.info("get predict..........");
 		return new ResponseEntity<SalePredictVO>(service.getPredict(prod_name, retail_no),HttpStatus.OK);
 	}
-	@GetMapping("/accessError")
-	public void accessDenied(Authentication auth, Model model) {
-		log.info("access Denied : "+auth);
+	@GetMapping("/customLogin")
+	public void customLogin(String error, String logout, Model model) {
+		log.info("error: "+error);
+		log.info("logout: "+logout);
+		if(error != null) {
+			model.addAttribute("error","Login Error Check Your Account");
+		}
+		if(logout != null) {
+			model.addAttribute("logout","Logout!");
+		}
+	}
+	
+	@GetMapping("/accessDenied")
+	public String accessDenied() {
+		return "redirect:/customLogin";
+	}
+	
+	@GetMapping("/customLogout")
+	public void logout(){
+		log.info("logout");
+	}
+//	@PreAuthorize("isAuthenticated()")
+//	@PostMapping("/checkPw/{id}/{checkPw}")
+//	public ResponseEntity<String> checkPw(@PathVariable("id") String id, @PathVariable("checkPw") String checkPw) {
+//		log.info("asdasdasdasdasda");
+//		//EmpVO vo = service.read(id);
+//		//String currentPw=vo.getPw();
+//		String Pw=passwordEncoder.encode(checkPw);
+//		boolean check = passwordEncoder.matches("pw185",Pw);
+//		log.info(check);
+//		
+//		return check==true?new ResponseEntity<String>("success", HttpStatus.OK)
+//				:new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		//return new ResponseEntity<String>("success", HttpStatus.OK);
+//		
+//	}
+	@GetMapping("/modify")
+	public void modify() {
+	}
+	@PostMapping("/modify")
+	public String modifyProc(EmpVO vo,RedirectAttributes rttr) {
+		if(service.updateEmp(vo)) {
+			rttr.addFlashAttribute("result","success");
+			rttr.addFlashAttribute("vo",vo);
+		}
+		return "redirect:/home";
 	}
 }

@@ -23,8 +23,8 @@
 				
 					<!-- 부품/상품 검색창 -->
 					<div class="search-box" id="componentSearchBox">
-						<form class="position-relative" data-bs-toggle="search" data-bs-display="static" action="/comparsionSupplier" method="post">
-							<input class="form-control search-input search" type="search" placeholder="부품 검색창" aria-label="Search" name="compo_name"/>
+						<form class="position-relative" data-bs-toggle="search" data-bs-display="static" action="/comparsionSupplier" method="get">
+							<input class="form-control search-input search" type="search" placeholder="부품 검색창" aria-label="Search" name="compo_name" id="searchItemInput"/>
 							<span class="fas fa-search search-box-icon"></span>
 						</form>
 					</div>
@@ -306,13 +306,7 @@
 			
 		});
 		
-		/*$('#componentDetail').on("click",function(e){
-			$('#componentModal').find("input[name='compo_name']").val($('#compo_name').val());
-			$('#componentModal').find("input[name='compo_no']").val($('#compo_no').val());
-			$('#componentModal').find("input[name='detail']").val($('#detail').val());
-			$('#componentModal').find("input[name='unit']").val($('#unit').val());
-			$("#componentModal").modal("show");
-		});*/
+
 		$('#head').on("click",'#componentDetail',function(e){
 			Service.supplierDTO(compo_name,function(data){
 				console.log(data)
@@ -325,20 +319,7 @@
 
 		});
 		//모달 창
-/* 		$(".supplierDetail").on("click", function(e){
-			var suppl_no=$(this).closest('tr').children('.ps-3').html();
-			//var supplierDetail;
-			Service.getSupplier(suppl_no,function(supplierDetail){
-				 //supplierDetail=result;
-				 $('#myModal').find("input[name='suppl_name']").val(supplierDetail.suppl_name);
-				 $('#myModal').find("input[name='ceo_name']").val(supplierDetail.ceo_name);
-				 $('#myModal').find("input[name='category']").val(supplierDetail.category);
-				 $('#myModal').find("input[name='biz_no']").val(supplierDetail.biz_no);
-				 $('#myModal').find("input[name='transport_category']").val(supplierDetail.transport_category);
-				 $('#myModal').find("input[name='phone']").val(supplierDetail.phone);
-			}); 
-			$("#myModal").modal("show");
-		}); */
+
 		$('#bulk-select-body').on("click", ".supplierDetail",function(e){
 			var suppl_no=$(this).closest('tr').children('.ps-3').html();
 			//var supplierDetail;
@@ -383,7 +364,7 @@
 			      { name: '수량', max: maxQuantity },
 			      { name: '불량률', max: 10 },
 			      { name: '품질 등급', max: 10 },
-			      { name: '생산 기간', max: 10000 }
+			      { name: '생산 기간', max: 10 }
 			    ]
 			  },
 			  series: [
@@ -439,7 +420,6 @@
 				Service.getProposal({suppl_no:suppl_no,compo_name},function(result){
 					var proposal_no=result.proposal_no;
 					for(let i=0; i<td.length;i++){
-
 	 					if(td.eq(i).html()==proposal_no){
 							td.eq(i).parent().remove();
 							proposal.splice(i,1);
@@ -449,6 +429,14 @@
 				})
 			}
 		});
+	    function handleEnterKeyPress(event) {
+	        if (event.key === 'Enter') {
+	            event.preventDefault(); // 기본 Enter 동작 막기
+	            document.getElementById('searchItem').click(); // 검색 버튼 클릭
+	        }
+	    }
+	    const searchInput = document.getElementById('searchItemInput');
+	    searchInput.addEventListener('keypress', handleEnterKeyPress);
 	});
 </script>
 
