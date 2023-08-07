@@ -22,6 +22,12 @@ public class ServiceMKImpl implements ServiceMK {
 	@Autowired
 	private MapperMK statisticsMapper;
 
+	@Override
+	public List<HashMap<String, Object>> getSaleQtyGroupByDate(RequestDTO period) {
+		List<HashMap<String, Object>> resultHashMap = 
+				statisticsMapper.getSaleQtyGroupByDate(period.getStartDate(), period.getEndDate());
+		return resultHashMap;
+	}
 	
 	@Override
 	public List<HashMap<String, Object>> getSupplyDependence(RequestDTO period) {
@@ -86,53 +92,54 @@ public class ServiceMKImpl implements ServiceMK {
 		List<SaleVO> saleList = statisticsMapper.getSaleList();
 		return saleList;
 	}
-	
-	// 직전 단위기간 구하는 메소드
-	public RequestDTO getPrecendingPeriod(RequestDTO period) {
-		log.info("getPrecendingPeriod===");
-		log.info(period);
-		
-		Calendar startCal = Calendar.getInstance();
-		Calendar endCal = Calendar.getInstance();
-		startCal.setTime(period.getStartDate());
-		endCal.setTime(period.getEndDate());
+//	
+//	// 직전 단위기간 구하는 메소드
+//	public RequestDTO getPrecendingPeriod(RequestDTO period) {
+//		log.info("getPrecendingPeriod===");
+//		log.info(period);
+//		
+//		Calendar startCal = Calendar.getInstance();
+//		Calendar endCal = Calendar.getInstance();
+//		startCal.setTime(period.getStartDate());
+//		endCal.setTime(period.getEndDate());
+//
+//		String on = period.getOn();
+//		log.info("on==="+on);
+//		
+//		switch (on) {
+//		case "YoY": //YoY
+//			log.info("YoY");
+//			startCal.add(Calendar.YEAR, -1);
+//			endCal.add(Calendar.YEAR, -1);
+//			break;
+//		case "HoH"://HoH
+//			log.info("HoH");
+//			startCal.add(Calendar.MONTH, -6);
+//			endCal.add(Calendar.MONTH, -6);
+//			break;
+//		case "QoQ": //QoQ
+//			log.info("QoQ");
+//			startCal.add(Calendar.MONTH, -3);
+//			endCal.add(Calendar.MONTH, -3);
+//			break;
+//		case "MoM": //MoM
+//			log.info("MoM");
+//			startCal.add(Calendar.MONTH, -1);
+//			endCal.add(Calendar.MONTH, -1);
+//			break;
+//		default:
+//			log.info("default===");
+//			startCal.add(Calendar.YEAR, -1);
+//			endCal.add(Calendar.YEAR, -1);
+//			break;
+//		}
+//		period.setStartDate(new Date(startCal.getTimeInMillis()));
+//		period.setEndDate(new Date(endCal.getTimeInMillis()));
+//		log.info("getPrecendingPeriod===");
+//		log.info(period);
+//		return period;
+//	}
 
-		String on = period.getOn();
-		log.info("on==="+on);
-		
-		switch (on) {
-		case "YoY": //YoY
-			log.info("YoY");
-			startCal.add(Calendar.YEAR, -1);
-			endCal.add(Calendar.YEAR, -1);
-			break;
-		case "HoH"://HoH
-			log.info("HoH");
-			startCal.add(Calendar.MONTH, -6);
-			endCal.add(Calendar.MONTH, -6);
-			break;
-		case "QoQ": //QoQ
-			log.info("QoQ");
-			startCal.add(Calendar.MONTH, -3);
-			endCal.add(Calendar.MONTH, -3);
-			break;
-		case "MoM": //MoM
-			log.info("MoM");
-			startCal.add(Calendar.MONTH, -1);
-			endCal.add(Calendar.MONTH, -1);
-			break;
-		default:
-			log.info("default===");
-			startCal.add(Calendar.YEAR, -1);
-			endCal.add(Calendar.YEAR, -1);
-			break;
-		}
-		period.setStartDate(new Date(startCal.getTimeInMillis()));
-		period.setEndDate(new Date(endCal.getTimeInMillis()));
-		log.info("getPrecendingPeriod===");
-		log.info(period);
-		return period;
-	}
 
 
 

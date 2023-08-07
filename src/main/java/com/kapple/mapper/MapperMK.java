@@ -23,7 +23,9 @@ import com.kapple.domain.TransportationVO;
 public interface MapperMK {
 
 	void insert(TestTblVO test);
-
+	public List<HashMap<String, Object>> getSaleQtyGroupByDate(
+			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);
+	
 	// 부품 공급 의존도
 	public List<HashMap<String, Object>> getSupplyDependence(
 			@Param(value = "startDate") Date startDate, @Param(value = "endDate") Date endDate);

@@ -8,7 +8,7 @@ import lombok.Data;
 public class RequestDTO {
 	private Date startDate;
 	private Date endDate;
-	private String on;
+	//private String on;
 	// default, YearOnYear, HalfOnHalf, QuaterOnQuater, MonthOnMonth
 	// YearToDate, HalfToDate, QuaterToDate, MonthToDate
 	

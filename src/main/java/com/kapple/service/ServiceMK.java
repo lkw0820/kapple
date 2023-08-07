@@ -8,6 +8,8 @@ import com.kapple.dto.RequestDTO;
 
 public interface ServiceMK {
 	
+	public List<HashMap<String, Object>> getSaleQtyGroupByDate(RequestDTO period);
+	
 	public Long getTotalProduceQtyByPeriod(RequestDTO period);
 	
 	public List<HashMap<String, Object>> getSupplyDependence(RequestDTO period);

@@ -5,21 +5,12 @@
 	<div class="pb-5">
 		<div class="row g-4">
 			<!-- 페이지 타이틀, 동적으로 변경 원할시 아이디 추가해서 사용 -->
-			<div class="mb-5">
+			<div class="mb-2">
 				<button id="testBtn">What is it</button>
 				<h2 id="heading" class="mb-2">통계 및 분석</h2>
-				<h5 id="subheading" class="text-700 fw-semi-bold">통계 요약 및 분석</h5>
+				<h5 id="subheading" class="text-700 fw-semi-bold">by period</h5>
 			</div>
 			<!-- 왼쪽 통계 그래프들 -->
-			<!-- 데이트피커 -->
-			<!-- 			<div class="row justify-content-between">
-					<div
-						class="col-6 col-md-4 col-xxl-3 text-center 
-						border-start-xxl border-end-xxl-0 border-bottom-xxl-0 
-						border-end border-bottom pb-4 pb-xxl-0 ">
-						<input type="text" id="datePicker" class="form-control" value="2019-06-27">
-					</div>
-			</div> -->
 			<div class="col-12 col-xxl-6">
 				<!-- 통계 값 패널, 이모티콘 : Unicons Line, 다른거 사용 가능, 동적 변환 원하면 클래스명 또는 아이디값 부여 -->
 				<div class="row justify-content-between">
@@ -70,22 +61,26 @@
 				<div class="row flex-between-center mb-4 g-3">
 					<div class="col-auto">
 						<h3 id="compareTitle">비교 통계</h3>
-						<p class="text-700 lh-sm mb-0" id="compareComment">직전 단위기간 대비
-							판매량</p>
+						<p class="text-700 lh-sm mb-0" id="compareComment">with the previous period</p>
 					</div>
 					<div class="col-6 col-sm-4">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value=""
+								id="flexCheckChecked" checked> <label
+								class="form-check-label" for="flexCheckChecked"> 모든 차트에 변경 적용하기 </label>
+						</div>
 						<!--  셀렉트, 내용 변경 가능 -->
-						<select class="form-select form-select-sm mt-2"
+						<div><select class="form-select form-select-sm mt-2"
 							id="selectComparePeriod">
 							<option>2023년도</option>
 							<option>2022년도</option>
 							<option>2021년도</option>
-						</select>
+						</select></div>
 					</div>
 				</div>
 				<!-- 그래프 -->
 				<div id="compareChart" class="echart-total-sales-chart"
-					style="min-height: 320px; width: 100%"></div>
+					style="min-height: 400px; width: 100%"></div>
 			</div>
 			<!-- class="col-12 col-xxl-6" -->
 
@@ -98,21 +93,25 @@
 								<div class="d-flex justify-content-between">
 									<div>
 										<h5 class="mb-1" id="salesTopBadge">
-											제품별 판매량
-											<!-- <span
-												class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
-												<span class="badge-label">★-6.8%</span> -->
-											</span>
+											제품별 판매량 <span class="mb-2"> <select
+												class="form-select form-select-sm mt-2"
+												id="selectComparePeriod">
+													<option>2023년도</option>
+													<option>2022년도</option>
+													<option>2021년도</option>
+											</select></span>
 										</h5>
-										<h6 class="text-700" id="salesTopPeriod">★Last 7 days</h6>
+										<!-- <h6 class="text-700" id="salesTopPeriod">★Last 7 days</h6> -->
 									</div>
+
 									<h4 id="salesTopQt">★16,247</h4>
+
 								</div>
 								<!-- class="d-flex justify-content-between" -->
 								<div class="d-flex justify-content-center px-4 py-6">
 									<!--  첫번째 차트 코드  -->
 									<div id="salesTopChart" class="echart-total-orders"
-										style="height: 115%; width: 100%"></div>
+										style="height: 100%; width: 100%"></div>
 								</div>
 								<div class="mt-2">
 									<div class="d-flex align-items-center mb-2">
@@ -141,12 +140,15 @@
 								<div class="d-flex justify-content-between">
 									<div>
 										<h5 class="mb-1" id="totalSalesAmount">
-											판매 예측 정확도
-											<!-- <span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
-												<span class="badge-label" id="totalSalesBadge">★+26.5%</span> -->
-											</span>
+											판매 예측 정확도 <span class="mb-2"> <select
+												class="form-select form-select-sm mt-2"
+												id="selectComparePeriod">
+													<option>2023년도</option>
+													<option>2022년도</option>
+													<option>2021년도</option>
+											</select></span>
 										</h5>
-										<h6 class="text-700" id="predictPeriod">★Last 7 days</h6>
+										<!-- <h6 class="text-700" id="predictPeriod">★Last 7 days</h6> -->
 										<!-- 이거 드롭다운 옵션했으면 좋겠는데? -->
 									</div>
 									<%-- <h4>${ testData }</h4> --%>
@@ -155,7 +157,7 @@
 								<!-- class="d-flex justify-content-between" -->
 								<div class="pb-0 pt-4">
 									<div id="predictChart" class="echarts-new-customers"
-										style="height: 180px; width: 100%;"></div>
+										style="height: 150px; width: 100%;"></div>
 								</div>
 							</div>
 							<!-- class="card-body" END -->
@@ -169,7 +171,14 @@
 								<div class="d-flex justify-content-between">
 									<div>
 										<h5 class="mb-2">부품 공급 의존도</h5>
-										<h6 class="text-700" id="suppleDependPeriod">★Last 7 days</h6>
+										<span class="mb-2"> <select
+											class="form-select form-select-sm mt-2"
+											id="selectComparePeriod">
+												<option>2023년도</option>
+												<option>2022년도</option>
+												<option>2021년도</option>
+										</select></span>
+										<!-- <h6 class="text-700" id="suppleDependPeriod">★Last 7 days</h6> -->
 									</div>
 								</div>
 								<div class="pb-4 pt-3">
@@ -208,8 +217,15 @@
 								<div class="d-flex justify-content-between">
 									<div>
 										<h5 class="mb-2">부품 회전율</h5>
-										<h6 class="text-700" id="compoTurnoverPeriod">★Last 7
-											days</h6>
+										<span class="mb-2"> <select
+											class="form-select form-select-sm mt-2"
+											id="selectComparePeriod">
+												<option>2023년도</option>
+												<option>2022년도</option>
+												<option>2021년도</option>
+										</select></span>
+										<!-- <h6 class="text-700" id="compoTurnoverPeriod">★Last 7
+											days</h6> -->
 									</div>
 								</div>
 								<div id="compoTurnoverChart"
@@ -254,24 +270,21 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	const { getColor, getData, getDates } = window.phoenix.utils;
-
+$(document).ready(function(){	
 	// 테스트
 	 $("#testBtn").html("수량:"+${orderQ});
 	 $(document).on("click", "#testBtn", function() {
-	      $("#totalSalesAmount").html("새로운 내용");
+		 requestPeriod();
 	      displayCompareChart();
-	      console.log(getDates);
-	      // requestPeriod(startDate, endDate);
-	      //$("#selectComparePeriod").remove();
-	      //$("#selectbox").prepend("<option>옵션</option>");//selectbox 옵션 최상단에 추가
+	      displaySupplyDependencyChart();
 		});  
 		var periodOption=[]; //셀렉트 옵션 기간
- 		var startDate = new Date('1/1/2022');
-		var endDate = new Date('12/31/2022');
+ 		//var startDate = new Date('1/1/2022');
+		//var endDate = new Date('12/31/2022');
+ 		var startDate = new Date('2022-01-01');
+		var endDate = new Date('2022-01-01');
 		var periodOn =  (30 * 1000 * 60 * 60 * 24); // 연도별 = 한 달 간격 차트
-		var onString;		//기간 종류
+		requestPeriod();
 		
 		var saleList=[];			//제품 판매 리스트**
 		var productList=[]; 	//제품 리스트
@@ -296,8 +309,8 @@ $(document).ready(function(){
 
 		// 셀렉트 테스트 데이터
 		const selOptVal = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013];
-		 $("#selectComparePeriod").on("change", function() {
-		        var selectedValue = $(this).val(); // 선택된 옵션의 값 가져오기
+ 		 $("#selectComparePeriod").on("change", function() {
+/* 		        var selectedValue = $(this).val(); // 선택된 옵션의 값 가져오기
 		        $("#selectComparePeriod").html("* " + selectedValue);// 선택된 옵션의 내용을 다른 요소에 출력
 		        // Selected Value
 		        var text = $('#selectComparePeriod option:selected').text();
@@ -310,8 +323,8 @@ $(document).ready(function(){
 		            str += text + "/" + value + ", ";
 		        });
 		        // 선택된 값으로 바꾸기
-		        $('#selectComparePeriod').val('#0000ff');
-		    });
+		        $('#selectComparePeriod').val('#0000ff'); */
+		    })
 		
 		//1. orderQt, produceQt, salesQt, returnQt,
 		//2. compareTitle, compareComment, compareChart, 
@@ -322,12 +335,15 @@ $(document).ready(function(){
 		//5. suppleDependPeriod, suppleDependChart, 
 		//6. compoTurnoverPeriod, compoTurnoverChart
 		
-		 // 차트 ===============================================================
-		// // 좌측하단 비교 통계 차트
+		 // 좌측하단 비교 통계 차트 ================================================================
 		  var displayCompareChart = function() {
+ 			//var saleQByDates = JSON.stringify(${saleQByDate});
+ 			//console.log(saleQByDates);
+ 			//var intervalNum = jsonString.length;
+ 			//console.log(intervalNum);
 		    const periods = getDates(
-		    	startDate,
-		      	endDate,
+		    		new Date('1/1/2022'),
+		    		new Date('12/30/2022'),
 		      	13 * 1000 * 60 * 60 * 24	//데이터가 30개라 365/30=12.xx를 ceiling한 것뿐임
 		    );
 		    const currentMonthData = [
@@ -364,21 +380,25 @@ $(document).ready(function(){
 		                fontWeight: 600,
 		                fontSize: 12.8
 		              },
-		              axisLine: { show: true, 
-		            	  lineStyle: { color: getColor('gray-200') }
-		              	}
-		              },
-		              axisTick: { show: false },
-		              splitLine: {
-		                show: true,
-		                interval: 0,
-		                lineStyle: {
-		                  color:
-		                    window.config.config.phoenixTheme === 'dark'
-		                      ? getColor('gray-100')
-		                      : getColor('gray-200')
-		                }
-		              },
+		              axisLine: {
+		                  show: true,
+		                  lineStyle: {
+		                    color: getColor('gray-200')
+		                  }
+		                },
+		                axisTick: {
+		                  show: false
+		                },
+		                splitLine: {
+		                  show: true,
+		                  interval: 0,
+		                  lineStyle: {
+		                    color:
+		                      window.config.config.phoenixTheme === 'dark'
+		                        ? getColor('gray-100')
+		                        : getColor('gray-200')
+		                  }
+		                },
 		              boundaryGap: false
 		            },
 		            {
@@ -442,10 +462,80 @@ $(document).ready(function(){
 		    //option && myChart.setOption(option);
 		}
 	      
+ 		// 우측 상단1 // 제품별 판매량 차트 ==============================================================
+		var displaySalesTopChart = function() {}
+ 		
+		// 우측 상단2 // 판매 예측 정확도 차트 ==============================================================
 		
+		// 우측 하단1 // 부품 공급 의존도 차트 ==============================================================
+		var displaySupplyDependencyChart = function() {
+			
+			var dataObj = [
+                { value: 7200000, name: 'Percentage discount' },
+                { value: 1800000, name: 'Fixed card discount' },
+                { value: 1000000, name: 'Fixed product discount' }
+              ];
 		
-		 
-		 
+			var myChart = echarts.init(document.getElementById('suppleDependChart'));
+		    var option = {
+		        title: {},
+		        tooltip: {},
+	 	        toolbox: {
+		            show: true,
+		            feature: {
+		              saveAsImage: {}
+		            }
+		         },
+		        legend: { data: ['sales'] },
+		        series: [
+		            {
+		              name: '72%',
+		              type: 'pie',
+		              radius: ['100%', '87%'],
+		              avoidLabelOverlap: false,
+		              emphasis: {
+		                scale: false,
+		                itemStyle: {
+		                  color: 'inherit'
+		                }
+		              },
+		              itemStyle: {
+		                borderWidth: 2,
+		                borderColor: getColor('gray-soft')
+		              },
+		              label: {
+		                show: true,
+		                position: 'center',
+		                formatter: '{a}',
+		                fontSize: 23,
+		                color: getColor('dark')
+		              },
+		              data: dataObj
+		            }
+		          ],
+		          grid: {}
+		      };
+		      //var newDates = getDates(newStartDate, newEndDate, 30 * 1000 * 60 * 60 * 24);
+		   // xAxis.data에 새로운 날짜 배열 할당
+		   //option.xAxis[0].data = newDates;
+		   // ECharts 업데이트
+		   myChart.setOption(option);
+		   // Display the chart using the configuration items and data just specified.
+		    //option && myChart.setOption(option);
+		}
+			
+			
+			
+		// 우측 하단2 // 부품 회전율 차트 ==============================================================
+		
+			
+			
+			
+			
+			
+			
+			
+			
 		 /* 왼쪽 큰 그래프
 	        // Draw the chart
 	        var makeChart = function(startDate, endDate){
@@ -479,7 +569,6 @@ $(document).ready(function(){
 				data: JSON.stringify({
 					"startDate": startDate,
 					"endDate":  endDate,
-					"on" : onString
 				}), // 요청 페이로드
 				contentType: "application/json; charset=utf-8;", // 요청 컨텐츠 타입
 				dataType: "json", // 응답 데이터 형식 (리턴형) (이거 안써주면 XML(document형)으로 됨)

@@ -9,19 +9,26 @@
     	
     ]]> </select>
 
+  	<select id="getSaleQtyGroupByDate" resultType="HashMap" parameterType="java.sql.Date"> 
+    <![CDATA[	
+    	SELECT sale_date, sum(quantity) AS "daily_sales"
+			FROM SALE
+			WHERE sale_date  BETWEEN #{startDate} AND #{endDate}
+			GROUP BY sale_date ORDER BY sale_date
+    ]]> </select>
 
   	<select id="getSupplyDependence" resultType="HashMap" parameterType="java.sql.Date"> 
     <![CDATA[
-    	SELECT suppl_no, suppl_name, "제품별 판매량", "랭킹"
+    	SELECT suppl_no, suppl_name, "공급사별 부품 구매량", "순위"
 			FROM (
-			    SELECT o.suppl_no, s.suppl_name, sum(o.QUANTITY) as "제품별 판매량", 
-			           RANK() OVER(ORDER BY sum(o.QUANTITY) DESC) as "랭킹"
+			    SELECT o.suppl_no, s.suppl_name, sum(o.QUANTITY) as "공급사별 부품 구매량", 
+			           RANK() OVER(ORDER BY sum(o.QUANTITY) DESC) as "순위"
 				    FROM orders o
 				    INNER JOIN SUPPLIER s ON o.suppl_no = s.suppl_no
 				    WHERE o.order_date BETWEEN #{startDate} AND #{endDate}
 				    GROUP BY o.suppl_no, s.suppl_name
 				)
-			WHERE "랭킹" <= 7
+			WHERE "순위" <= 7
     ]]> </select>
 
 
@@ -30,10 +37,10 @@
 	      	SELECT * FROM (
 				    SELECT prod_no, 
 				           sum(QUANTITY) as "제품별 판매량", 
-				           RANK() OVER(ORDER BY sum(QUANTITY) DESC) as "랭킹"
+				           RANK() OVER(ORDER BY sum(QUANTITY) DESC) as "순위"
 						    FROM sale   WHERE sale_date   BETWEEN #{startDate} AND #{endDate}
 						    GROUP BY prod_no
-				)  WHERE "랭킹" <= 7
+				)  WHERE "순위" <= 7
     ]]> </select>
 
     <select id="getTotalSalesAmountByPeriod" resultType="Long" parameterType="java.sql.Date"> 

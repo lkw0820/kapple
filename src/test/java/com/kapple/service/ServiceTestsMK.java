@@ -43,8 +43,11 @@ public class ServiceTestsMK {
 		period.setOn("YoY"); 
 		//log.info(statisticsService.getTotalOrderQtyByPeriod(period));
 		//log.info(statisticsService.getTotalSalesAmountByPeriod(period));
-		 log.info(statisticsService.getTotalProduceQtyByPeriod(period));
-	
+		//log.info(statisticsService.getTotalProduceQtyByPeriod(period));
+		//log.info(statisticsService.getSaleQtyGroupByDate(period));
+		log.info(statisticsService.getSupplyDependence(period));
+		
+		
 	}
 
 //	@SuppressWarnings("deprecation")
