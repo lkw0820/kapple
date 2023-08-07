@@ -27,7 +27,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@PreAuthorize("isAuthenticated()")
+	//@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/*", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -40,6 +40,11 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "main";
+	}
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/home")
+	public void home() {
+		
 	}
 	
 	/*
