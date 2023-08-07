@@ -357,7 +357,7 @@
 				$('#productModal').find("input[name='model_name']").val(data.prodDetail.model.model_name);
 				$('#productModal').find("input[name='capacity']").val(data.prodDetail.model.capacity);
 				$('#productModal').find("input[name='color']").val(data.prodDetail.model.color);
-				$('#productModal').find("input[name='release_date']").val(data.prodDetail.model.color);
+				$('#productModal').find("input[name='release_date']").val(new Date(data.prodDetail.model.release_date));
 		
 				$("#productModal").modal("show"); 
 			})
@@ -366,9 +366,7 @@
 		$('#bulk-select-body').on("click",".retailerDetail",function(e){
 			console.log('asdasd');
 			var retail_no=$(this).closest('tr').children('.ps-3').html();
-			//var retailerDetail;
 			Service.getRetailer(retail_no,function(retailerDetail){
-				//retailerDetail=result;
 				console.log(retailerDetail.retail_name);
 				 $('#myModal').find("input[name='retail_name']").val(retailerDetail.retail_name);
 				 $('#myModal').find("input[name='ceo_name']").val(retailerDetail.ceo_name);

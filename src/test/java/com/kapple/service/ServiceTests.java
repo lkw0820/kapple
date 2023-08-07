@@ -27,19 +27,23 @@ public class ServiceTests {
 //	public void test() {
 //		log.info(service.productDetail("고객사이름51"));
 //	}
+//	@Test
+//	public void test() {
+//		EmpVO vo = new EmpVO();
+//		vo.setAddress("update address");
+//		vo.setEmail("update email");
+//		vo.setPhone("update phone");
+//		vo.setId("id200");
+//		if(service.updateEmp(vo)) {
+//			log.info("successsdasdasdasdasdasdasdadasdasdasd");
+//		}else {
+//			log.info("fail");
+//		}
+//		
+//	}
 	@Test
 	public void test() {
-		EmpVO vo = new EmpVO();
-		vo.setAddress("update address");
-		vo.setEmail("update email");
-		vo.setPhone("update phone");
-		vo.setId("id200");
-		if(service.updateEmp(vo)) {
-			log.info("successsdasdasdasdasdasdasdadasdasdasd");
-		}else {
-			log.info("fail");
-		}
-		
+		service.productDetail("아이폰12미니");
 	}
 	
 

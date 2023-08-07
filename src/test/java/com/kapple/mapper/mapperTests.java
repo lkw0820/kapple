@@ -82,14 +82,18 @@ public class mapperTests {
 //			}
 //		}
 //	}
+//	@Test
+//	public void updateEmpTest() {
+//		EmpVO vo = new EmpVO();
+//		vo.setAddress("update address");
+//		vo.setEmail("update email");
+//		vo.setPhone("update phone");
+//		vo.setId("id200");
+//		mapper.updateEmp(vo);
+//	}
 	@Test
-	public void updateEmpTest() {
-		EmpVO vo = new EmpVO();
-		vo.setAddress("update address");
-		vo.setEmail("update email");
-		vo.setPhone("update phone");
-		vo.setId("id200");
-		mapper.updateEmp(vo);
+	public void test() {
+		mapper.productDetail("아이폰12미니");
 	}
 
 }
